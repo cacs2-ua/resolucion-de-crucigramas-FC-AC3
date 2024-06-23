@@ -16,9 +16,11 @@ MARGEN_INFERIOR=60 #altura del margen inferior entre la cuadrícula y la ventana
 TAM=60  #tamaño de la celda
 FILS=10 # número de filas del crucigrama
 COLS=10 # número de columnas del crucigrama
+RUTA_TABLERO = "Boards_Examples/simple.txt"
 
 LLENA='*' 
 VACIA='-'
+
 
 #########################################################################
 # Detecta si se pulsa el botón de FC
@@ -141,8 +143,7 @@ def main():
     
     almacen=creaAlmacen()
     game_over=False
-    ruta_tablero = "Boards_Examples/simple.txt"
-    tablero=Tablero(FILS, COLS,ruta_tablero)
+    tablero=Tablero(FILS, COLS,RUTA_TABLERO)
     print (tablero)    
     while not game_over:
         for event in pygame.event.get():
