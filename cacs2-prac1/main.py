@@ -100,6 +100,10 @@ def imprimeAlmacen(almacen):
         for pal in lista:
             print (pal, end=" ")
         print()
+
+def substract(a, b):
+    return a - b
+
         
 #########################################################################  
 # Principal
