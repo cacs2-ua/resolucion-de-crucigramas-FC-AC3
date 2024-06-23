@@ -14,8 +14,8 @@ WHITE = (255, 255, 255)
 MARGEN=5 #ancho del borde entre celdas
 MARGEN_INFERIOR=60 #altura del margen inferior entre la cuadrícula y la ventana
 TAM=60  #tamaño de la celda
-FILS=5 # número de filas del crucigrama
-COLS=6 # número de columnas del crucigrama
+FILS=10 # número de filas del crucigrama
+COLS=10 # número de columnas del crucigrama
 
 LLENA='*' 
 VACIA='-'
@@ -141,7 +141,8 @@ def main():
     
     almacen=creaAlmacen()
     game_over=False
-    tablero=Tablero(FILS, COLS)
+    ruta_tablero = "Boards_Examples/simple.txt"
+    tablero=Tablero(FILS, COLS,ruta_tablero)
     print (tablero)    
     while not game_over:
         for event in pygame.event.get():
