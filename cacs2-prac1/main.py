@@ -7,9 +7,9 @@ from tablero import *
 from dominio import *
 from pygame.locals import *
 
-GREY=(190, 190, 190)
-NEGRO=(100,100, 100)
-BLANCO=(255, 255, 255)
+GREY = (147, 112, 219)
+NEGRO = (128, 0, 128)
+BLANCO = (255, 255, 255)
 
 MARGEN=5 #ancho del borde entre celdas
 MARGEN_INFERIOR=60 #altura del margen inferior entre la cuadrícula y la ventana
@@ -88,7 +88,6 @@ def creaAlmacen():
             almacen.append(dom)
         elif pal.upper() not in almacen[pos].lista: #añade la palabra si no está duplicada        
             almacen[pos].addPal(pal.upper())           
-    
     return almacen
 
 ######################################################################### 
