@@ -1,6 +1,6 @@
 # tests/test_main.py
 import unittest
-from defaulTestCheck import add
+from defaulTestCheck import *
 
 class TestMain(unittest.TestCase):
     def test_add(self):
