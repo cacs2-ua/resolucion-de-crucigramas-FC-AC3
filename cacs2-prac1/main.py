@@ -110,10 +110,6 @@ def imprimeAlmacen(almacen):
 
 def substract(a, b):
     return a - b
-
-#def initialize_board_from_file(file_name):
-    
-
         
 #########################################################################  
 # Principal
