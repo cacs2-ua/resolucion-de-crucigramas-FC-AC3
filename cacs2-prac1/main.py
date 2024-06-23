@@ -129,7 +129,8 @@ def main():
     
     almacen=creaAlmacen()
     game_over=False
-    tablero=Tablero(FILS, COLS)    
+    tablero=Tablero(FILS, COLS)
+    print (tablero)    
     while not game_over:
         for event in pygame.event.get():
             if event.type==pygame.QUIT:               
