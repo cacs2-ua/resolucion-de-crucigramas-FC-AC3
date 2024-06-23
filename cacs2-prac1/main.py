@@ -7,9 +7,9 @@ from tablero import *
 from dominio import *
 from pygame.locals import *
 
-GREY = (147, 112, 219)
-NEGRO = (128, 0, 128)
-BLANCO = (255, 255, 255)
+MEDIUM_PURPLE = (147, 112, 219)
+DARK_PURPLE = (128, 0, 128)
+WHITE = (255, 255, 255)
 
 MARGEN=5 #ancho del borde entre celdas
 MARGEN_INFERIOR=60 #altura del margen inferior entre la cuadrícula y la ventana
@@ -161,18 +161,18 @@ def main():
             
         ##código de dibujo        
         #limpiar pantalla
-        screen.fill(NEGRO)
-        pygame.draw.rect(screen, GREY, [0, 0, COLS*(TAM+MARGEN)+MARGEN, altoVentana],0)
+        screen.fill(DARK_PURPLE)
+        pygame.draw.rect(screen, MEDIUM_PURPLE, [0, 0, COLS*(TAM+MARGEN)+MARGEN, altoVentana],0)
         for fil in range(tablero.getAlto()):
             for col in range(tablero.getAncho()):
                 if tablero.getCelda(fil, col)==VACIA: 
-                    pygame.draw.rect(screen, BLANCO, [(TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
+                    pygame.draw.rect(screen, WHITE, [(TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
                 elif tablero.getCelda(fil, col)==LLENA: 
-                    pygame.draw.rect(screen, NEGRO, [(TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
+                    pygame.draw.rect(screen, DARK_PURPLE, [(TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
                 else: #dibujar letra                    
-                    pygame.draw.rect(screen, BLANCO, [(TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
+                    pygame.draw.rect(screen, WHITE, [(TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
                     fuente= pygame.font.Font(None, 70)
-                    texto= fuente.render(tablero.getCelda(fil, col), True, NEGRO)            
+                    texto= fuente.render(tablero.getCelda(fil, col), True, DARK_PURPLE)            
                     screen.blit(texto, [(TAM+MARGEN)*col+MARGEN+15, (TAM+MARGEN)*fil+MARGEN+5])             
         #pintar botones        
         screen.blit(botonFC, [anchoVentana//4-25, altoVentana-45])
