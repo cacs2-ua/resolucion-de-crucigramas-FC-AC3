@@ -2,7 +2,7 @@ import unittest
 from main import *
 
 class TestMain(unittest.TestCase):
-    def test_add(self):
+    def test_substract(self):
         self.assertEqual(substract(2, 3), -1)
         self.assertEqual(substract(-1, 1), -2)
         self.assertEqual(substract(0, 0), 0)
