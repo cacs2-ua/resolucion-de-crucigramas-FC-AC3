@@ -142,7 +142,8 @@ def main():
                     print("FC")
                     res=False #aquí llamar al forward checking
                     if res==False:
-                        MessageBox.showwarning("Alerta", "No hay solución")                                  
+                        #MessageBox.showwarning("Alerta", "No hay solución")
+                        print("No hay solución")                                  
                 elif pulsaBotonAC3(pos, anchoVentana, altoVentana):                    
                      print("AC3")
                 elif pulsaBotonReset(pos, anchoVentana, altoVentana):                   
