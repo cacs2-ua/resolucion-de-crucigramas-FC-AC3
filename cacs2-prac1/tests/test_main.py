@@ -2,12 +2,12 @@ import unittest
 from main import *
 
 class TestMain(unittest.TestCase):
-    def test_substract(self):
+    def test_substract(self): # Test 1
         self.assertEqual(substract(2, 3), -1)
         self.assertEqual(substract(-1, 1), -2)
         self.assertEqual(substract(0, 0), 0)
         
-    def test_assertions(self):
+    def test_assertions(self): # Test 2
         self.assertTrue(True)
         self.assertFalse(False)
         self.assertIsNone(None)
@@ -15,7 +15,7 @@ class TestMain(unittest.TestCase):
         self.assertIn(2, [1, 2, 3])
         self.assertNotIn(4, [1, 2, 3])
     
-    def test_is_outside_crossboard(self):
+    def test_is_outside_crossboard(self): # Test 3
         # Initialize a board instance
         board = Tablero(FILS=3, COLS=3)
         
@@ -28,7 +28,7 @@ class TestMain(unittest.TestCase):
         self.assertFalse(is_outside_crossboard(0, 0, board))
         self.assertFalse(is_outside_crossboard(2, 2, board))
     
-    def test_is_inside_crossboard(self):
+    def test_is_inside_crossboard(self): # Test 4
         # Initialize a board instance
         board = Tablero(FILS=3, COLS=3)
         
@@ -41,7 +41,7 @@ class TestMain(unittest.TestCase):
         self.assertTrue(is_inside_crossboard(0, 0, board))
         self.assertTrue(is_inside_crossboard(2, 2, board))
     
-    def test_is_solid(self):
+    def test_is_solid(self): # Test 5
         # Initialize a board instance
         board = Tablero(FILS=3, COLS=3)
         board.tablero = [
@@ -59,14 +59,14 @@ class TestMain(unittest.TestCase):
         self.assertFalse(is_solid(1, 0, board))
         self.assertFalse(is_solid(2, 1, board))
     
-    def test_is_isolated(self):
+    def test_is_isolated(self): # Test 6
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         self.assertTrue(is_isolated(2, 1, board))
         self.assertTrue(is_isolated(3, 2, board))
         self.assertFalse(is_isolated(1, 4, board))
         self.assertFalse(is_isolated(3, 3, board))
     
-    def test_initialize_1_isolated_variables(self):
+    def test_initialize_1_isolated_variables(self): # Test 7
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         expected = [
             ["-", 1, (2, 1), (2, 1), 1, "isolated", [], {}, {}],
@@ -87,7 +87,7 @@ class TestMain(unittest.TestCase):
             self.assertEqual(real_word.pounds, expected_word[7])
             self.assertEqual(real_word.restrictions, expected_word[8])
             
-    def test_2_initialize_1_isolated_variables(self):
+    def test_2_initialize_1_isolated_variables(self): # Test 8
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         expected = [
             Word("-", 1, (2, 1), (2, 1), 1, "isolated"),
@@ -97,7 +97,7 @@ class TestMain(unittest.TestCase):
         
         self.assertEqual(expected, real)
     
-    def test_is_right_horizontal_terminal(self):
+    def test_is_right_horizontal_terminal(self): # Test 9
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         self.assertTrue(is_right_horizontal_terminal(0, 5, board))
         self.assertTrue(is_right_horizontal_terminal(2, 1, board))
@@ -107,7 +107,7 @@ class TestMain(unittest.TestCase):
         self.assertFalse(is_right_horizontal_terminal(2, 3, board))
         self.assertFalse(is_right_horizontal_terminal(4, 4, board))
     
-    def test_is_empty(self):
+    def test_is_empty(self): # Test 10
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         
         self.assertTrue(is_empty(0, 2, board))
@@ -118,7 +118,7 @@ class TestMain(unittest.TestCase):
         self.assertFalse(is_empty(3, 1, board))
         self.assertFalse(is_empty(1, 6, board))
     
-    def test_has_letter(self):
+    def test_has_letter(self): # Test 11
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         
         self.assertTrue(has_letter(0, 0, board))
@@ -130,7 +130,7 @@ class TestMain(unittest.TestCase):
         self.assertFalse(has_letter(5, 2, board))
 
  
-    def test_1_initialize_1_horizontal_variables(self):
+    def test_1_initialize_1_horizontal_variables(self): # Test 12
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         expected = [
             Word("-", 3, (0,2), (0, 3), 2, "horizontal"), #1
@@ -144,31 +144,31 @@ class TestMain(unittest.TestCase):
         
         self.assertEqual(expected, real)
     
-        def test_is_down_vertical_terminal(self):
-            board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
-            self.assertTrue(is_down_vertical_terminal(1, 0, board))
-            self.assertTrue(is_down_vertical_terminal(4, 4, board))
-            self.assertTrue(is_down_vertical_terminal(4, 5, board))
-            
-            self.assertFalse(is_down_vertical_terminal(2, 2, board))
-            self.assertFalse(is_down_vertical_terminal(1, 8, board))
-            self.assertFalse(is_down_vertical_terminal(0, 3, board))
-    
-    """
-        def test_1_initialize_1_vertical_variables(self):
-            board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
-            expected = [
-                Word("-", 9, (0,0), (1, 0), 2, "vertical"), #1
-                Word("-", 10, (3,0), (4, 0), 2, "vertical"), #2
-                Word("-", 11, (0,2), (1, 2), 2, "vertical"), #3
-                Word("-", 12, (0,3), (2, 3), 3, "vertical"), #4
-                Word("-", 13, (1,4), (4, 4), 4, "vertical"), #5
-                Word("-", 14, (0,5), (4, 5), 5, "vertical"), #6
-            ]
-            real = initialize_1_vertical_variables(board, 8)
+    def test_is_down_vertical_terminal(self): # Test 13
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        self.assertTrue(is_down_vertical_terminal(1, 0, board))
+        self.assertTrue(is_down_vertical_terminal(4, 4, board))
+        self.assertTrue(is_down_vertical_terminal(4, 5, board))
         
+        self.assertFalse(is_down_vertical_terminal(2, 2, board))
+        self.assertFalse(is_down_vertical_terminal(1, 8, board))
+        self.assertFalse(is_down_vertical_terminal(0, 3, board))
+
+
+    def test_1_initialize_1_vertical_variables(self): # Test 14
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        expected = [
+            Word("-", 9, (0,0), (1, 0), 2, "vertical"), #1
+            Word("-", 10, (3,0), (4, 0), 2, "vertical"), #2
+            Word("-", 11, (0,2), (1, 2), 2, "vertical"), #3
+            Word("-", 12, (0,3), (2, 3), 3, "vertical"), #4
+            Word("-", 13, (1,4), (4, 4), 4, "vertical"), #5
+            Word("-", 14, (0,5), (4, 5), 5, "vertical"), #6
+        ]
+        real = initialize_1_vertical_variables(board, 8)
+    
         self.assertEqual(expected, real)
-    """
+
 
 
 if __name__ == '__main__':

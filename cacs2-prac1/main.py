@@ -253,9 +253,35 @@ def initialize_1_horizontal_variables(board, number_of_previous_variables):
                 horizontal_variable_list.append(new_horizontal_variable)
                 horizontal_variable_length = 0
     return horizontal_variable_list
+
+def initialize_1_vertical_variables(board, number_of_previous_variables):
+    vertical_variable_number = number_of_previous_variables
+    vertical_variable_list = []
+    vertical_variable_length = 0
+    for j in range(board.getAncho()):
+        for i in range(board.getAlto()):
+            if is_solid(i, j, board):
+                continue
+            vertical_variable_length += 1
+            if is_down_vertical_terminal(i, j, board):
+                if vertical_variable_length == 1:
+                    vertical_variable_length = 0
+                    continue
+                vertical_variable_number += 1
+                new_vertical_variable = (
+                    Word(
+                        name = vertical_variable_number,
+                        initial_pos= (i - vertical_variable_length + 1, j),
+                        final_pos = (i, j),
+                        length = vertical_variable_length,
+                        orientation = "vertical"
+                    )
+                )
+                vertical_variable_list.append(new_vertical_variable)
+                vertical_variable_length = 0
+    return vertical_variable_list
                 
                 
-        
 #########################################################################  
 # Principal
 #########################################################################
