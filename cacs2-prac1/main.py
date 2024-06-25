@@ -174,6 +174,14 @@ def is_isolated(i, j, board):
               is_outside_crossboard(i, j - 1, board)
               )
               
+              and
+              
+              (
+                  is_empty(i, j, board)
+                  or
+                  has_letter(i, j, board)
+              )
+              
              )
 
 def initialize_1_isolated_variables(board, number_of_previous_variables = 0):
