@@ -171,15 +171,9 @@ class TestMain(unittest.TestCase):
     
     def test_1_initialize_1_horizontal_variables(self): # Test 12
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
-        list_of_vertical_variables = [
-            Word("-", 1, (0,0), (1, 0), 2, "vertical"), #1
-            Word("-", 2, (3,0), (4, 0), 2, "vertical"), #2
-            Word("-", 3, (0,2), (1, 2), 2, "vertical"), #3
-            Word("-", 4, (0,3), (2, 3), 3, "vertical"), #4
-            Word("-", 5, (1,4), (4, 4), 4, "vertical"), #5
-            Word("-", 6, (0,5), (4, 5), 5, "vertical"), #6
-        ]
-        
+        list_of_vertical_variables = []
+        initialize_1_vertical_variables(board, 0, list_of_vertical_variables)
+
         expected = [
             Word("-", 1, (0,0), (1, 0), 2, "vertical"), #1
             Word("-", 2, (3,0), (4, 0), 2, "vertical"), #2

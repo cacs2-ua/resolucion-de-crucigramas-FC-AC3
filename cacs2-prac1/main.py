@@ -259,9 +259,9 @@ def is_down_vertical_terminal(i, j, board):
             )  
             )
 
-def initialize_1_vertical_variables(board, number_of_previous_variables = 0):
+def initialize_1_vertical_variables(board, number_of_previous_variables = 0,
+                                    vertical_variable_list = []):
     vertical_variable_number = number_of_previous_variables
-    vertical_variable_list = []
     vertical_variable_length = 0
     for j in range(board.getAncho()):
         for i in range(board.getAlto()):
