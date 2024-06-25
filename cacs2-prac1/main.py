@@ -298,7 +298,7 @@ def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_var
             if is_isolated(i, j, board):
                 horizontal_variable_number += 1   
                 new_isolated_variable = Word(
-                        name = len(isolated_variable_list) + 1,
+                        name = len(isolated_variable_list) + number_of_previous_variables + 1,
                         initial_pos = (i, j),
                         final_pos = (i, j),
                         length = 1,
@@ -315,7 +315,7 @@ def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_var
                 horizontal_variable_number += 1
                 new_horizontal_variable = (
                     Word(
-                        name = len(horizontal_variable_list) + 1,
+                        name = len(horizontal_variable_list) + number_of_previous_variables + 1,
                         initial_pos = (i, j - horizontal_variable_length + 1),
                         final_pos = (i, j),
                         length = horizontal_variable_length,
@@ -328,8 +328,8 @@ def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_var
     for word in isolated_variable_list:
         word.set_name(word.get_name() + len(horizontal_variable_list))
     
-    concatenated_list = horizontal_variable_list.extend(isolated_variable_list)
-    return concatenated_list
+    horizontal_variable_list.extend(isolated_variable_list)
+    return horizontal_variable_list
                 
 #########################################################################  
 # Principal
