@@ -13,10 +13,10 @@ WHITE = (255, 255, 255)
 
 MARGEN=5 #ancho del borde entre celdas
 MARGEN_INFERIOR=60 #altura del margen inferior entre la cuadrícula y la ventana
-TAM=30  #tamaño de la celda
-FILS=20 # número de filas del crucigrama
-COLS=20 # número de columnas del crucigrama
-RUTA_TABLERO = "Boards_Examples/complex.txt"
+TAM=60  #tamaño de la celda
+FILS=5 # número de filas del crucigrama
+COLS=6 # número de columnas del crucigrama
+RUTA_TABLERO = "Boards_Examples/mine1.txt"
 
 LLENA='*' 
 VACIA='-'
