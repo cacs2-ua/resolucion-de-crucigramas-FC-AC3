@@ -130,8 +130,6 @@ class TestMain(unittest.TestCase):
         self.assertFalse(has_letter(5, 2, board))
 
  
-    
-    """
     def test_1_initialize_1_horizontal_variables(self):
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         expected = [
@@ -145,7 +143,6 @@ class TestMain(unittest.TestCase):
         real = initialize_1_horizontal_variables(board, 2)
         
         self.assertEqual(expected, real)
-    """ 
 
 
 if __name__ == '__main__':
