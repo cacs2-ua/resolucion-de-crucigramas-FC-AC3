@@ -169,7 +169,7 @@ class TestMain(unittest.TestCase):
     
         self.assertEqual(expected, real)
     
-    def test_1_initialize_1_horizontal_variables(self): # Test 12
+    def test_1_initialize_1_horizontal_and_isolated_variables(self): # Test 12
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         list_of_vertical_variables = []
         initialize_1_vertical_variables(board, 0, list_of_vertical_variables)
