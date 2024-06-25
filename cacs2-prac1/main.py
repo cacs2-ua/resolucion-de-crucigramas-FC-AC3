@@ -285,7 +285,46 @@ def initialize_1_vertical_variables(board, number_of_previous_variables = 0):
                 vertical_variable_list.append(new_vertical_variable)
                 vertical_variable_length = 0
     return vertical_variable_list
+
+def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_variables = 0):
+    horizontal_variable_number = number_of_previous_variables
+    horizontal_variable_list = []
+    horizontal_variable_length = 0
+    isolated_variable_list = []
+    for i in range(board.getAlto()):
+        for j in range(board.getAncho()):
+            if is_solid(i, j, board):
+                continue
+            if is_isolated(i, j, board):
+                horizontal_variable_number += 1   
+                new_isolated_variable = Word(
+                        name = horizontal_variable_number,
+                        initial_pos = (i, j),
+                        final_pos = (i, j),
+                        length = 1,
+                        orientation = "isolated"
+                    )
+                isolated_variable_list.append(new_isolated_variable)
+                continue
                 
+            horizontal_variable_length += 1
+            if is_right_horizontal_terminal(i, j, board):
+                if horizontal_variable_length == 1:
+                    horizontal_variable_length = 0
+                    continue
+                horizontal_variable_number += 1
+                new_horizontal_variable = (
+                    Word(
+                        name = horizontal_variable_number ,
+                        initial_pos = (i, j - horizontal_variable_length + 1),
+                        final_pos = (i, j),
+                        length = horizontal_variable_length,
+                        orientation = "horizontal"
+                        )
+                    )
+                horizontal_variable_list.append(new_horizontal_variable)
+                horizontal_variable_length = 0
+    return horizontal_variable_list
                 
 #########################################################################  
 # Principal
