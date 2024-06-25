@@ -110,6 +110,69 @@ def imprimeAlmacen(almacen):
 
 def substract(a, b):
     return a - b
+
+def is_outside_crossboard (i, j, board):
+    return (i < 0 
+            or  
+            i >= board.alto 
+            or 
+            j < 0 
+            or j >= board.ancho)
+
+def is_inside_crossboard (i, j, board):
+    return not is_outside_crossboard(i, j, board)
+
+def is_solid(i, j, board):
+    return board.tablero[i][j] == '*'
+
+
+def is_isolated(i, j, board):
+    return (
+              (
+              is_solid(i - 1, j, board) 
+              or 
+              is_outside_crossboard(i - 1, j, board)
+              )
+              
+              and
+              
+              (
+              is_solid(i, j + 1, board) 
+              or 
+              is_outside_crossboard(i, j + 1, board)
+              )
+              
+              and
+              
+              (
+              is_solid(i + 1, j, board) 
+              or 
+              is_outside_crossboard(i + 1, j, board)
+              )
+              
+              and
+              
+              (
+              is_solid(i, j - 1, board) 
+              or 
+              is_outside_crossboard(i, j - 1, board)
+              )
+              
+             )
+                
+
+
+
+def assign_isolated_variables(board):
+    isolated_variables_list = []
+    isolated_variables_counter = 0
+    for i in range(board.alto):
+        for j in range(board.ancho):
+            print ("")
+
+            
+            
+    
         
 #########################################################################  
 # Principal

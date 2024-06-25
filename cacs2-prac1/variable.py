@@ -4,7 +4,8 @@ from copy import deepcopy
 
 class Word:
 
-    def __init__(self, name, initial_pos, final_pos, length, orientation, feasibles):
+    def __init__(self, name = "", initial_pos = 0, final_pos = 0, 
+                 length = 0, orientation = "horizontal", feasibles = []):
         self.value = "-"
         self.name = name
         self.initial_pos = initial_pos
