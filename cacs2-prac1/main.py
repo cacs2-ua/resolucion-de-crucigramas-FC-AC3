@@ -216,9 +216,9 @@ def is_right_horizontal_terminal(i, j, board):
             )  
             )
 
-def initialize_1_horizontal_variables(board, number_of_previous_variables = 0):
+def initialize_1_horizontal_variables(board, number_of_previous_variables = 0,
+                                      horizontal_variable_list = []):
     horizontal_variable_number = number_of_previous_variables
-    horizontal_variable_list = []
     horizontal_variable_length = 0
     for i in range(board.getAlto()):
         for j in range(board.getAncho()):
@@ -287,9 +287,9 @@ def initialize_1_vertical_variables(board, number_of_previous_variables = 0,
     return vertical_variable_list
 
 def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_variables = 0,
+                                                   horizontal_variable_list = [],
                                                    list_of_vertical_variables = []):
     horizontal_variable_number = number_of_previous_variables
-    horizontal_variable_list = []
     horizontal_variable_length = 0
     isolated_variable_list = []
     for i in range(board.getAlto()):
@@ -332,6 +332,34 @@ def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_var
     
     list_of_vertical_variables.extend(isolated_variable_list)
     return list_of_vertical_variables
+
+
+def initialize_1_vertical_and_isolated_variables(board, number_of_previous_variables = 0,
+                                                vertical_variable_list = []):
+    vertical_variable_number = number_of_previous_variables
+    vertical_variable_length = 0
+    for j in range(board.getAncho()):
+        for i in range(board.getAlto()):
+            if is_solid(i, j, board):
+                continue
+            vertical_variable_length += 1
+            if is_down_vertical_terminal(i, j, board):
+                if vertical_variable_length == 1:
+                    vertical_variable_length = 0
+                    continue
+                vertical_variable_number += 1
+                new_vertical_variable = (
+                    Word(
+                        name = vertical_variable_number,
+                        initial_pos= (i - vertical_variable_length + 1, j),
+                        final_pos = (i, j),
+                        length = vertical_variable_length,
+                        orientation = "vertical"
+                    )
+                )
+                vertical_variable_list.append(new_vertical_variable)
+                vertical_variable_length = 0
+    return vertical_variable_list
                 
 #########################################################################  
 # Principal
