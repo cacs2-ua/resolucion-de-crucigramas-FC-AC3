@@ -194,12 +194,19 @@ def initialize_1_isolated_variables(board):
 
 def is_right_horizontal_terminal(i, j, board):
     return (
-            (is_solid(i, j + 1, board) 
+            (
+             is_solid(i, j + 1, board) 
              or 
              is_outside_crossboard(i, j + 1, board)
-             )
+            )
+            
             and
-            is_empty(i, j, board))
+            (
+                is_empty(i, j, board)
+                or
+                has_letter(i, j, board)
+            )  
+            )
     
 
 def initialize_1_horizontal_variables(board, number_of_previous_variables):
