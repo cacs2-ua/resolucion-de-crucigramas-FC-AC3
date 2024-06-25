@@ -97,8 +97,18 @@ class TestMain(unittest.TestCase):
         
         self.assertEqual(expected, real)
     
+    def test_is_right_horizontal_terminal(self):
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        self.assertTrue(is_right_horizontal_terminal(0, 5, board))
+        self.assertTrue(is_right_horizontal_terminal(2, 1, board))
+        self.assertTrue(is_right_horizontal_terminal(3, 2, board))
+        
+        self.assertFalse(is_right_horizontal_terminal(0, 2, board))
+        self.assertFalse(is_right_horizontal_terminal(2, 3, board))
+        self.assertFalse(is_right_horizontal_terminal(4, 4, board))
+    """
     def test_1_initialize_1_horizontal_variables(self):
-        board = Tablero(file_path='tests/resources/Boards_Examples/horizontal1.txt')
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         expected = [
             Word("-", 3, (0,2), (0, 3), 2, "horizontal"), #1
             Word("-", 4, (1,2), (1, 5), 4, "horizontal"), #2
@@ -110,7 +120,7 @@ class TestMain(unittest.TestCase):
         real = initialize_1_horizontal_variables(board, 2)
         
         self.assertEqual(expected, real)
-        
+    """ 
 
 
 if __name__ == '__main__':

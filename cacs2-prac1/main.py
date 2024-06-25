@@ -179,6 +179,10 @@ def initialize_1_isolated_variables(board):
                 isolated_variable_list.append(new_isolated_variable)
     return isolated_variable_list
 
+def is_right_horizontal_terminal(i, j, board):
+    return is_solid(i, j + 1, board) or is_outside_crossboard(i, j + 1, board)
+    
+
 def initialize_1_horizontal_variables(board, number_of_previous_variables):
     horizontal_variable_number = number_of_previous_variables
     horizontal_variable_list = []
