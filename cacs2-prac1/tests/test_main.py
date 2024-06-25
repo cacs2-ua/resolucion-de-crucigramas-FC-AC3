@@ -182,6 +182,7 @@ class TestMain(unittest.TestCase):
             Word("-", 14, (3,2), (3, 2), 1, "isolated"), #14
         ]
         real = initialize_1_horizontal_and_isolated_variables(board, 6)
+        print("")
         
         self.assertEqual(expected, real)
 
