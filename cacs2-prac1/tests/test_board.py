@@ -5,9 +5,9 @@ from tablero import *
 
 class TestTablero(unittest.TestCase):
 
-    def setUp(self):
-        # Create a temporary file with board content
-        self.test_file_content = (
+    def get_temporary_file_content(self):
+        # This function returns the temporary file content
+        return (
             "---------\n"
             "-#######-\n"
             "-#######-\n"
@@ -19,16 +19,15 @@ class TestTablero(unittest.TestCase):
             "#####-###-\n"
             "------###-\n"
         )
-        self.test_file = tempfile.NamedTemporaryFile(delete=False, mode='w+')
-        self.test_file.write(self.test_file_content)
-        self.test_file.seek(0)
-
-    def tearDown(self):
-        self.test_file.close()
-        os.unlink(self.test_file.name)
 
     def test_load_from_file(self):
-        tablero = Tablero(file_path=self.test_file.name)
+        # Create a temporary file with board content
+        test_file_content = self.get_temporary_file_content()
+        test_file = tempfile.NamedTemporaryFile(delete=False, mode='w+')
+        test_file.write(test_file_content)
+        test_file.close()
+
+        tablero = Tablero(file_path=test_file.name)
         expected_board = [
             "---------",
             "-#######-",
@@ -45,10 +44,18 @@ class TestTablero(unittest.TestCase):
         for i, line in enumerate(expected_board):
             for j, char in enumerate(line):
                 self.assertEqual(tablero.getCelda(i, j), char)
+
+        os.unlink(test_file.name)
 
     def test_set_from_file(self):
+        # Create a temporary file with board content
+        test_file_content = self.get_temporary_file_content()
+        test_file = tempfile.NamedTemporaryFile(delete=False, mode='w+')
+        test_file.write(test_file_content)
+        test_file.close()
+
         tablero = Tablero(10, 10)
-        tablero.set_from_file(self.test_file.name)
+        tablero.set_from_file(test_file.name)
         expected_board = [
             "---------",
             "-#######-",
@@ -65,6 +72,8 @@ class TestTablero(unittest.TestCase):
         for i, line in enumerate(expected_board):
             for j, char in enumerate(line):
                 self.assertEqual(tablero.getCelda(i, j), char)
+
+        os.unlink(test_file.name)
 
 if __name__ == '__main__':
     unittest.main()
