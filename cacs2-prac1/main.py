@@ -335,13 +335,27 @@ def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_var
 
 
 def initialize_1_vertical_and_isolated_variables(board, number_of_previous_variables = 0,
-                                                vertical_variable_list = []):
+                                                vertical_variable_list = [],
+                                                horizontal_variable_list = []):
     vertical_variable_number = number_of_previous_variables
     vertical_variable_length = 0
+    isolated_variable_list = []
     for j in range(board.getAncho()):
         for i in range(board.getAlto()):
             if is_solid(i, j, board):
                 continue
+            if is_isolated(i, j, board):
+                horizontal_variable_number += 1   
+                new_isolated_variable = Word(
+                        name = len(isolated_variable_list) + number_of_previous_variables + 1,
+                        initial_pos = (i, j),
+                        final_pos = (i, j),
+                        length = 1,
+                        orientation = "isolated"
+                    )
+                isolated_variable_list.append(new_isolated_variable)
+                continue
+            
             vertical_variable_length += 1
             if is_down_vertical_terminal(i, j, board):
                 if vertical_variable_length == 1:
@@ -350,7 +364,7 @@ def initialize_1_vertical_and_isolated_variables(board, number_of_previous_varia
                 vertical_variable_number += 1
                 new_vertical_variable = (
                     Word(
-                        name = vertical_variable_number,
+                        name = len(vertical_variable_list) + number_of_previous_variables + 1,
                         initial_pos= (i - vertical_variable_length + 1, j),
                         final_pos = (i, j),
                         length = vertical_variable_length,
@@ -358,8 +372,13 @@ def initialize_1_vertical_and_isolated_variables(board, number_of_previous_varia
                     )
                 )
                 vertical_variable_list.append(new_vertical_variable)
+                horizontal_variable_list.append(new_vertical_variable)
                 vertical_variable_length = 0
-    return vertical_variable_list
+    for word in isolated_variable_list:
+        word.set_name(word.get_name() + len(vertical_variable_list))
+    
+    horizontal_variable_list.extend(isolated_variable_list)
+    return horizontal_variable_list
                 
 #########################################################################  
 # Principal
