@@ -207,15 +207,38 @@ def is_right_horizontal_terminal(i, j, board):
                 has_letter(i, j, board)
             )  
             )
+
+
     
 
 def initialize_1_horizontal_variables(board, number_of_previous_variables):
     horizontal_variable_number = number_of_previous_variables
     horizontal_variable_list = []
+    horizontal_variable_length = 0
     for i in range(board.getAlto()):
         for j in range(board.getAncho()):
-            print(f"i: {i}, j: {j}")
-    
+            if is_solid(i, j, board):
+                continue
+            horizontal_variable_length += 1
+            if is_right_horizontal_terminal(i, j, board):
+                if horizontal_variable_length == 1:
+                    horizontal_variable_length = 0
+                    continue
+                horizontal_variable_number += 1
+                new_horizontal_variable = (
+                    Word(
+                        name = horizontal_variable_number ,
+                        initial_pos = (i, j - horizontal_variable_length + 1),
+                        final_pos = (i, j),
+                        length = horizontal_variable_length,
+                        orientation = "horizontal"
+                        )
+                    )
+                horizontal_variable_list.append(new_horizontal_variable)
+                horizontal_variable_length = 0
+    return horizontal_variable_list
+                
+                
         
 #########################################################################  
 # Principal
