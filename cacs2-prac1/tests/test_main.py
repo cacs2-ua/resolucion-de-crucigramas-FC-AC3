@@ -106,6 +106,18 @@ class TestMain(unittest.TestCase):
         self.assertFalse(is_right_horizontal_terminal(0, 2, board))
         self.assertFalse(is_right_horizontal_terminal(2, 3, board))
         self.assertFalse(is_right_horizontal_terminal(4, 4, board))
+    
+    def test_is_empty(self):
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        
+        self.assertTrue(is_empty(0, 2, board))
+        self.assertTrue(is_empty(3, 0, board))
+        self.assertTrue(is_empty(1, 4, board))
+        
+        self.assertFalse(is_empty(2, 2, board))
+        self.assertFalse(is_empty(3, 1, board))
+        self.assertFalse(is_empty(1, 6, board))
+    
     """
     def test_1_initialize_1_horizontal_variables(self):
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')

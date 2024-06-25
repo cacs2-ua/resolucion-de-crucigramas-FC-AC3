@@ -128,6 +128,12 @@ def is_solid(i, j, board):
         return False
     return board.tablero[i][j] == '*'
 
+def is_empty(i, j, board):
+    if is_outside_crossboard(i, j, board):
+        return False
+    return board.tablero[i][j] == '-'
+
+
 
 def is_isolated(i, j, board):
     return (
