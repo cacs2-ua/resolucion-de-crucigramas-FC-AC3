@@ -5,6 +5,7 @@ from tkinter.simpledialog import *
 from tkinter import messagebox as MessageBox
 from tablero import *
 from dominio import *
+from variable import *
 from pygame.locals import *
 
 MEDIUM_PURPLE = (147, 112, 219)
@@ -123,6 +124,8 @@ def is_inside_crossboard (i, j, board):
     return not is_outside_crossboard(i, j, board)
 
 def is_solid(i, j, board):
+    if is_outside_crossboard(i, j, board):
+        return False
     return board.tablero[i][j] == '*'
 
 
@@ -159,19 +162,22 @@ def is_isolated(i, j, board):
               )
               
              )
-                
 
-
-
-def assign_isolated_variables(board):
-    isolated_variables_list = []
+def initialize_1_isolated_variables(board):
     isolated_variables_counter = 0
-    for i in range(board.alto):
-        for j in range(board.ancho):
-            print ("")
-
-            
-            
+    isolated_variable_list = []
+    for i in range(board.getAlto()):
+        for j in range(board.getAncho()):
+            if is_isolated(i, j, board):
+                isolated_variables_counter += 1
+                new_isolated_variable = Word(
+                                             name = isolated_variables_counter, 
+                                             initial_pos = (i, j), 
+                                             final_pos= (i, j),
+                                             length = 1,
+                                             orientation = "isolated")
+                isolated_variable_list.append(new_isolated_variable)
+    return isolated_variable_list
     
         
 #########################################################################  

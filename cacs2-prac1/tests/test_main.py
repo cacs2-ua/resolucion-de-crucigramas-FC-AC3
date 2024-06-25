@@ -65,3 +65,24 @@ class TestMain(unittest.TestCase):
         self.assertTrue(is_isolated(3, 2, board))
         self.assertFalse(is_isolated(1, 4, board))
         self.assertFalse(is_isolated(3, 3, board))
+    
+    def test_initialize_1_isolated_variables(self):
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        expected = [
+            ["-", 1, (2, 1), (2, 1), 1, "isolated", [], {}, {}],
+            ["-", 2, (3, 2), (3, 2), 1, "isolated", [], {}, {}]
+        ]
+        real = initialize_1_isolated_variables(board)
+        
+        self.assertEqual(len(real), len(expected))
+        
+        for real_word, expected_word in zip(real, expected):
+            self.assertEqual(real_word.value, expected_word[0])
+            self.assertEqual(real_word.name, expected_word[1])
+            self.assertEqual(real_word.initial_pos, expected_word[2])
+            self.assertEqual(real_word.final_pos, expected_word[3])
+            self.assertEqual(real_word.length, expected_word[4])
+            self.assertEqual(real_word.orientation, expected_word[5])
+            self.assertEqual(real_word.feasibles, expected_word[6])
+            self.assertEqual(real_word.pounds, expected_word[7])
+            self.assertEqual(real_word.restrictions, expected_word[8])
