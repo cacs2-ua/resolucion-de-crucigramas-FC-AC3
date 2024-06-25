@@ -118,6 +118,19 @@ class TestMain(unittest.TestCase):
         self.assertFalse(is_empty(3, 1, board))
         self.assertFalse(is_empty(1, 6, board))
     
+    def test_has_letter(self):
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        
+        self.assertTrue(has_letter(0, 0, board))
+        self.assertTrue(has_letter(2, 4, board))
+        self.assertTrue(has_letter(4, 1, board))
+        
+        self.assertFalse(has_letter(0, 1, board))
+        self.assertFalse(has_letter(2, 1, board))
+        self.assertFalse(has_letter(5, 2, board))
+
+ 
+    
     """
     def test_1_initialize_1_horizontal_variables(self):
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')

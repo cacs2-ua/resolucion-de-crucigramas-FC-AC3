@@ -133,6 +133,13 @@ def is_empty(i, j, board):
         return False
     return board.tablero[i][j] == '-'
 
+def has_letter(i, j, board):
+    return (
+        not is_empty(i, j, board) 
+        and 
+        not is_solid(i, j, board) 
+        and 
+        not is_outside_crossboard(i, j, board))   
 
 
 def is_isolated(i, j, board):
