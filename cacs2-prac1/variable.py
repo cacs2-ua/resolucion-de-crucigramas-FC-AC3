@@ -35,3 +35,9 @@ class Word:
         return (f"Word(value={self.value}, name={self.name}, initial_pos={self.initial_pos}, "
                 f"final_pos={self.final_pos}, length={self.length}, orientation={self.orientation}, "
                 f"feasibles={self.feasibles}, pounds={self.pounds}, restrictions={self.restrictions})")
+
+    def set_name(self, name):
+        self.name = name
+    
+    def get_name(self):
+        return self.name
