@@ -144,6 +144,16 @@ class TestMain(unittest.TestCase):
         
         self.assertEqual(expected, real)
     
+        def test_is_down_vertical_terminal(self):
+            board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+            self.assertTrue(is_down_vertical_terminal(1, 0, board))
+            self.assertTrue(is_down_vertical_terminal(4, 4, board))
+            self.assertTrue(is_down_vertical_terminal(4, 5, board))
+            
+            self.assertFalse(is_down_vertical_terminal(2, 2, board))
+            self.assertFalse(is_down_vertical_terminal(1, 8, board))
+            self.assertFalse(is_down_vertical_terminal(0, 3, board))
+    
     """
         def test_1_initialize_1_vertical_variables(self):
             board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')

@@ -208,6 +208,22 @@ def is_right_horizontal_terminal(i, j, board):
             )  
             )
 
+def is_down_vertical_terminal(i, j, board):
+    return (
+            (
+             is_solid(i + 1, j, board) 
+             or 
+             is_outside_crossboard(i + 1, j, board)
+            )
+            
+            and
+            (
+                is_empty(i, j, board)
+                or
+                has_letter(i, j, board)
+            )  
+            )
+
 
     
 
