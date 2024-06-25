@@ -86,3 +86,17 @@ class TestMain(unittest.TestCase):
             self.assertEqual(real_word.feasibles, expected_word[6])
             self.assertEqual(real_word.pounds, expected_word[7])
             self.assertEqual(real_word.restrictions, expected_word[8])
+            
+    def test_2_initialize_1_isolated_variables(self):
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        expected = [
+            Word("-", 1, (2, 1), (2, 1), 1, "isolated"),
+            Word("-", 2, (3, 2), (3, 2), 1, "isolated")
+        ]
+        real = initialize_1_isolated_variables(board)
+        
+        self.assertEqual(expected, real)
+
+
+if __name__ == '__main__':
+    unittest.main()
