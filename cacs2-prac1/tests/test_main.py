@@ -168,6 +168,21 @@ class TestMain(unittest.TestCase):
         real = initialize_1_vertical_variables(board, 8)
     
         self.assertEqual(expected, real)
+    
+    def test_1_initialize_1_horizontal_and_isolated_variables(self): # Test 15
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        expected = [
+            Word("-", 1, (0,2), (0, 3), 2, "horizontal"), #1
+            Word("-", 2, (1,2), (1, 5), 4, "horizontal"), #2
+            Word("-", 3, (1,2), (1, 5), 4, "horizontal"), #2
+            Word("-", 5, (2,3), (2, 5), 3, "horizontal"), #3
+            Word("-", 6, (3,4), (3, 5), 2, "horizontal"), #4
+            Word("-", 7, (4,0), (4, 1), 2, "horizontal"), #5
+            Word("-", 8, (4,3), (4, 5), 3, "horizontal"), #6
+        ]
+        real = initialize_1_horizontal_variables(board, 2)
+        
+        self.assertEqual(expected, real)
 
 
 
