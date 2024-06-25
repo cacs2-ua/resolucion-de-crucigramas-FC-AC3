@@ -208,25 +208,6 @@ def is_right_horizontal_terminal(i, j, board):
             )  
             )
 
-def is_down_vertical_terminal(i, j, board):
-    return (
-            (
-             is_solid(i + 1, j, board) 
-             or 
-             is_outside_crossboard(i + 1, j, board)
-            )
-            
-            and
-            (
-                is_empty(i, j, board)
-                or
-                has_letter(i, j, board)
-            )  
-            )
-
-
-    
-
 def initialize_1_horizontal_variables(board, number_of_previous_variables = 0):
     horizontal_variable_number = number_of_previous_variables
     horizontal_variable_list = []
@@ -253,6 +234,22 @@ def initialize_1_horizontal_variables(board, number_of_previous_variables = 0):
                 horizontal_variable_list.append(new_horizontal_variable)
                 horizontal_variable_length = 0
     return horizontal_variable_list
+
+def is_down_vertical_terminal(i, j, board):
+    return (
+            (
+             is_solid(i + 1, j, board) 
+             or 
+             is_outside_crossboard(i + 1, j, board)
+            )
+            
+            and
+            (
+                is_empty(i, j, board)
+                or
+                has_letter(i, j, board)
+            )  
+            )
 
 def initialize_1_vertical_variables(board, number_of_previous_variables = 0):
     vertical_variable_number = number_of_previous_variables
