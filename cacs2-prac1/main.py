@@ -286,7 +286,8 @@ def initialize_1_vertical_variables(board, number_of_previous_variables = 0):
                 vertical_variable_length = 0
     return vertical_variable_list
 
-def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_variables = 0):
+def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_variables = 0,
+                                                   list_of_vertical_variables = []):
     horizontal_variable_number = number_of_previous_variables
     horizontal_variable_list = []
     horizontal_variable_length = 0
@@ -323,13 +324,14 @@ def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_var
                         )
                     )
                 horizontal_variable_list.append(new_horizontal_variable)
+                list_of_vertical_variables.append(new_horizontal_variable)
                 horizontal_variable_length = 0
                 
     for word in isolated_variable_list:
         word.set_name(word.get_name() + len(horizontal_variable_list))
     
-    horizontal_variable_list.extend(isolated_variable_list)
-    return horizontal_variable_list
+    list_of_vertical_variables.extend(isolated_variable_list)
+    return list_of_vertical_variables
                 
 #########################################################################  
 # Principal
