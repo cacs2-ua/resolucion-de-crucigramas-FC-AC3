@@ -522,7 +522,20 @@ class TestMain(unittest.TestCase):
         self.assertEqual(expected_horizontals, real["horizontal"])
         self.assertEqual(expected_verticals, real["vertical"])
         self.assertEqual(expected_isolated, real["isolated"])
-        
     
+    def test_get_initial_letters(self): # Test 26
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        #my_dict = {'key1': value1, 'key2': value2, 'key3': value3}
+        expected_dict = {
+                         (0, 0): "E",
+                         (1, 3): "V",
+                         (1, 5): "S",
+                         (2, 4): "S",
+                         (3, 5): "N",
+                         (4, 1): "O"
+                         }
+        real_dict = get_initial_letters(board)
+        self.assertEqual(expected_dict, real_dict)
+
 if __name__ == '__main__':
     unittest.main()

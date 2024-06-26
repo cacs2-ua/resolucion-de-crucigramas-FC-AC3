@@ -518,6 +518,14 @@ def initialize_feasibles_v1(board, storage, dictionary_of_variables):
         
     return dictionary_of_variables
 
+def get_initial_letters(board):
+    initial_letters = {}
+    for i in range(board.getAlto()):
+        for j in range(board.getAncho()):
+            if has_letter(i, j, board):
+                initial_letters[(i, j)] = board.getCelda(i, j)
+    return initial_letters
+
 def initialize_restrictions_v1(board, hash_table_of_variables):
     restrictions = []
 
