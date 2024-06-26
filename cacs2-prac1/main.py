@@ -415,6 +415,30 @@ def initialize_1_all_variables(board):
                                                        list_of_variables)
     
     return list_of_variables
+
+def initialize_2_all_variables(board):
+    n = board.getAlto()
+    m = board.getAncho()
+    list_of_variables = []
+    
+    if m >= n:
+        horizontal_variable_list = []
+        initialize_1_vertical_variables(board, 0, list_of_variables)
+        initialize_1_horizontal_and_isolated_variables(board,
+                                                       len(list_of_variables),
+                                                       horizontal_variable_list,
+                                                       list_of_variables)
+        
+    else:
+        vertical_variable_list = []
+        initialize_1_horizontal_variables(board, 0, list_of_variables)
+        initialize_1_vertical_and_isolated_variables(board,
+                                                     len(list_of_variables),
+                                                     vertical_variable_list,
+                                                     list_of_variables)
+
+    
+    return list_of_variables
         
 
 
