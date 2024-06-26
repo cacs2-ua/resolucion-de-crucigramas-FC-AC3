@@ -451,25 +451,39 @@ def initialize_2_all_variables(board):
     n = board.getAlto()
     m = board.getAncho()
     list_of_variables = []
+    isolated_variable_list = []
+    dictionary_of_variables = {}
     
     if m >= n:
+        vertical_variable_list = []
         horizontal_variable_list = []
-        initialize_1_vertical_variables(board, 0, list_of_variables)
+        initialize_1_vertical_variables(board, 0, vertical_variable_list,
+                                        list_of_variables)
+        dictionary_of_variables["vertical"] = vertical_variable_list
         initialize_1_horizontal_and_isolated_variables(board,
                                                        len(list_of_variables),
                                                        horizontal_variable_list,
-                                                       list_of_variables)
+                                                       list_of_variables,
+                                                       isolated_variable_list)
+        dictionary_of_variables["horizontal"] = horizontal_variable_list
+        dictionary_of_variables["isolated"] = isolated_variable_list
         
     else:
+        horizontal_variable_list = []
         vertical_variable_list = []
-        initialize_1_horizontal_variables(board, 0, list_of_variables)
+        initialize_1_horizontal_variables(board, 0, horizontal_variable_list,
+                                          list_of_variables)
+        dictionary_of_variables["horizontal"] = horizontal_variable_list
         initialize_1_vertical_and_isolated_variables(board,
                                                      len(list_of_variables),
                                                      vertical_variable_list,
-                                                     list_of_variables)
+                                                     list_of_variables,
+                                                     isolated_variable_list)
+        dictionary_of_variables["vertical"] = vertical_variable_list
+        dictionary_of_variables["isolated"] = isolated_variable_list
 
     
-    return list_of_variables
+    return dictionary_of_variables
 
 
 def create_storage_with_hash_table(filename):
