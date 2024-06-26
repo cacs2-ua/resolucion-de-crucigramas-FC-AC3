@@ -7,6 +7,7 @@ from tablero import *
 from dominio import *
 from variable import *
 from pygame.locals import *
+from copy import deepcopy
 
 MEDIUM_PURPLE = (147, 112, 219)
 DARK_PURPLE = (128, 0, 128)
@@ -409,28 +410,28 @@ def initialize_1_all_variables(board):
     if m >= n:
         vertical_variable_list = []
         initialize_1_horizontal_variables(board, 0, list_of_variables)
-        dictionary_of_variables["horizontal"] = list_of_variables
+        dictionary_of_variables["horizontal"] = deepcopy(list_of_variables)
         initialize_1_vertical_and_isolated_variables(board,
                                                      len(list_of_variables),
                                                      vertical_variable_list,
                                                      list_of_variables,
                                                      isolated_variable_list)
-        dictionary_of_variables["vertical"] = vertical_variable_list
-        dictionary_of_variables["isolated"] = isolated_variable_list
+        dictionary_of_variables["vertical"] = deepcopy(vertical_variable_list)
+        dictionary_of_variables["isolated"] = deepcopy(isolated_variable_list)
         
         
         
     else:
         horizontal_variable_list = []
         initialize_1_vertical_variables(board, 0, list_of_variables)
-        dictionary_of_variables["vertical"] = list_of_variables
+        dictionary_of_variables["vertical"] = deepcopy(list_of_variables)
         initialize_1_horizontal_and_isolated_variables(board,
                                                        len(list_of_variables),
                                                        horizontal_variable_list,
                                                        list_of_variables,
                                                        isolated_variable_list)
-        dictionary_of_variables["horizontal"] = horizontal_variable_list
-        dictionary_of_variables["isolated"] = isolated_variable_list
+        dictionary_of_variables["horizontal"] = deepcopy(horizontal_variable_list)
+        dictionary_of_variables["isolated"] = deepcopy(isolated_variable_list)
     
     return dictionary_of_variables
 
