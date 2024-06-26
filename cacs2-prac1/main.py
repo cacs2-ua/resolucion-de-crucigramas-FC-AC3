@@ -536,8 +536,10 @@ def square_belongs_to_word(i, j, word):
     elif word.get_orientation() == "isolated":
         return i == word.get_initial_pos()[0] and j == word.get_initial_pos()[1]
 
-def initialize_restrictions_v1(board, hash_table_of_variables):
-    restrictions = []
+
+                
+                
+        
 
 
 

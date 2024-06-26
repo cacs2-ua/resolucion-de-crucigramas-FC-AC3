@@ -91,3 +91,9 @@ class Word:
     
     def get_restrictions(self):
         return self.restrictions
+    
+    def add_restriction(self, restriction):
+        restrainer_name = restriction.get_word_restrainer().get_name()
+        if restrainer_name not in self.restrictions:
+            self.restrictions[restrainer_name] = []
+        self.restrictions[restrainer_name].append(restriction)
