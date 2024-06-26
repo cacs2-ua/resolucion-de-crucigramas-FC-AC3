@@ -536,6 +536,43 @@ class TestMain(unittest.TestCase):
                          }
         real_dict = get_initial_letters(board)
         self.assertEqual(expected_dict, real_dict)
-
+    
+    def test_square_belongs_to_word(self): # Test 27
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        hash_table_of_variables = initialize_1_all_variables(board)
+        
+        self.assertTrue(square_belongs_to_word(1, 3, 
+                                hash_table_of_variables["horizontal"][1]))
+        
+        self.assertTrue(square_belongs_to_word(1, 5, 
+                                hash_table_of_variables["horizontal"][1]))
+        
+        self.assertTrue(square_belongs_to_word(2, 4, 
+                                hash_table_of_variables["horizontal"][2]))
+        
+        self.assertTrue(square_belongs_to_word(3, 5, 
+                                hash_table_of_variables["horizontal"][3]))
+        
+        self.assertTrue(square_belongs_to_word(4, 1, 
+                                hash_table_of_variables["horizontal"][4]))
+        
+        self.assertTrue(square_belongs_to_word(4, 4, 
+                                hash_table_of_variables["horizontal"][5]))
+        
+        self.assertTrue(square_belongs_to_word(0, 0, 
+                                hash_table_of_variables["vertical"][0]))
+        
+        self.assertTrue(square_belongs_to_word(3, 0, 
+                                hash_table_of_variables["vertical"][1]))
+        
+        self.assertTrue(square_belongs_to_word(0, 2, 
+                                hash_table_of_variables["vertical"][2]))
+        
+        self.assertTrue(square_belongs_to_word(1, 3, 
+                                hash_table_of_variables["vertical"][3]))
+        
+        self.assertFalse(square_belongs_to_word(2, 1, 
+                                hash_table_of_variables["horizontal"][3]))
+        
 if __name__ == '__main__':
     unittest.main()
