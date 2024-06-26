@@ -457,7 +457,7 @@ class TestMain(unittest.TestCase):
         self.assertEqual(result[2].getLista().count('LA'), 1)
     
 
-"""  
+
     def test_initialize_feasibles_v1(self): # Test 25
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         list_of_variables = initialize_1_all_variables(board)
@@ -515,8 +515,6 @@ class TestMain(unittest.TestCase):
         real = initialize_feasibles_v1(board, dictionary_of_domains, list_of_variables)
         self.assertEqual(expected, real)
         
-        
-"""
-
+    
 if __name__ == '__main__':
     unittest.main()

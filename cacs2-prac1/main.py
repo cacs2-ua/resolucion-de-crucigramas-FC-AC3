@@ -504,10 +504,15 @@ def create_storage_with_hash_table(filename):
             
     return almacen
 
-def initialize_feasibles_v1(board, storage, list_of_variables):
-    for word in list_of_variables:
+def initialize_feasibles_v1(board, storage, dictionary_of_variables):
+    
+    for word in dictionary_of_variables["horizontal"]:
         word.set_feasibles(storage[word.get_length()].getLista())
-    return list_of_variables
+    for word in dictionary_of_variables["vertical"]:
+        word.set_feasibles(storage[word.get_length()].getLista())
+    for word in dictionary_of_variables["isolated"]:
+        word.set_feasibles(storage[word.get_length()].getLista())
+    return dictionary_of_variables
 
 
 
