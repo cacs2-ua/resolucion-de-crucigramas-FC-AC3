@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python Debugger: Current File with Arguments",
+            "name": "main.py debug",
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/main.py",
@@ -13,12 +13,20 @@
             "args": []
         },
         {
-            "name": "Python: Debug tests",
+            "name": "tests/test_main.py debug",
             "type": "debugpy",
             "request": "launch",
             "module": "unittest",
             "args": ["${workspaceFolder}/tests/test_main.py"],
             "console": "integratedTerminal"
-        }
+        },
+        {
+            "name": "check_main.py debug",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/check_main.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
     ]
 }

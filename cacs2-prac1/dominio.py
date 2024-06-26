@@ -13,3 +13,6 @@ class Dominio:
     
     def getLista(self):
         return self.lista
+    
+    def __repr__(self):
+        return f"Dominio(tam={self.tam}, lista={self.lista})"
