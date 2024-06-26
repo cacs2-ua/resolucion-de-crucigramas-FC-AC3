@@ -595,7 +595,13 @@ class TestMain(unittest.TestCase):
                          hash_table_of_variables["horizontal"][1],
                          1, 5, "S")]}
         
+        expected_horizontal_3_restriction = {3: 
+            [Restriction(hash_table_of_variables["horizontal"][2],
+                         hash_table_of_variables["horizontal"][2], 
+                         2, 4, "S")]}
+        
         expected_horizontal_2_feasibles = ['ESTO', 'PARA', 'COMO', 'ROSA', 'OLOR', 'LALA', 'PERO', 'OSOS', 'PERA']
+        expected_horizontal_3_feasibles = ['CON', 'LAL', 'ROL', 'RON', 'OLA', 'SOL', 'ARA']
         
         expected_horizontal_2 = Word(
             value="-", name = 2, initial_pos= (1, 2), final_pos= (1, 5),
@@ -603,11 +609,22 @@ class TestMain(unittest.TestCase):
             feasibles = expected_horizontal_2_feasibles,
             restrictions = expected_horizontal_2_restriction
             )
+        
+        expected_horizontal_3 = Word(
+            value="-", name = 3, initial_pos= (2, 3), final_pos= (2, 5),
+            length= 3, orientation= "horizontal", 
+            feasibles = expected_horizontal_3_feasibles,
+            restrictions = expected_horizontal_3_restriction
+            )
+        
         initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
         
-        real = hash_table_of_variables["horizontal"][1]
-        prueba =expected_horizontal_2.get_restrictions()[2]
-        self.assertEqual(expected_horizontal_2, real)
+        real_horizontal_2 = hash_table_of_variables["horizontal"][1]
+        real_horizontal_3 = hash_table_of_variables["horizontal"][2]
+
+        
+        self.assertEqual(expected_horizontal_2, real_horizontal_2)
+        self.assertEqual(expected_horizontal_3, real_horizontal_3)
         
         
         
