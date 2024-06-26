@@ -36,8 +36,58 @@ class Word:
                 f"final_pos={self.final_pos}, length={self.length}, orientation={self.orientation}, "
                 f"feasibles={self.feasibles}, pounds={self.pounds}, restrictions={self.restrictions})")
 
+    
+    
+    def set_value(self, value):
+        self.value = value
+    
+    def get_value(self):
+        return self.value
+    
     def set_name(self, name):
         self.name = name
     
     def get_name(self):
         return self.name
+    
+    def set_initial_pos(self, initial_pos):
+        self.initial_pos = initial_pos
+    
+    def get_initial_pos(self):
+        return self.initial_pos
+    
+    def set_final_pos(self, final_pos):
+        self.final_pos = final_pos
+    
+    def get_final_pos(self):
+        return self.final_pos
+    
+    def set_length(self, length):
+        self.length = length
+    
+    def get_length(self):
+        return self.length
+    
+    def set_orientation(self, orientation):
+        self.orientation = orientation
+    
+    def get_orientation(self):
+        return self.orientation
+    
+    def set_feasibles(self, feasibles):
+        self.feasibles = feasibles
+    
+    def get_feasibles(self):
+        return self.feasibles
+    
+    def set_pounds(self, pounds):
+        self.pounds = pounds
+        
+    def get_pounds(self):
+        return self.pounds
+
+    def set_restrictions(self, restrictions):
+        self.restrictions = restrictions
+    
+    def get_restrictions(self):
+        return self.restrictions
