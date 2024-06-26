@@ -462,6 +462,7 @@ def create_storage_with_hash_table(filename):
 def initialize_feasibles_v1(board, storage, list_of_variables):
     for word in list_of_variables:
         word.set_feasibles(storage[word.get_length()].getLista())
+    return list_of_variables
 
 
 

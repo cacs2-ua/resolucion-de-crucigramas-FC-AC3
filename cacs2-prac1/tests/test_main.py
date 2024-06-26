@@ -397,9 +397,8 @@ class TestMain(unittest.TestCase):
         real = initialize_2_all_variables(board)
         self.assertEqual(expected, real)
     
-    def test_create_storage_with_hash_table(self):
+    def test_create_storage_with_hash_table(self): # Test 24
         filename = 'd0.txt'
-       
         
         result = create_storage_with_hash_table(filename)
         
@@ -427,8 +426,65 @@ class TestMain(unittest.TestCase):
         self.assertEqual(result[4].getLista().count('PERO'), 1)
         self.assertEqual(result[2].getLista().count('LA'), 1)
     
-    
 
+
+    def test_initialize_feasibles_v1(self): # Test 25
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        list_of_variables = initialize_1_all_variables(board)
+        filename = 'd0.txt'
+        dictionary_of_domains = create_storage_with_hash_table(filename)
+        
+        variable_1_feasibles = ['ES', 'UN', 'DE', 'LA', 'NO', 'AR']
+        variable_2_feasibles = ['ESTO', 'PARA', 'COMO', 'ROSA', 'OLOR', 'LALA', 'PERO', 'OSOS', 'PERA']
+        variable_3_feasibles = ['CON', 'LAL', 'ROL', 'RON', 'OLA', 'SOL', 'ARA']
+        variable_4_feasibles = ['ES', 'UN', 'DE', 'LA', 'NO', 'AR']
+        variable_5_feasibles = ['ES', 'UN', 'DE', 'LA', 'NO', 'AR']
+        variable_6_feasibles = ['CON', 'LAL', 'ROL', 'RON', 'OLA', 'SOL', 'ARA']
+        
+        variable_7_feasibles = ['ES', 'UN', 'DE', 'LA', 'NO', 'AR']
+        variable_8_feasibles = ['ES', 'UN', 'DE', 'LA', 'NO', 'AR']
+        variable_9_feasibles = ['ES', 'UN', 'DE', 'LA', 'NO', 'AR']
+        variable_10_feasibles = ['CON', 'LAL', 'ROL', 'RON', 'OLA', 'SOL', 'ARA']
+        variable_11_feasibles = ['ESTO', 'PARA', 'COMO', 'ROSA', 'OLOR', 'LALA', 'PERO', 'OSOS', 'PERA']
+        variable_12_feasibles = ['TOTEM', 'OSERA', 'RETOS', 'SETOS', 'ESOPO']
+        
+        variable_13_feasibles = ['L', 'A', 'B']
+        variable_14_feasibles = ['L', 'A', 'B']
+        
+        expected = [
+            Word("-", 1, (0,2), (0, 3), 2, "horizontal", 
+                 feasibles= variable_1_feasibles), #1
+            Word("-", 2, (1,2), (1, 5), 4, "horizontal", 
+                 feasibles= variable_2_feasibles), #2
+            Word("-", 3, (2,3), (2, 5), 3, "horizontal", 
+                 feasibles= variable_3_feasibles), #3
+            Word("-", 4, (3,4), (3, 5), 2, "horizontal",
+                 feasibles= variable_4_feasibles), #4
+            Word("-", 5, (4,0), (4, 1), 2, "horizontal",
+                 feasibles=variable_5_feasibles), #5
+            Word("-", 6, (4,3), (4, 5), 3, "horizontal",
+                 feasibles= variable_6_feasibles), #6
+            Word("-", 7, (0,0), (1, 0), 2, "vertical",
+                 feasibles= variable_7_feasibles), #7
+            Word("-", 8, (3,0), (4, 0), 2, "vertical",
+                 feasibles= variable_8_feasibles), #8
+            Word("-", 9, (0,2), (1, 2), 2, "vertical",
+                 feasibles= variable_9_feasibles), #9
+            Word("-", 10, (0,3), (2, 3), 3, "vertical",
+                 feasibles= variable_10_feasibles), #10
+            Word("-", 11, (1,4), (4, 4), 4, "vertical",
+                 variable_11_feasibles), #11
+            Word("-", 12, (0,5), (4, 5), 5, "vertical",
+                 feasibles=variable_12_feasibles), #12
+            Word("-", 13, (2,1), (2, 1), 1, "isolated", 
+                 feasibles= variable_13_feasibles), #13
+            Word("-", 14, (3,2), (3, 2), 1, "isolated",
+                 feasibles= variable_14_feasibles), #14
+        ]
+        
+        real = initialize_feasibles_v1(board, dictionary_of_domains, list_of_variables)
+        self.assertEqual(expected, real)
+        
         
 
 
