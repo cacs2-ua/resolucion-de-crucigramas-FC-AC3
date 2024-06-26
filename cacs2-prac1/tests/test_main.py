@@ -624,6 +624,8 @@ class TestMain(unittest.TestCase):
         
         expected_isolated_1_restriction = {}
         
+        expected_isolated_2_restriction = {}
+        
         expected_horizontal_2_feasibles = ['ESTO', 'PARA', 'COMO', 'ROSA', 'OLOR', 'LALA', 'PERO', 'OSOS', 'PERA']
         expected_horizontal_3_feasibles = ['CON', 'LAL', 'ROL', 'RON', 'OLA', 'SOL', 'ARA']
         expected_horizontal_6_feasibles = ['CON', 'LAL', 'ROL', 'RON', 'OLA', 'SOL', 'ARA']
@@ -633,6 +635,7 @@ class TestMain(unittest.TestCase):
         expected_vertical_6_feasibles = ['TOTEM', 'OSERA', 'RETOS', 'SETOS', 'ESOPO']
         
         expected_isolated_1_feasibles = ['L', 'A', 'B']
+        expected_isolated_2_feasibles = ['L', 'A', 'B']
         
         
         expected_horizontal_2 = Word(
@@ -684,6 +687,13 @@ class TestMain(unittest.TestCase):
             restrictions = expected_isolated_1_restriction
             )
         
+        expected_isolated_2 = Word(
+            value="-", name = 14, initial_pos= (3, 2), final_pos= (3, 2),
+            length= 1, orientation= "isolated", 
+            feasibles = expected_isolated_2_feasibles,
+            restrictions = expected_isolated_2_restriction
+            )
+        
         initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
         
         real_horizontal_2 = hash_table_of_variables["horizontal"][1]
@@ -695,6 +705,7 @@ class TestMain(unittest.TestCase):
         real_vertical_6 = hash_table_of_variables["vertical"][5]
 
         real_isolated_1 = hash_table_of_variables["isolated"][0]
+        real_isolated_2 = hash_table_of_variables["isolated"][1]
         
         self.assertEqual(expected_horizontal_2, real_horizontal_2)
         self.assertEqual(expected_horizontal_3, real_horizontal_3)
@@ -705,6 +716,7 @@ class TestMain(unittest.TestCase):
         self.assertEqual(expected_vertical_6, real_vertical_6)
         
         self.assertEqual(expected_isolated_1, real_isolated_1)
+        self.assertEqual(expected_isolated_2, real_isolated_2)  
 
         
         
