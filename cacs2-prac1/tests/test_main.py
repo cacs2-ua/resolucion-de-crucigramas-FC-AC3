@@ -481,7 +481,7 @@ class TestMain(unittest.TestCase):
         variable_13_feasibles = ['L', 'A', 'B']
         variable_14_feasibles = ['L', 'A', 'B']
         
-        expected = [
+        expected_horizontals = [
             Word("-", 1, (0,2), (0, 3), 2, "horizontal", 
                  feasibles= variable_1_feasibles), #1
             Word("-", 2, (1,2), (1, 5), 4, "horizontal", 
@@ -494,26 +494,34 @@ class TestMain(unittest.TestCase):
                  feasibles=variable_5_feasibles), #5
             Word("-", 6, (4,3), (4, 5), 3, "horizontal",
                  feasibles= variable_6_feasibles), #6
+            ]
+        
+        expected_verticals = [
             Word("-", 7, (0,0), (1, 0), 2, "vertical",
-                 feasibles= variable_7_feasibles), #7
+                feasibles= variable_7_feasibles), #7
             Word("-", 8, (3,0), (4, 0), 2, "vertical",
-                 feasibles= variable_8_feasibles), #8
+                feasibles= variable_8_feasibles), #8
             Word("-", 9, (0,2), (1, 2), 2, "vertical",
-                 feasibles= variable_9_feasibles), #9
+                feasibles= variable_9_feasibles), #9
             Word("-", 10, (0,3), (2, 3), 3, "vertical",
-                 feasibles= variable_10_feasibles), #10
+                feasibles= variable_10_feasibles), #10
             Word("-", 11, (1,4), (4, 4), 4, "vertical",
-                 variable_11_feasibles), #11
+                variable_11_feasibles), #11
             Word("-", 12, (0,5), (4, 5), 5, "vertical",
-                 feasibles=variable_12_feasibles), #12
-            Word("-", 13, (2,1), (2, 1), 1, "isolated", 
-                 feasibles= variable_13_feasibles), #13
-            Word("-", 14, (3,2), (3, 2), 1, "isolated",
-                 feasibles= variable_14_feasibles), #14
+                feasibles=variable_12_feasibles) #12
+            ]
+    
+        expected_isolated = [
+        Word("-", 13, (2,1), (2, 1), 1, "isolated", 
+                feasibles= variable_13_feasibles), #13
+        Word("-", 14, (3,2), (3, 2), 1, "isolated",
+                feasibles= variable_14_feasibles), #14
         ]
         
         real = initialize_feasibles_v1(board, dictionary_of_domains, list_of_variables)
-        self.assertEqual(expected, real)
+        self.assertEqual(expected_horizontals, real["horizontal"])
+        self.assertEqual(expected_verticals, real["vertical"])
+        self.assertEqual(expected_isolated, real["isolated"])
         
     
 if __name__ == '__main__':
