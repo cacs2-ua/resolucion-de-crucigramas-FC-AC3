@@ -618,7 +618,11 @@ class TestMain(unittest.TestCase):
                          hash_table_of_variables["vertical"][5], 
                          3, 5, "N")]}
         
+        
+        
         expected_horizontal_6_restriction = {}
+        
+        expected_isolated_1_restriction = {}
         
         expected_horizontal_2_feasibles = ['ESTO', 'PARA', 'COMO', 'ROSA', 'OLOR', 'LALA', 'PERO', 'OSOS', 'PERA']
         expected_horizontal_3_feasibles = ['CON', 'LAL', 'ROL', 'RON', 'OLA', 'SOL', 'ARA']
@@ -627,6 +631,8 @@ class TestMain(unittest.TestCase):
         expected_vertical_4_feasibles = ['CON', 'LAL', 'ROL', 'RON', 'OLA', 'SOL', 'ARA']
         expected_vertical_5_feasibles = ['ESTO', 'PARA', 'COMO', 'ROSA', 'OLOR', 'LALA', 'PERO', 'OSOS', 'PERA']
         expected_vertical_6_feasibles = ['TOTEM', 'OSERA', 'RETOS', 'SETOS', 'ESOPO']
+        
+        expected_isolated_1_feasibles = ['L', 'A', 'B']
         
         
         expected_horizontal_2 = Word(
@@ -671,6 +677,13 @@ class TestMain(unittest.TestCase):
             restrictions = expected_vertical_6_restriction
             )
         
+        expected_isolated_1 = Word(
+            value="-", name = 13, initial_pos= (2, 1), final_pos= (2, 1),
+            length= 1, orientation= "isolated", 
+            feasibles = expected_isolated_1_feasibles,
+            restrictions = expected_isolated_1_restriction
+            )
+        
         initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
         
         real_horizontal_2 = hash_table_of_variables["horizontal"][1]
@@ -681,6 +694,8 @@ class TestMain(unittest.TestCase):
         real_vertical_5 = hash_table_of_variables["vertical"][4]
         real_vertical_6 = hash_table_of_variables["vertical"][5]
 
+        real_isolated_1 = hash_table_of_variables["isolated"][0]
+        
         self.assertEqual(expected_horizontal_2, real_horizontal_2)
         self.assertEqual(expected_horizontal_3, real_horizontal_3)
         self.assertEqual(expected_horizontal_6, real_horizontal_6)
@@ -688,6 +703,8 @@ class TestMain(unittest.TestCase):
         self.assertEqual(expected_vertical_4, real_vertical_4)
         self.assertEqual(expected_vertical_5, real_vertical_5)
         self.assertEqual(expected_vertical_6, real_vertical_6)
+        
+        self.assertEqual(expected_isolated_1, real_isolated_1)
 
         
         
