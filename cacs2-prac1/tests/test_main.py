@@ -396,6 +396,37 @@ class TestMain(unittest.TestCase):
         ]
         real = initialize_2_all_variables(board)
         self.assertEqual(expected, real)
+    
+    def test_create_storage_with_hash_table(self):
+        filename = 'd0.txt'
+        with open(filename, 'w', encoding="utf-8") as f:
+            f.write("Esto es un ejemplo de fichero de prueba para la practica con varias palabras de distinta longitud como totem osera l a b no rosa olor lal rol ron ola sol ara lala ar pero lotero retos setos osos lotera pera romano esopo romana")
+        
+        result = create_storage_with_hash_table(filename)
+        
+        # Check if all keys exist
+        self.assertIn(4, result)
+        self.assertIn(2, result)
+        self.assertIn(5, result)
+        self.assertIn(6, result)
+        
+        # Check if lengths are correct
+        self.assertEqual(result[4].getTam(), 4)
+        self.assertEqual(result[2].getTam(), 2)
+        self.assertEqual(result[5].getTam(), 5)
+        self.assertEqual(result[6].getTam(), 6)
+        
+        # Check if words are correctly added and uppercased
+        self.assertIn('ESTO', result[4].getLista())
+        self.assertIn('ES', result[2].getLista())
+        self.assertIn('UN', result[2].getLista())
+        self.assertIn('EJEMPLO', result[7].getLista())
+        self.assertIn('PRACTICA', result[8].getLista())
+        self.assertIn('TOTEM', result[5].getLista())
+        
+        # Check if duplicate words are not added
+        self.assertEqual(result[4].getLista().count('PERO'), 1)
+        self.assertEqual(result[2].getLista().count('LA'), 1)
         
 
 

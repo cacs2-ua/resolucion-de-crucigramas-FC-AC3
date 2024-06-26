@@ -439,7 +439,25 @@ def initialize_2_all_variables(board):
 
     
     return list_of_variables
-        
+
+
+def create_storage_with_hash_table(filename):
+    with open(filename, 'r', encoding="utf-8") as f:
+        lista = f.read()
+    
+    listaPal = lista.split()
+    almacen = {}
+   
+    for pal in listaPal:
+        tam = len(pal)
+        if tam not in almacen:
+            dom = Dominio(tam)
+            dom.addPal(pal.upper())
+            almacen[tam] = dom
+        elif pal.upper() not in almacen[tam].getLista():
+            almacen[tam].addPal(pal.upper())
+            
+    return almacen
 
 
 
