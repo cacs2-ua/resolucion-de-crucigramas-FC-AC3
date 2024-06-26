@@ -218,9 +218,12 @@ def is_right_horizontal_terminal(i, j, board):
             )
 
 def initialize_1_horizontal_variables(board, number_of_previous_variables = 0,
-                                      horizontal_variable_list = None):
+                                      horizontal_variable_list = None,
+                                      list_of_variables = None):
     if horizontal_variable_list is None:
         horizontal_variable_list = []
+    if list_of_variables is None:
+        list_of_variables = []
     horizontal_variable_number = number_of_previous_variables
     horizontal_variable_length = 0
     for i in range(board.getAlto()):
@@ -243,6 +246,7 @@ def initialize_1_horizontal_variables(board, number_of_previous_variables = 0,
                         )
                     )
                 horizontal_variable_list.append(new_horizontal_variable)
+                list_of_variables.append(new_horizontal_variable)
                 horizontal_variable_length = 0
     return horizontal_variable_list
 
@@ -263,9 +267,12 @@ def is_down_vertical_terminal(i, j, board):
             )
 
 def initialize_1_vertical_variables(board, number_of_previous_variables = 0,
-                                    vertical_variable_list = None):
+                                    vertical_variable_list = None,
+                                    list_of_variables = None):
     if vertical_variable_list is None:
         vertical_variable_list = []
+    if list_of_variables is None:
+        list_of_variables = []
     vertical_variable_number = number_of_previous_variables
     vertical_variable_length = 0
     for j in range(board.getAncho()):
@@ -288,6 +295,7 @@ def initialize_1_vertical_variables(board, number_of_previous_variables = 0,
                     )
                 )
                 vertical_variable_list.append(new_vertical_variable)
+                list_of_variables.append(new_vertical_variable)
                 vertical_variable_length = 0
     return vertical_variable_list
 
@@ -408,6 +416,7 @@ def initialize_1_all_variables(board):
     dictionary_of_variables = {}
     
     if m >= n:
+        horizontal_variable_list = []
         vertical_variable_list = []
         initialize_1_horizontal_variables(board, 0, list_of_variables)
         dictionary_of_variables["horizontal"] = deepcopy(list_of_variables)
