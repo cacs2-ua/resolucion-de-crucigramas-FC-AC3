@@ -331,18 +331,18 @@ class TestMain(unittest.TestCase):
         initialize_1_horizontal_variables(board, 0, list_of_vertical_variables)
         
         expected = [
-            Word("-", 1, (0,0), (1, 0), 2, "vertical"), #7
-            Word("-", 2, (3,0), (4, 0), 2, "vertical"), #8
-            Word("-", 3, (0,2), (1, 2), 2, "vertical"), #9
-            Word("-", 4, (0,3), (2, 3), 3, "vertical"), #10
-            Word("-", 5, (1,4), (4, 4), 4, "vertical"), #11
-            Word("-", 6, (0,5), (4, 5), 5, "vertical"), #12
-            Word("-", 7, (0,2), (0, 3), 2, "horizontal"), #1
-            Word("-", 8, (1,2), (1, 5), 4, "horizontal"), #2
-            Word("-", 9, (2,3), (2, 5), 3, "horizontal"), #3
-            Word("-", 10, (3,4), (3, 5), 2, "horizontal"), #4
-            Word("-", 11, (4,0), (4, 1), 2, "horizontal"), #5
-            Word("-", 12, (4,3), (4, 5), 3, "horizontal"), #6
+            Word("-", 1, (0,0), (1, 0), 2, "vertical"), #1
+            Word("-", 2, (3,0), (4, 0), 2, "vertical"), #2
+            Word("-", 3, (0,2), (1, 2), 2, "vertical"), #3
+            Word("-", 4, (0,3), (2, 3), 3, "vertical"), #4
+            Word("-", 5, (1,4), (4, 4), 4, "vertical"), #5
+            Word("-", 6, (0,5), (4, 5), 5, "vertical"), #6
+            Word("-", 7, (0,2), (0, 3), 2, "horizontal"), #7
+            Word("-", 8, (1,2), (1, 5), 4, "horizontal"), #8
+            Word("-", 9, (2,3), (2, 5), 3, "horizontal"), #9
+            Word("-", 10, (3,4), (3, 5), 2, "horizontal"), #10
+            Word("-", 11, (4,0), (4, 1), 2, "horizontal"), #11
+            Word("-", 12, (4,3), (4, 5), 3, "horizontal"), #12
             Word("-", 13, (2,1), (2, 1), 1, "isolated"), #13
             Word("-", 14, (3,2), (3, 2), 1, "isolated"), #14
         ]
@@ -379,18 +379,18 @@ class TestMain(unittest.TestCase):
         initialize_1_horizontal_variables(board, 0, list_of_vertical_variables)
         
         expected = [
-            Word("-", 1, (0,0), (1, 0), 2, "vertical"), #7
-            Word("-", 2, (3,0), (4, 0), 2, "vertical"), #8
-            Word("-", 3, (0,2), (1, 2), 2, "vertical"), #9
-            Word("-", 4, (0,3), (2, 3), 3, "vertical"), #10
-            Word("-", 5, (1,4), (4, 4), 4, "vertical"), #11
-            Word("-", 6, (0,5), (4, 5), 5, "vertical"), #12
-            Word("-", 7, (0,2), (0, 3), 2, "horizontal"), #1
-            Word("-", 8, (1,2), (1, 5), 4, "horizontal"), #2
-            Word("-", 9, (2,3), (2, 5), 3, "horizontal"), #3
-            Word("-", 10, (3,4), (3, 5), 2, "horizontal"), #4
-            Word("-", 11, (4,0), (4, 1), 2, "horizontal"), #5
-            Word("-", 12, (4,3), (4, 5), 3, "horizontal"), #6
+            Word("-", 1, (0,0), (1, 0), 2, "vertical"), #1
+            Word("-", 2, (3,0), (4, 0), 2, "vertical"), #2
+            Word("-", 3, (0,2), (1, 2), 2, "vertical"), #3
+            Word("-", 4, (0,3), (2, 3), 3, "vertical"), #4
+            Word("-", 5, (1,4), (4, 4), 4, "vertical"), #5
+            Word("-", 6, (0,5), (4, 5), 5, "vertical"), #6
+            Word("-", 7, (0,2), (0, 3), 2, "horizontal"), #7
+            Word("-", 8, (1,2), (1, 5), 4, "horizontal"), #8
+            Word("-", 9, (2,3), (2, 5), 3, "horizontal"), #9
+            Word("-", 10, (3,4), (3, 5), 2, "horizontal"), #10
+            Word("-", 11, (4,0), (4, 1), 2, "horizontal"), #11
+            Word("-", 12, (4,3), (4, 5), 3, "horizontal"), #12
             Word("-", 13, (2,1), (2, 1), 1, "isolated"), #13
             Word("-", 14, (3,2), (3, 2), 1, "isolated"), #14
         ]
