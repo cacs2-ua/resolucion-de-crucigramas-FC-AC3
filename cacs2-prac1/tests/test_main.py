@@ -399,8 +399,7 @@ class TestMain(unittest.TestCase):
     
     def test_create_storage_with_hash_table(self):
         filename = 'd0.txt'
-        with open(filename, 'w', encoding="utf-8") as f:
-            f.write("Esto es un ejemplo de fichero de prueba para la practica con varias palabras de distinta longitud como totem osera l a b no rosa olor lal rol ron ola sol ara lala ar pero lotero retos setos osos lotera pera romano esopo romana")
+       
         
         result = create_storage_with_hash_table(filename)
         
@@ -427,6 +426,9 @@ class TestMain(unittest.TestCase):
         # Check if duplicate words are not added
         self.assertEqual(result[4].getLista().count('PERO'), 1)
         self.assertEqual(result[2].getLista().count('LA'), 1)
+    
+    
+
         
 
 
