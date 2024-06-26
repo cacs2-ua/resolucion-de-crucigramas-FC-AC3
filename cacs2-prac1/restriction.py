@@ -47,3 +47,19 @@ class Restriction:
     
     def get_letter_of_restriction(self):
         return self.letter_of_restriction
+    
+    def __eq__(self, other):
+        if isinstance(other, Restriction):
+            return (self.word_restricted == other.word_restricted and
+                    self.word_restrainer == other.word_restrainer and
+                    self.x_coordinate == other.x_coordinate and
+                    self.y_coordinate == other.y_coordinate and
+                    self.letter_of_restriction == other.letter_of_restriction)
+        return False
+
+    def __repr__(self):
+        return (f"Restriction(word_restricted={self.word_restricted}, "
+                f"word_restrainer={self.word_restrainer}, "
+                f"x_coordinate={self.x_coordinate}, "
+                f"y_coordinate={self.y_coordinate}, "
+                f"letter_of_restriction='{self.letter_of_restriction}')")

@@ -1,6 +1,7 @@
 import unittest
 from main import *
 
+
 class TestMain(unittest.TestCase):
     def test_substract(self): # Test 1
         self.assertEqual(substract(2, 3), -1)
@@ -573,6 +574,42 @@ class TestMain(unittest.TestCase):
         
         self.assertFalse(square_belongs_to_word(2, 1, 
                                 hash_table_of_variables["horizontal"][3]))
+        
+    def test_initialize_restrictions_v1(self): # Test 28
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        
+        hash_table_of_variables = initialize_1_all_variables(board)
+        
+        filename = 'd0.txt'
+        hash_table_of_domains = create_storage_with_hash_table(filename)
+        
+        initialize_feasibles_v1(board, hash_table_of_domains, hash_table_of_variables)
+        
+        initial_letters_hash_map = get_initial_letters(board)
+                
+        expected_horizontal_2_restriction = {2: 
+            [Restriction(hash_table_of_variables["horizontal"][1],
+                         hash_table_of_variables["horizontal"][1], 
+                         1, 3, "V"),
+             Restriction(hash_table_of_variables["horizontal"][1], 
+                         hash_table_of_variables["horizontal"][1],
+                         1, 5, "S")]}
+        
+        expected_horizontal_2_feasibles = ['ESTO', 'PARA', 'COMO', 'ROSA', 'OLOR', 'LALA', 'PERO', 'OSOS', 'PERA']
+        
+        expected_horizontal_2 = Word(
+            value="-", name = 2, initial_pos= (1, 2), final_pos= (1, 5),
+            length= 4, orientation= "horizontal", 
+            feasibles = expected_horizontal_2_feasibles,
+            restrictions = expected_horizontal_2_restriction
+            )
+        initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
+        
+        real = hash_table_of_variables["horizontal"][1]
+        prueba =expected_horizontal_2.get_restrictions()[2]
+        self.assertEqual(expected_horizontal_2, real)
+        
+        
         
 if __name__ == '__main__':
     unittest.main()
