@@ -217,7 +217,9 @@ def is_right_horizontal_terminal(i, j, board):
             )
 
 def initialize_1_horizontal_variables(board, number_of_previous_variables = 0,
-                                      horizontal_variable_list = []):
+                                      horizontal_variable_list = None):
+    if horizontal_variable_list is None:
+        horizontal_variable_list = []
     horizontal_variable_number = number_of_previous_variables
     horizontal_variable_length = 0
     for i in range(board.getAlto()):
@@ -260,7 +262,9 @@ def is_down_vertical_terminal(i, j, board):
             )
 
 def initialize_1_vertical_variables(board, number_of_previous_variables = 0,
-                                    vertical_variable_list = []):
+                                    vertical_variable_list = None):
+    if vertical_variable_list is None:
+        vertical_variable_list = []
     vertical_variable_number = number_of_previous_variables
     vertical_variable_length = 0
     for j in range(board.getAncho()):
@@ -287,8 +291,12 @@ def initialize_1_vertical_variables(board, number_of_previous_variables = 0,
     return vertical_variable_list
 
 def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_variables = 0,
-                                                   horizontal_variable_list = [],
-                                                   list_of_vertical_variables = []):
+                                                   horizontal_variable_list = None,
+                                                   list_of_vertical_variables = None):
+    if horizontal_variable_list is None:
+        horizontal_variable_list = []
+    if list_of_vertical_variables is None:
+        list_of_vertical_variables = []
     horizontal_variable_number = number_of_previous_variables
     horizontal_variable_length = 0
     isolated_variable_list = []
