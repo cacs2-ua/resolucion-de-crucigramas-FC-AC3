@@ -1,5 +1,5 @@
 from dominio import *
-from restriccion import *
+from restriction import *
 from copy import deepcopy
 
 class Word:
