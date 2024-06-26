@@ -426,7 +426,7 @@ class TestMain(unittest.TestCase):
         self.assertEqual(expected_verticals, real["vertical"])
         self.assertEqual(expected_horizontals, real["horizontal"])
         self.assertEqual(expected_isolated, real["isolated"])
-"""  
+
     def test_create_storage_with_hash_table(self): # Test 24
         filename = 'd0.txt'
         
@@ -457,7 +457,7 @@ class TestMain(unittest.TestCase):
         self.assertEqual(result[2].getLista().count('LA'), 1)
     
 
-
+"""  
     def test_initialize_feasibles_v1(self): # Test 25
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         list_of_variables = initialize_1_all_variables(board)
