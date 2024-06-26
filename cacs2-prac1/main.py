@@ -6,6 +6,7 @@ from tkinter import messagebox as MessageBox
 from tablero import *
 from dominio import *
 from variable import *
+from restriction import *
 from pygame.locals import *
 from copy import deepcopy
 
@@ -517,8 +518,8 @@ def initialize_feasibles_v1(board, storage, dictionary_of_variables):
         
     return dictionary_of_variables
 
-
-    
+def initialize_restrictions_v1(board, hash_table_of_variables):
+    restrictions = []
 
 
 
