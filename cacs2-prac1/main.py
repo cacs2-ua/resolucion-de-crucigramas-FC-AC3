@@ -292,14 +292,17 @@ def initialize_1_vertical_variables(board, number_of_previous_variables = 0,
 
 def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_variables = 0,
                                                    horizontal_variable_list = None,
-                                                   list_of_vertical_variables = None):
+                                                   list_of_vertical_variables = None,
+                                                   isolated_variable_list = None):
     if horizontal_variable_list is None:
         horizontal_variable_list = []
     if list_of_vertical_variables is None:
         list_of_vertical_variables = []
+    if isolated_variable_list is None:
+        isolated_variable_list = []
     horizontal_variable_number = number_of_previous_variables
     horizontal_variable_length = 0
-    isolated_variable_list = []
+    
     for i in range(board.getAlto()):
         for j in range(board.getAncho()):
             if is_solid(i, j, board):
@@ -344,14 +347,17 @@ def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_var
 
 def initialize_1_vertical_and_isolated_variables(board, number_of_previous_variables = 0,
                                                    vertical_variable_list = None,
-                                                   list_of_horizontal_variables = None):
+                                                   list_of_horizontal_variables = None,
+                                                   isolated_variable_list = None):
     if vertical_variable_list is None:
         vertical_variable_list = []
     if list_of_horizontal_variables is None:
         list_of_horizontal_variables = []
+    if isolated_variable_list is None:
+        isolated_variable_list = []
     vertical_variable_number = number_of_previous_variables
     vertical_variable_length = 0
-    isolated_variable_list = []
+    
     for j in range(board.getAncho()):
         for i in range(board.getAlto()):
             if is_solid(i, j, board):
