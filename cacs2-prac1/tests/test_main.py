@@ -600,11 +600,18 @@ class TestMain(unittest.TestCase):
                          hash_table_of_variables["horizontal"][2], 
                          2, 4, "S")]}
         
+        expected_vertical_4_restriction = {10: 
+            [Restriction(hash_table_of_variables["vertical"][3],
+                         hash_table_of_variables["vertical"][3], 
+                         1, 3, "V")]}
+        
         expected_horizontal_6_restriction = {}
         
         expected_horizontal_2_feasibles = ['ESTO', 'PARA', 'COMO', 'ROSA', 'OLOR', 'LALA', 'PERO', 'OSOS', 'PERA']
         expected_horizontal_3_feasibles = ['CON', 'LAL', 'ROL', 'RON', 'OLA', 'SOL', 'ARA']
         expected_horizontal_6_feasibles = ['CON', 'LAL', 'ROL', 'RON', 'OLA', 'SOL', 'ARA']
+        
+        expected_vertical_4_feasibles = ['CON', 'LAL', 'ROL', 'RON', 'OLA', 'SOL', 'ARA']
         
         expected_horizontal_2 = Word(
             value="-", name = 2, initial_pos= (1, 2), final_pos= (1, 5),
@@ -627,18 +634,28 @@ class TestMain(unittest.TestCase):
             restrictions = expected_horizontal_6_restriction
             )
         
+        expected_vertical_4 = Word(
+            value="-", name = 10, initial_pos= (0, 3), final_pos= (2, 3),
+            length= 3, orientation= "vertical", 
+            feasibles = expected_vertical_4_feasibles,
+            restrictions = expected_vertical_4_restriction
+            )
+        
         initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
         
         real_horizontal_2 = hash_table_of_variables["horizontal"][1]
         real_horizontal_3 = hash_table_of_variables["horizontal"][2]
         real_horizontal_6 = hash_table_of_variables["horizontal"][5]
+        
+        real_vertical_4 = hash_table_of_variables["vertical"][3]
 
-        a = expected_horizontal_6.get_restrictions()
-        b = real_horizontal_6.get_restrictions()
         self.assertEqual(expected_horizontal_2, real_horizontal_2)
         self.assertEqual(expected_horizontal_3, real_horizontal_3)
-        self.assertEqual(expected_horizontal_6.get_restrictions(), 
-                         real_horizontal_6.get_restrictions())
+        self.assertEqual(expected_horizontal_6, real_horizontal_6)
+        
+        self.assertEqual(expected_vertical_4, real_vertical_4)
+
+        
         
         
         
