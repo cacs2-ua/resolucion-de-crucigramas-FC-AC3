@@ -536,7 +536,17 @@ def square_belongs_to_word(i, j, word):
     elif word.get_orientation() == "isolated":
         return i == word.get_initial_pos()[0] and j == word.get_initial_pos()[1]
 
-
+def initialize_restrictions_v1(board, hash_table_of_variables):
+    restrictions = []
+    total_number_of_initial_restrictions = 0
+    
+    for key in hash_table_of_variables:
+        for word in hash_table_of_variables["horizontal"]:
+            if square_belongs_to_word(key[0], key[1], word):
+                new_restriction = Restriction(word, word,
+                                              key[0], key[1],
+                                              board.getCelda(key[0], key[1]))
+                
                 
                 
         
