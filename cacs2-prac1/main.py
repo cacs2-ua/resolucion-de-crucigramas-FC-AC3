@@ -572,12 +572,6 @@ def initialize_restrictions_v1(board, initial_letters, hash_table_of_variables):
         founded = False
         
                 
-                
-                
-        
-
-
-
 #########################################################################  
 # Principal
 #########################################################################
