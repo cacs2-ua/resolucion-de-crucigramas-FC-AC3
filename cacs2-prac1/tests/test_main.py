@@ -820,6 +820,152 @@ class TestMain(unittest.TestCase):
         self.assertEqual(expected_square_5, real_square_5)
         self.assertEqual(expected_square_6, real_square_6)
         self.assertEqual(expected_square_7, real_square_7)
+    
+    def test_ok_restriction_between_two_variables(self): # Test 34
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        hash_map_of_variables = initialize_1_all_variables(board)
+        
+        expected_ok_restriction_1 = True
+        expected_ok_restriction_2 = True
+        expected_ok_restriction_3 = True
+        expected_ok_restriction_4 = True
+        expected_ok_restriction_5 = True
+        expected_ok_restriction_6 = True
+        expected_ok_restriction_7 = True
+        
+        expected_ok_restriction_8 = True
+        
+        expected_ok_restriction_9 = False
+        expected_ok_restriction_10 = False
+        
+        expected_ok_restriction_11 = True
+        
+        horizontal_variable_2 = hash_map_of_variables["horizontal"][1]
+        horizontal_variable_2.set_value("ATAS")
+        vertical_variable_6 = hash_map_of_variables["vertical"][5]
+        feasible_1 = "ESOPO"
+        
+        
+        
+        horizontal_variable_3 = hash_map_of_variables["horizontal"][2]
+        horizontal_variable_3.set_value("ASI")
+        vertical_variable_5 = hash_map_of_variables["vertical"][4]
+        feasible_2 = "OSOS"
+        
+        vertical_variable_1 = hash_map_of_variables["vertical"][0]
+        feasible_3 = "LO"
+        
+        feasible_4 = "LOS"
+        
+        feasible_5 = "OSERA"
+        
+        isolated_variable_1 = hash_map_of_variables["isolated"][0]
+        isolated_variable_2 = hash_map_of_variables["isolated"][1]
+        
+        feasible_6 = "O"
+        
+        real_ok_restriction_1 = ok_restriction_between_two_variables(
+            board,
+            horizontal_variable_2, 
+            vertical_variable_6, 
+            feasible_1
+            )
+        
+        real_ok_restriction_2 = ok_restriction_between_two_variables(
+            board,
+            horizontal_variable_3, 
+            vertical_variable_5, 
+            feasible_2
+            )
+        
+        vertical_variable_5.set_value("OSOS")
+        real_ok_restriction_11 = ok_restriction_between_two_variables(
+            board,
+            vertical_variable_5,
+            horizontal_variable_3, 
+            "ESE"
+            )
+        
+        self.assertEqual(expected_ok_restriction_11, real_ok_restriction_11)
+        
+        vertical_variable_5.set_value("-")
+                
+        real_ok_restriction_3 = ok_restriction_between_two_variables(
+            board,
+            horizontal_variable_3, 
+            vertical_variable_1, 
+            feasible_3
+            )
+        
+        real_ok_restriction_4 = ok_restriction_between_two_variables(
+            board,
+            horizontal_variable_2, 
+            horizontal_variable_3, 
+            feasible_4
+            )
+        
+        real_ok_restriction_5 = ok_restriction_between_two_variables(
+            board,
+            vertical_variable_5, 
+            vertical_variable_6, 
+            feasible_5
+            )
+        
+        real_ok_restriction_6 = ok_restriction_between_two_variables(
+            board,
+            horizontal_variable_3, 
+            horizontal_variable_3, 
+            feasible_4
+            )
+        
+        real_ok_restriction_7 = ok_restriction_between_two_variables(
+            board,
+            vertical_variable_6, 
+            vertical_variable_6, 
+            feasible_5
+            )
+        
+        real_ok_restriction_8 = ok_restriction_between_two_variables(
+            board,
+            isolated_variable_1, 
+            isolated_variable_2, 
+            feasible_5
+            )
+        
+        
+        self.assertEqual(expected_ok_restriction_1, real_ok_restriction_1)
+        self.assertEqual(expected_ok_restriction_2, real_ok_restriction_2)
+        self.assertEqual(expected_ok_restriction_3, real_ok_restriction_3)
+        self.assertEqual(expected_ok_restriction_4, real_ok_restriction_4)
+        self.assertEqual(expected_ok_restriction_5, real_ok_restriction_5)
+        self.assertEqual(expected_ok_restriction_6, real_ok_restriction_6)
+        self.assertEqual(expected_ok_restriction_7, real_ok_restriction_7)
+        self.assertEqual(expected_ok_restriction_8, real_ok_restriction_8)
+        
+        horizontal_variable_2.set_value("MAPA")
+        
+        real_ok_restriction_9 = ok_restriction_between_two_variables(
+            board,
+            horizontal_variable_2, 
+            vertical_variable_6, 
+            feasible_1
+            )
+        
+        self.assertEqual(expected_ok_restriction_9, real_ok_restriction_9)
+        
+        feasible_2 = "OZAL"
+        
+        real_ok_restriction_10 = ok_restriction_between_two_variables(
+            board,
+            horizontal_variable_3, 
+            vertical_variable_5, 
+            feasible_2
+            )
+        
+        self.assertEqual(expected_ok_restriction_10, real_ok_restriction_10)
+        
+        
+        
         
         
         
