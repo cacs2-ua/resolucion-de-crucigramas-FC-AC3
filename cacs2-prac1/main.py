@@ -577,6 +577,23 @@ def count_number_of_variables(hash_table_of_variables):
         count += len(hash_table_of_variables[key])
     return count
 
+def count_number_of_horizontal_variables(hash_table_of_variables):
+    return len(hash_table_of_variables["horizontal"])
+
+def count_number_of_vertical_variables(hash_table_of_variables):
+    return len(hash_table_of_variables["vertical"])
+
+def count_number_of_isolated_variables(hash_table_of_variables):
+    return len(hash_table_of_variables["isolated"])
+
+"""
+def forward(board, concrete_variable, hash_table_of_variables):
+    total_number_of_variables = count_number_of_variables(hash_table_of_variables)
+    
+    for j in range (concrete_variable.get_name() + 1, total_number_of_variables + 1):
+        empty = True
+        for feasible_value in 
+"""
 
 #########################################################################  
 # Principal

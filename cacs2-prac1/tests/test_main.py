@@ -728,6 +728,36 @@ class TestMain(unittest.TestCase):
         real_number = count_number_of_variables(real)
         
         self.assertEqual(expected_number, real_number)
+    
+    def test_count_number_of_horizontal_variables(self): # Test 30
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        
+        expected_number = 6
+        
+        real = initialize_1_all_variables(board)
+        real_number = count_number_of_horizontal_variables(real)
+        
+        self.assertEqual(expected_number, real_number)
+    
+    def test_count_number_of_vertical_variables(self): # Test 31
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        
+        expected_number = 6
+        
+        real = initialize_1_all_variables(board)
+        real_number = count_number_of_vertical_variables(real)
+        
+        self.assertEqual(expected_number, real_number)
+    
+    def test_count_number_of_isolated_variables(self): # Test 32
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        
+        expected_number = 2
+        
+        real = initialize_1_all_variables(board)
+        real_number = count_number_of_isolated_variables(real)
+        
+        self.assertEqual(expected_number, real_number)
         
         
         
