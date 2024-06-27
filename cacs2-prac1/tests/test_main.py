@@ -964,7 +964,7 @@ class TestMain(unittest.TestCase):
         
         self.assertEqual(expected_ok_restriction_10, real_ok_restriction_10)
     
-    def test_2_ok_restriction_between_two_variables(self):
+    def test_2_ok_restriction_between_two_variables(self): # Test 35
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         hash_map_of_variables = initialize_1_all_variables(board)
         
