@@ -571,7 +571,13 @@ def initialize_restrictions_v1(board, initial_letters, hash_table_of_variables):
                 break
         founded = False
         
-                
+def count_number_of_variables(hash_table_of_variables):
+    count = 0
+    for key in hash_table_of_variables:
+        count += len(hash_table_of_variables[key])
+    return count
+
+
 #########################################################################  
 # Principal
 #########################################################################

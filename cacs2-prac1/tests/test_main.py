@@ -718,6 +718,16 @@ class TestMain(unittest.TestCase):
         self.assertEqual(expected_isolated_1, real_isolated_1)
         self.assertEqual(expected_isolated_2, real_isolated_2)  
 
+    
+    def test_count_number_of_variables(self): # Test 29
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        
+        expected_number = 14
+        
+        real = initialize_1_all_variables(board)
+        real_number = count_number_of_variables(real)
+        
+        self.assertEqual(expected_number, real_number)
         
         
         
