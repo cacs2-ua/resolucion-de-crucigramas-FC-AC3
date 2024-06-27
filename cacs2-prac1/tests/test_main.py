@@ -1050,5 +1050,30 @@ class TestMain(unittest.TestCase):
         self.assertIn(2, word1.get_pounds())
         self.assertIn(pound, word1.get_pounds()[2])
         self.assertEqual(word1.get_pounds()[2][0], pound)
+    
+    def test_remove_pound(self): # Test 38
+        word1 = Word(name=1)
+        word2 = Word(name=2)
+        word3 = Word(name=3)
+        
+        expected_pound_1 = {2 : ["LOPEZ"]}
+        word1.add_pound(word2, "LOPEZ")
+        real_pound_1 = word1.get_pounds()
+        
+        self.assertEqual(expected_pound_1, real_pound_1)
+        
+        expected_pound_2 = {}
+        word1.remove_pound(word2, "LOPEZ")
+        real_pound_2 = word1.get_pounds()
+        
+        self.assertEqual(expected_pound_2, real_pound_2)
+        
+        expected_pound_3 = {2 : ["LOPEZ", "HOLA"]}
+        word1.add_pound(word2, "LOPEZ")
+        word1.add_pound(word2, "HOLA")
+        real_pound_3 = word1.get_pounds()
+        
+        self.assertEqual(expected_pound_3, real_pound_3)
+        
 if __name__ == '__main__':
     unittest.main()

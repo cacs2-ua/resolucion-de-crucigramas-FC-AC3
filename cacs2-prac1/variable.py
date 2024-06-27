@@ -102,3 +102,10 @@ class Word:
         if restrainer_word.get_name() not in self.pounds:
             self.pounds[restrainer_word.get_name()] = []
         self.pounds[restrainer_word.get_name()].append(pound)
+    
+    def remove_pound (self, restrainer_word, pound):
+        if restrainer_word.get_name() in self.pounds:
+            self.pounds[restrainer_word.get_name()].remove(pound)
+            if len(self.pounds[restrainer_word.get_name()]) == 0:
+                del self.pounds[restrainer_word.get_name()]
+    
