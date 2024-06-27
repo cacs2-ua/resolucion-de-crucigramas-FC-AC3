@@ -963,11 +963,71 @@ class TestMain(unittest.TestCase):
             )
         
         self.assertEqual(expected_ok_restriction_10, real_ok_restriction_10)
+    
+    def test_2_ok_restriction_between_two_variables(self):
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        hash_map_of_variables = initialize_1_all_variables(board)
+        
+        expected_ok_restriction_1 = True
+        expected_ok_restriction_2 = True
+        
+        expected_ok_restriction_3 = False
+        
+        vertical_variable_4 = hash_map_of_variables["vertical"][3]
+        vertical_variable_4.set_value("UVE")
+        horizontal_variable_2 = hash_map_of_variables["horizontal"][1]
+        feasible_1 = "AVES"
+        
+        vertical_variable_6 = hash_map_of_variables["vertical"][5]
+        vertical_variable_6.set_value("ASILO")
+        horizontal_variable_6 = hash_map_of_variables["horizontal"][5]
+        feasible_2 = "ALO"
+        
+        vertical_variable_2 = hash_map_of_variables["vertical"][1]
+        vertical_variable_2.set_value("LO")
+        horizontal_variable_5 = hash_map_of_variables["horizontal"][4]
+        feasible_3 = "AL"
+        
+        real_ok_restriction_1 = ok_restriction_between_two_variables(
+            board,
+            vertical_variable_4, 
+            horizontal_variable_2, 
+            feasible_1
+            )
+        
+        real_ok_restriction_2 = ok_restriction_between_two_variables(
+            board,
+            vertical_variable_6, 
+            horizontal_variable_6, 
+            feasible_2
+            )
+        
+        real_ok_restriction_3 = ok_restriction_between_two_variables(
+            board,
+            vertical_variable_2, 
+            horizontal_variable_5, 
+            feasible_3
+            )
         
         
+        self.assertEqual(expected_ok_restriction_1, real_ok_restriction_1)
+        self.assertEqual(expected_ok_restriction_2, real_ok_restriction_2)
+        self.assertEqual(expected_ok_restriction_3, real_ok_restriction_3)
         
+        expected_ok_restriction_4 = False
         
+        vertical_variable_3 = hash_map_of_variables["vertical"][2]
+        vertical_variable_3.set_value("NO")
+        horizontal_variable_2 = hash_map_of_variables["horizontal"][1]
+        feasible_4 = "HOLA"
         
+        real_ok_restriction_4 = ok_restriction_between_two_variables(
+            board,
+            vertical_variable_3, 
+            horizontal_variable_2, 
+            feasible_4
+            )
+        self.assertEqual(expected_ok_restriction_4, real_ok_restriction_4)
         
 if __name__ == '__main__':
     unittest.main()

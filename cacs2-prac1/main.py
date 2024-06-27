@@ -630,19 +630,21 @@ def ok_restriction_between_two_variables(board, word_a, word_b, feasible_b):
     horizontal_word = word_a if word_a.get_orientation() == "horizontal" else word_b
     vertical_word = word_a if word_a.get_orientation() == "vertical" else word_b
     
-    horizontal_word_index = (common_square[1] 
-                             -
-                             board.getAncho()
-                             +
-                             horizontal_word.get_length()
-                             )
+    horizontal_word_index = abs(
+                                (
+                                common_square[1] 
+                                - 
+                                horizontal_word.get_initial_pos()[1]
+                                )
+                                )
     
-    vertical_word_index = (common_square[0]
-                           -
-                           board.getAlto()
-                           +
-                           vertical_word.get_length()
-                           )
+    vertical_word_index = abs(
+                            (
+                            common_square[0]
+                            -
+                            vertical_word.get_initial_pos()[0]
+                            )
+                            )
     
     if word_a.get_orientation() == "horizontal":
         if word_a.get_value()[horizontal_word_index] == feasible_b[vertical_word_index]:
