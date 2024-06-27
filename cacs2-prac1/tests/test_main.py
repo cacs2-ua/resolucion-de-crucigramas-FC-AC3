@@ -1086,6 +1086,15 @@ class TestMain(unittest.TestCase):
         initial_letters_hash_map = get_initial_letters(board)
         initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
         
+        horiziontal_variable_restrainer_3 = hash_table_of_variables["horizontal"][2]
+        vertical_variable_restricted_5 = hash_table_of_variables["vertical"][4]
+        
+        expected_pounded_domain_1 = ['ESTO', 'OSOS']
+        forward(board, horiziontal_variable_restrainer_3, hash_table_of_variables)
+        real_pounded_domain_1 = hash_table_of_variables["vertical"][4].get_feasibles()
+        
+        self.assertEqual(expected_pounded_domain_1, real_pounded_domain_1)
+        
         
         
         
