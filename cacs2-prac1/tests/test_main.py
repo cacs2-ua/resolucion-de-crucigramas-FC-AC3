@@ -1161,6 +1161,17 @@ class TestMain(unittest.TestCase):
         real_pounded_domain_14 = hash_table_of_variables["isolated"][0].get_feasibles()
         self.assertEqual(expected_pounded_domain_14, real_pounded_domain_14)
         
+    def test_2_forward(self):
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        hash_table_of_variables = initialize_1_all_variables(board)
+        filename = 'tests/resources/Boards_Examples/d0-forward-test1.txt'
+        hash_table_of_domains = create_storage_with_hash_table(filename)
+        initialize_feasibles_v1(board, hash_table_of_domains, hash_table_of_variables)
+        
+        initial_letters_hash_map = get_initial_letters(board)
+        initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
+        
+        
         
         
 if __name__ == '__main__':
