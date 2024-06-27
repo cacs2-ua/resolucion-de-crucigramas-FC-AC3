@@ -769,6 +769,8 @@ class TestMain(unittest.TestCase):
         expected_square_3 = None
         expected_square_4 = (2, 1)
         expected_square_5 = None
+        expected_square_6 = None
+        expected_square_7 = None
         
         horizontal_variable_3 = hash_map_of_variables["horizontal"][2]
         vertical_variable_5 = hash_map_of_variables["vertical"][4]
@@ -802,12 +804,22 @@ class TestMain(unittest.TestCase):
             isolated_variable_1, 
             isolated_variable_2)
         
+        real_square_6 = get_common_square_coordinates_from_two_variables(
+            horizontal_variable_5, 
+            horizontal_variable_3)
+        
+        real_square_7 = get_common_square_coordinates_from_two_variables(
+            vertical_variable_1, 
+            vertical_variable_5)
+        
         
         self.assertEqual(expected_square_1, real_square_1)
         self.assertEqual(expected_square_2, real_square_2)
         self.assertEqual(expected_square_3, real_square_3)
         self.assertEqual(expected_square_4, real_square_4)
         self.assertEqual(expected_square_5, real_square_5)
+        self.assertEqual(expected_square_6, real_square_6)
+        self.assertEqual(expected_square_7, real_square_7)
         
         
         
