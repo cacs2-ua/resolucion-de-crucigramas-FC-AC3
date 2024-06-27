@@ -656,6 +656,7 @@ def ok_restriction_between_two_variables(board, word_a, word_b, feasible_b):
             
     return result
         
+
 """
 def forward(board, concrete_variable, hash_table_of_variables):
     result = False
@@ -687,17 +688,24 @@ def forward(board, concrete_variable, hash_table_of_variables):
         
     for j in range (number_of_variables_to_be_checked):
         empty = True
+        variable_checked_deep_copy = deepcopy(hash_table_of_variables
+                                              [orientation_to_be_checked][j])
         for feasible_value in (hash_table_of_variables
                                [orientation_to_be_checked]
                                [j].get_feasibles()):
-            comon_square = get_common_square_coordinates_from_two_variables(
-                concrete_variable,
-                hash_table_of_variables[orientation_to_be_checked][j]
-            )
-            
-            if comon_square is None:
-                continue
+            if ok_restriction_between_two_variables(board, 
+                                                    concrete_variable,
+                                                    hash_table_of_variables
+                                                    [orientation_to_be_checked]
+                                                    [j],
+                                                    feasible_value):
+                empty = False
+            else:
+                variable_checked_deep_copy.get_feasibles().remove(feasible_value)
 """
+                
+
+
 
             
 #########################################################################  

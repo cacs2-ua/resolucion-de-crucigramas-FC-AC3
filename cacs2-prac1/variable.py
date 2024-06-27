@@ -97,3 +97,8 @@ class Word:
         if restrainer_name not in self.restrictions:
             self.restrictions[restrainer_name] = []
         self.restrictions[restrainer_name].append(restriction)
+    
+    def add_pound(self, restrainer_word, pound):
+        if restrainer_word.get_name() not in self.pounds:
+            self.pounds[restrainer_word.get_name()] = []
+        self.pounds[restrainer_word.get_name()].append(pound)

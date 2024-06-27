@@ -1028,6 +1028,27 @@ class TestMain(unittest.TestCase):
             feasible_4
             )
         self.assertEqual(expected_ok_restriction_4, real_ok_restriction_4)
+    
+    def test_add_restriction(self): # Test 36
+        word1 = Word(value="hello", name=1, initial_pos=(0, 0), final_pos=(0, 4), length=5, orientation="horizontal")
+        word2 = Word(value="world", name=2, initial_pos=(0, 0), final_pos=(4, 0), length=5, orientation="vertical")
+        restriction = Restriction(word_restricted=word1, word_restrainer=word2, x_coordinate=0, y_coordinate=0, letter_of_restriction='h')
         
+        word1.add_restriction(restriction)
+        
+        self.assertIn(2, word1.get_restrictions())
+        self.assertIn(restriction, word1.get_restrictions()[2])
+        self.assertEqual(word1.get_restrictions()[2][0].get_letter_of_restriction(), 'h')
+
+    def test_add_pound(self): # Test 37
+        word1 = Word(value="hello", name=1, initial_pos=(0, 0), final_pos=(0, 4), length=5, orientation="horizontal")
+        word2 = Word(value="world", name=2, initial_pos=(0, 0), final_pos=(4, 0), length=5, orientation="vertical")
+        pound = "LOPEZ"
+        
+        word1.add_pound(word2, pound)
+        
+        self.assertIn(2, word1.get_pounds())
+        self.assertIn(pound, word1.get_pounds()[2])
+        self.assertEqual(word1.get_pounds()[2][0], pound)
 if __name__ == '__main__':
     unittest.main()
