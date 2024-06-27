@@ -618,13 +618,44 @@ def get_common_square_coordinates_from_two_variables(word_a, word_b):
         
         else:
             return None
-        
-        
-        
-    
 
+def ok_restriction_between_two_variables(board, word_a, word_b, feasible_b):
+    result = False
+    common_square = get_common_square_coordinates_from_two_variables(word_a, word_b)
+    
+    if common_square is None:
+        result = True
+        return result
+
+    horizontal_word = word_a if word_a.get_orientation() == "horizontal" else word_b
+    vertical_word = word_a if word_a.get_orientation() == "vertical" else word_b
+    
+    horizontal_word_index = (common_square[1] 
+                             -
+                             board.getAncho()
+                             +
+                             horizontal_word.get_length()
+                             )
+    
+    vertical_word_index = (common_square[0]
+                           -
+                           board.getAlto()
+                           +
+                           vertical_word.get_length()
+                           )
+    
+    if word_a.get_orientation() == "horizontal":
+        if word_a.get_value()[horizontal_word_index] == feasible_b[vertical_word_index]:
+            result = True
+            
+    elif word_a.get_orientation() == "vertical":
+        if word_a.get_value()[vertical_word_index] == feasible_b[horizontal_word_index]:
+            result = True
+            
+    return result
+        
 """
-def forward(board, concrete_variable, restrainer_value, hash_table_of_variables):
+def forward(board, concrete_variable, hash_table_of_variables):
     result = False
     number_of_variables_to_be_checked = 0
     orientation_to_be_checked = "-"
@@ -641,7 +672,7 @@ def forward(board, concrete_variable, restrainer_value, hash_table_of_variables)
         restriction_check = Restriction(concrete_variable, concrete_variable,
                                         concrete_variable.get_initial_pos()[0],
                                         concrete_variable.get_initial_pos()[1],
-                                        value)
+                                        concrete_variable.get_value())
         if ( len(concrete_variable.get_restrictions()) > 0 and
             restriction_check not in (concrete_variable.
                                      get_restrictions()
@@ -657,11 +688,16 @@ def forward(board, concrete_variable, restrainer_value, hash_table_of_variables)
         for feasible_value in (hash_table_of_variables
                                [orientation_to_be_checked]
                                [j].get_feasibles()):
+            comon_square = get_common_square_coordinates_from_two_variables(
+                concrete_variable,
+                hash_table_of_variables[orientation_to_be_checked][j]
+            )
+            
+            if comon_square is None:
+                continue
 """
-            
 
             
-
 #########################################################################  
 # Principal
 #########################################################################
