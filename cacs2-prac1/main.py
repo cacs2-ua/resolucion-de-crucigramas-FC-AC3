@@ -586,14 +586,81 @@ def count_number_of_vertical_variables(hash_table_of_variables):
 def count_number_of_isolated_variables(hash_table_of_variables):
     return len(hash_table_of_variables["isolated"])
 
-"""
-def forward(board, concrete_variable, hash_table_of_variables):
-    total_number_of_variables = count_number_of_variables(hash_table_of_variables)
+def get_common_square_coordinates_from_two_variables(word_a, word_b):
+    if word_a.get_orientation() == word_b.get_orientation():
+        if word_a.get_orientation() == "isolated":
+            if word_a.get_initial_pos() == word_b.get_initial_pos():
+                return word_a.get_initial_pos()
+            else:
+                return None
+        else:
+            return None
     
-    for j in range (concrete_variable.get_name() + 1, total_number_of_variables + 1):
-        empty = True
-        for feasible_value in 
+    else:
+        horizontal_word = word_a if word_a.get_orientation() == "horizontal" else word_b
+        vertical_word = word_a if word_a.get_orientation() == "vertical" else word_b
+        
+        common_square = (
+                        horizontal_word.get_initial_pos()[0], 
+                        vertical_word.get_initial_pos()[1]
+                        )
+        
+        if (
+            square_belongs_to_word(common_square[0], 
+                                   common_square[1], 
+                                   horizontal_word) 
+                                   and 
+            square_belongs_to_word(common_square[0], 
+                                   common_square[1], 
+                                   vertical_word)
+            ):
+            return common_square
+        
+        else:
+            return None
+        
+        
+        
+    
+
 """
+def forward(board, concrete_variable, restrainer_value, hash_table_of_variables):
+    result = False
+    number_of_variables_to_be_checked = 0
+    orientation_to_be_checked = "-"
+    
+    if concrete_variable.get_orientation() == "horizontal":
+        orientation_to_be_checked = "vertical"
+        number_of_variables_to_be_checked = count_number_of_vertical_variables(hash_table_of_variables)
+    
+    elif concrete_variable.get_orientation() == "vertical":
+        orientation_to_be_checked = "horizontal"
+        number_of_variables_to_be_checked = count_number_of_horizontal_variables(hash_table_of_variables)
+    
+    elif concrete_variable.get_orientation() == "isolated":
+        restriction_check = Restriction(concrete_variable, concrete_variable,
+                                        concrete_variable.get_initial_pos()[0],
+                                        concrete_variable.get_initial_pos()[1],
+                                        value)
+        if ( len(concrete_variable.get_restrictions()) > 0 and
+            restriction_check not in (concrete_variable.
+                                     get_restrictions()
+                                     [concrete_variable.get_name()])
+            ):
+            return result
+        else:
+            result = True
+            return result
+        
+    for j in range (number_of_variables_to_be_checked):
+        empty = True
+        for feasible_value in (hash_table_of_variables
+                               [orientation_to_be_checked]
+                               [j].get_feasibles()):
+"""
+            
+
+            
 
 #########################################################################  
 # Principal
