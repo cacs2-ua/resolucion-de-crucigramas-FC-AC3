@@ -759,6 +759,55 @@ class TestMain(unittest.TestCase):
         
         self.assertEqual(expected_number, real_number)
         
+    
+    def test_get_common_square_coordinates_from_two_variables(self): # Test 33
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        hash_map_of_variables = initialize_1_all_variables(board)
+        
+        expected_square_1 = (2, 4)
+        expected_square_2 = (3, 5)
+        expected_square_3 = None
+        expected_square_4 = (2, 1)
+        expected_square_5 = None
+        
+        horizontal_variable_3 = hash_map_of_variables["horizontal"][2]
+        vertical_variable_5 = hash_map_of_variables["vertical"][4]
+        
+        horizontal_variable_4 = hash_map_of_variables["horizontal"][3]
+        vertical_variable_6 = hash_map_of_variables["vertical"][5]
+        
+        horizontal_variable_5 = hash_map_of_variables["horizontal"][4]
+        vertical_variable_1 = hash_map_of_variables["vertical"][0]
+        
+        isolated_variable_1 = hash_map_of_variables["isolated"][0]
+        isolated_variable_2 = hash_map_of_variables["isolated"][1]
+        
+        real_square_1 = get_common_square_coordinates_from_two_variables(
+            horizontal_variable_3, 
+            vertical_variable_5)
+        
+        real_square_2 = get_common_square_coordinates_from_two_variables(
+            horizontal_variable_4, 
+            vertical_variable_6)
+        
+        real_square_3 = get_common_square_coordinates_from_two_variables(
+            horizontal_variable_5, 
+            vertical_variable_1)
+        
+        real_square_4 = get_common_square_coordinates_from_two_variables(
+            isolated_variable_1, 
+            isolated_variable_1)
+        
+        real_square_5 = get_common_square_coordinates_from_two_variables(
+            isolated_variable_1, 
+            isolated_variable_2)
+        
+        
+        self.assertEqual(expected_square_1, real_square_1)
+        self.assertEqual(expected_square_2, real_square_2)
+        self.assertEqual(expected_square_3, real_square_3)
+        self.assertEqual(expected_square_4, real_square_4)
+        self.assertEqual(expected_square_5, real_square_5)
         
         
         
