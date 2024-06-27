@@ -1092,11 +1092,23 @@ class TestMain(unittest.TestCase):
         expected_pounded_domain_1 = ['ESTO', 'OSOS']
         
         horiziontal_variable_restrainer_3.set_value("OSO")
-        forward(board, horiziontal_variable_restrainer_3, hash_table_of_variables)
+        expected_result = True
+        real_result = forward(board, horiziontal_variable_restrainer_3, hash_table_of_variables)
+        
+        self.assertEqual(expected_result, real_result)
         real_pounded_domain_1 = hash_table_of_variables["vertical"][4].get_feasibles()
         
         self.assertEqual(expected_pounded_domain_1, real_pounded_domain_1)
         
+        expected_pounded_domain_2 = ['AVO']
+        real_pounded_domain_2 = hash_table_of_variables["vertical"][3].get_feasibles()
+        
+        self.assertEqual(expected_pounded_domain_2, real_pounded_domain_2)
+        
+        expected_pounded_domain_3 = ['ESOPO']
+        real_pounded_domain_3 = hash_table_of_variables["vertical"][5].get_feasibles()
+        
+        self.assertEqual(expected_pounded_domain_3, real_pounded_domain_3)
         
         
         
