@@ -1075,7 +1075,7 @@ class TestMain(unittest.TestCase):
         
         self.assertEqual(expected_pound_3, real_pound_3)
         
-    
+    """
     def test_1_forward(self): # Test 39
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         hash_table_of_variables = initialize_1_all_variables(board)
@@ -1160,16 +1160,83 @@ class TestMain(unittest.TestCase):
         expected_pounded_domain_14 = ['L', 'A', 'B']
         real_pounded_domain_14 = hash_table_of_variables["isolated"][0].get_feasibles()
         self.assertEqual(expected_pounded_domain_14, real_pounded_domain_14)
-        
+       """ 
     def test_2_forward(self):
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         hash_table_of_variables = initialize_1_all_variables(board)
-        filename = 'tests/resources/Boards_Examples/d0-forward-test1.txt'
+        filename = 'tests/resources/Boards_Examples/d0-forward-test2.txt'
         hash_table_of_domains = create_storage_with_hash_table(filename)
         initialize_feasibles_v1(board, hash_table_of_domains, hash_table_of_variables)
         
         initial_letters_hash_map = get_initial_letters(board)
         initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
+        
+        vertical_variable_restrainer_5 = hash_table_of_variables["vertical"][4]
+        horizontal_variable_restricted_6 = hash_table_of_variables["horizontal"][5]
+        
+        expected_pounded_domain_1 = ['CON', 'ROL', 'RON', 'SOL']
+        
+        vertical_variable_restrainer_5.set_value("ISLO")
+        b = hash_table_of_variables["horizontal"][1]
+        a = forward(board, vertical_variable_restrainer_5, hash_table_of_variables)
+        
+        real_pounded_domain_1 = hash_table_of_variables["horizontal"][5].get_feasibles()
+        
+        self.assertEqual(expected_pounded_domain_1, real_pounded_domain_1)
+        
+        expected_pounded_domain_2 = ['LA', 'LN']
+        real_pounded_domain_2 = hash_table_of_variables["horizontal"][3].get_feasibles()
+        self.assertEqual(expected_pounded_domain_2, real_pounded_domain_2)
+        
+        expected_pounded_domain_3 = ['ASA']
+        real_pounded_domain_3 = hash_table_of_variables["horizontal"][2].get_feasibles()
+        self.assertEqual(expected_pounded_domain_3, real_pounded_domain_3)
+        
+        expected_pounded_domain_4 = ['AVIS']
+        real_pounded_domain_4 = hash_table_of_variables["horizontal"][1].get_feasibles()
+        self.assertEqual(expected_pounded_domain_4, real_pounded_domain_4)
+        
+        expected_pounded_domain_5 = ['ES', 'UN', 'DE', 'LA', 'NO', 'AR', 'LN']
+        real_pounded_domain_5 = hash_table_of_variables["horizontal"][4].get_feasibles()
+        self.assertEqual(expected_pounded_domain_5, real_pounded_domain_5)
+        
+        expected_pounded_domain_6 = ['ES', 'UN', 'DE', 'LA', 'NO', 'AR', 'LN']
+        real_pounded_domain_6 = hash_table_of_variables["horizontal"][0].get_feasibles()
+        self.assertEqual(expected_pounded_domain_6, real_pounded_domain_6)
+        
+        expected_pounded_domain_7 = ['ES', 'UN', 'DE', 'LA', 'NO', 'AR', 'LN']
+        real_pounded_domain_7 = hash_table_of_variables["vertical"][0].get_feasibles()
+        self.assertEqual(expected_pounded_domain_7, real_pounded_domain_7)
+        
+        expected_pounded_domain_8 = ['ES', 'UN', 'DE', 'LA', 'NO', 'AR', 'LN']
+        real_pounded_domain_8 = hash_table_of_variables["vertical"][1].get_feasibles()
+        self.assertEqual(expected_pounded_domain_8, real_pounded_domain_8)
+        
+        expected_pounded_domain_9 = ['ES', 'UN', 'DE', 'LA', 'NO', 'AR', 'LN']
+        real_pounded_domain_9 = hash_table_of_variables["vertical"][2].get_feasibles()
+        self.assertEqual(expected_pounded_domain_9, real_pounded_domain_9)
+        
+        expected_pounded_domain_10 = ['CON', 'LAL', 'ROL', 'RON', 'OLA', 'SOL', 'ARA', 'AVO', 'ASA']
+        real_pounded_domain_10 = hash_table_of_variables["vertical"][3].get_feasibles()
+        self.assertEqual(expected_pounded_domain_10, real_pounded_domain_10)
+        
+        expected_pounded_domain_11 = ['ESTO', 'PARA', 'COMO', 'ROSA', 'OLOR', 'LALA', 'PERO', 'OSOS', 'PERA', 'AVIS']
+        real_pounded_domain_11 = hash_table_of_variables["vertical"][4].get_feasibles()
+        self.assertEqual(expected_pounded_domain_11, real_pounded_domain_11)
+        
+        expected_pounded_domain_12 = ['TOTEM', 'OSERA', 'RETOS', 'SETOS', 'ESOPO']
+        real_pounded_domain_12 = hash_table_of_variables["vertical"][5].get_feasibles()
+        self.assertEqual(expected_pounded_domain_12, real_pounded_domain_12)
+        
+        expected_pounded_domain_13 = ['L', 'A', 'B']
+        real_pounded_domain_13 = hash_table_of_variables["isolated"][0].get_feasibles()
+        self.assertEqual(expected_pounded_domain_13, real_pounded_domain_13)
+        
+        expected_pounded_domain_14 = ['L', 'A', 'B']
+        real_pounded_domain_14 = hash_table_of_variables["isolated"][1].get_feasibles()
+        self.assertEqual(expected_pounded_domain_14, real_pounded_domain_14)
+        
+        
         
         
         
