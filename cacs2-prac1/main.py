@@ -657,7 +657,7 @@ def ok_restriction_between_two_variables(board, word_a, word_b, feasible_b):
     return result
         
 
-"""
+
 def forward(board, concrete_variable, hash_table_of_variables):
     result = False
     number_of_variables_to_be_checked = 0
@@ -672,18 +672,14 @@ def forward(board, concrete_variable, hash_table_of_variables):
         number_of_variables_to_be_checked = count_number_of_horizontal_variables(hash_table_of_variables)
     
     elif concrete_variable.get_orientation() == "isolated":
-        restriction_check = Restriction(concrete_variable, concrete_variable,
-                                        concrete_variable.get_initial_pos()[0],
-                                        concrete_variable.get_initial_pos()[1],
-                                        concrete_variable.get_value())
-        if ( len(concrete_variable.get_restrictions()) > 0 and
-            restriction_check not in (concrete_variable.
-                                     get_restrictions()
-                                     [concrete_variable.get_name()])
-            ):
+        if ok_restriction_between_two_variables(board, 
+                                                concrete_variable,
+                                                concrete_variable,
+                                                concrete_variable.get_value()):
+            result = True
             return result
         else:
-            result = True
+            result = False
             return result
         
     for j in range (number_of_variables_to_be_checked):
@@ -696,13 +692,21 @@ def forward(board, concrete_variable, hash_table_of_variables):
             if ok_restriction_between_two_variables(board, 
                                                     concrete_variable,
                                                     hash_table_of_variables
-                                                    [orientation_to_be_checked]
-                                                    [j],
+                                                    [orientation_to_be_checked][j],
                                                     feasible_value):
                 empty = False
             else:
-                variable_checked_deep_copy.get_feasibles().remove(feasible_value)
-"""
+                variable_checked_deep_copy.remove_feasible(feasible_value)
+                variable_checked_deep_copy.add_pound(concrete_variable, feasible_value)
+        hash_table_of_variables[orientation_to_be_checked][j] = variable_checked_deep_copy
+        if empty == True:
+            result = False
+            return result
+        
+    result = True
+    return result
+        
+
                 
 
 

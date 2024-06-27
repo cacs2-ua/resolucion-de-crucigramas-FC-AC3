@@ -109,3 +109,6 @@ class Word:
             if len(self.pounds[restrainer_word.get_name()]) == 0:
                 del self.pounds[restrainer_word.get_name()]
     
+    def remove_feasible (self, feasible):
+        self.feasibles.remove(feasible)
+    
