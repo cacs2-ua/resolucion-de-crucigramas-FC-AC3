@@ -21,7 +21,7 @@ FILS = 5  # número de filas del crucigrama
 COLS = 6  # número de columnas del crucigrama
 
 RUTA_TABLERO = "Boards_Examples/mine1.txt"
-RUTA_DOMINIOS = "Domains_Examples/mine_crossboard_ordered_domain_h_v_a.txt"
+RUTA_DOMINIOS = "Domains_Examples/mine_crossboard_disordered.txt"
 
 LLENA = '*'
 VACIA = '-'
@@ -1001,6 +1001,19 @@ def forward_checking(board, domains_filename, debug_flag = False):
     return result
 
 
+def store_crossboard(file_path):
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+        
+    # Initialize the 2D array
+    crossboard = []
+    
+    for line in lines:
+        # Remove newline characters and convert the line to a list of characters
+        row = list(line.strip())
+        crossboard.append(row)
+    
+    return crossboard
 
 
 #########################################################################
