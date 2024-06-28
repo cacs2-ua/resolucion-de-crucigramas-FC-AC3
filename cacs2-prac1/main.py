@@ -17,14 +17,14 @@ WHITE = (255, 255, 255)
 MARGEN = 5  # ancho del borde entre celdas
 MARGEN_INFERIOR = 60  # altura del margen inferior entre la cuadrícula y la ventana
 TAM = 60  # tamaño de la celda
-FILS = 5  # número de filas del crucigrama
-COLS = 6  # número de columnas del crucigrama
+FILS = 10  # número de filas del crucigrama
+COLS = 10  # número de columnas del crucigrama
 
 #RUTA_TABLERO = "Boards_Examples/debug_forward_checking/debug_1.txt"
 #RUTA_DOMINIOS = "Domains_Examples/debug_forward_checking/debug_1.txt"
 
-RUTA_TABLERO = "Boards_Examples/mine1.txt"
-RUTA_DOMINIOS = "Domains_Examples/mine_crossboard_mixed_with_150.txt"
+RUTA_TABLERO = "Boards_Examples/simple.txt"
+RUTA_DOMINIOS = "Domains_Examples/Top3000EnglishWords.txt"
 
 LLENA = '*'
 VACIA = '-'
