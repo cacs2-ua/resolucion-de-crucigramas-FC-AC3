@@ -788,6 +788,9 @@ def forward(board, concrete_variable, hash_table_of_variables):
         orientation_to_be_checked = "horizontal"
         number_of_variables_to_be_checked = count_number_of_horizontal_variables(
             hash_table_of_variables)
+    
+    elif concrete_variable.get_orientation() == "isolated":
+        return True
 
     """
     elif concrete_variable.get_orientation() == "isolated":
