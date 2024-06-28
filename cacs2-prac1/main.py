@@ -890,21 +890,84 @@ def restore(board, restrainer_variable, hash_table_of_variables):
                 
             hash_table_of_variables[orientation_to_be_checked][j] = checked_variable
 
-"""
-def FC_1(variable_number,
+def set_word_on_board(board, word, value):
+    
+    if word.get_orientation() == "horizontal":
+        for j in range(word.get_length()):
+            board.setCelda(word.get_initial_pos()[0],
+                           word.get_initial_pos()[1] + j,
+                           value[j])
+            
+    elif word.get_orientation() == "vertical":
+        for i in range(word.get_length()):
+            board.setCelda(word.get_initial_pos()[0] + i,
+                           word.get_initial_pos()[1],
+                           value[i])
+            
+    elif word.get_orientation() == "isolated":
+        board.setCelda(word.get_initial_pos()[0],
+                       word.get_initial_pos()[1],
+                       value[0])
+
+
+def FC(variable_number,
        board, hash_table_of_variables,
        number_of_horizontals,
        number_of_verticals,
-       number_of_isolated):
+       number_of_isolated,
+       total_number_of_variables,
+       debug_flag = False):
     
     access_orientation = "-"
     access_index = -1
     
-    if 1 <= variable_number <= number_of_horizontals:
-        access_orientation = "horizontal"
     
-    elif number_of_horizontals
-"""
+    if 0 < variable_number <= number_of_horizontals:
+        access_orientation = "horizontal"
+        access_index = variable_number - 1
+    
+    elif number_of_horizontals < variable_number <= number_of_verticals:
+        access_orientation = "vertical"
+        access_index = variable_number - number_of_horizontals - 1
+    
+    elif number_of_verticals < variable_number <= number_of_isolated:
+        access_orientation = "isolated"
+        access_index = variable_number - number_of_horizontals - number_of_verticals  - 1
+    
+    for feasible_value in (hash_table_of_variables
+                           [access_orientation]
+                           [access_index]
+                           .get_feasibles()):
+        hash_table_of_variables[access_orientation][access_index].set_value(feasible_value)
+        
+        if debug_flag == True:
+            set_word_on_board(board,
+                              hash_table_of_variables[access_orientation][access_index],
+                              hash_table_of_variables[access_orientation][access_index].get_value())
+        
+        if variable_number == total_number_of_variables:
+            return True
+        else:
+            if forward(board,
+                    hash_table_of_variables[access_orientation][access_index],
+                    hash_table_of_variables):
+                
+                if FC(variable_number + 1,
+                      board, hash_table_of_variables,
+                      number_of_horizontals,
+                      number_of_verticals,
+                      number_of_isolated,
+                      total_number_of_variables,
+                      debug_flag):
+                    return True
+                else:
+                    restore(board,
+                            hash_table_of_variables[access_orientation][access_index],
+                            hash_table_of_variables)
+    
+    return False
+                    
+
     
     
                     
