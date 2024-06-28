@@ -782,7 +782,44 @@ def pound_reflexive_restrictions(hash_table_of_variables):
                 
                 hash_table_of_variables[key][acces_variable_index] = word_checked_deep_copy
   
+def restaura(board, restrainer_variable, hash_table_of_variables):
+    result = False
+    number_of_variables_to_be_checked = 0
+    orientation_to_be_checked = "-"
 
+    if restrainer_variable.get_orientation() == "horizontal":
+        orientation_to_be_checked = "vertical"
+        number_of_variables_to_be_checked = count_number_of_vertical_variables(
+            hash_table_of_variables)
+
+    elif restrainer_variable.get_orientation() == "vertical":
+        orientation_to_be_checked = "horizontal"
+        number_of_variables_to_be_checked = count_number_of_horizontal_variables(
+            hash_table_of_variables)
+    
+    for j in range(number_of_variables_to_be_checked):
+        hash_table_of_pounds = (hash_table_of_variables
+                                [orientation_to_be_checked][j].
+                                get_pounds())
+        if (restrainer_variable.get_name()
+            in
+            hash_table_of_pounds):
+            list_of_pounded_values = (hash_table_of_pounds
+                                      [restrainer_variable
+                                       .get_name()])
+            
+            checked_variable = deepcopy(
+                hash_table_of_variables
+                [orientation_to_be_checked][j]
+            )
+            
+            for pounded_value in list_of_pounded_values:
+                checked_variable.remove_pound(restrainer_variable,
+                                               pounded_value)
+                checked_variable.add_feasible(pounded_value)
+                
+            hash_table_of_variables[orientation_to_be_checked][j] = checked_variable
+    
 
                     
 
