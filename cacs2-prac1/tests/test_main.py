@@ -1312,8 +1312,40 @@ class TestMain(unittest.TestCase):
         real_expected_pounded_1 = 3 in hash_table_of_variables["vertical"][4].get_pounds()
         self.assertEqual(after_expected_pounded_1, real_expected_pounded_1)
 
+    
+    def test_2_restore(self): # Test 43
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        hash_table_of_variables = initialize_1_all_variables(board)
+        filename = 'tests/resources/Boards_Examples/d0-forward-test2.txt'
+        hash_table_of_domains = create_storage_with_hash_table(filename)
+        initialize_feasibles_v1(board, hash_table_of_domains, hash_table_of_variables)
         
+        initial_letters_hash_map = get_initial_letters(board)
+        initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
         
+        vertical_variable_restrainer_5 = hash_table_of_variables["vertical"][4]
+        vertical_variable_restrainer_5.set_value("ISLO")
+        horizontal_variable_restricted_6 = hash_table_of_variables["horizontal"][5]
+        
+        forward(board, vertical_variable_restrainer_5, hash_table_of_variables)
+        
+        expected_feasible_1 = ['CON', 'ROL', 'RON', 'SOL']
+        real_feasible_1 = hash_table_of_variables["horizontal"][5].get_feasibles()
+        self.assertEqual(expected_feasible_1, real_feasible_1)
+        
+        expected_pounded_1 = ['LAL', 'OLA', 'ARA', 'AVO', 'ASA']
+        real_pounded_1 = hash_table_of_variables["horizontal"][5].get_pounds()[11]
+        self.assertEqual(expected_pounded_1, real_pounded_1)
+        
+        restore(board, vertical_variable_restrainer_5, hash_table_of_variables)
+        
+        after_expected_feasible_1 = ['CON', 'ROL', 'RON', 'SOL', 'LAL', 'OLA', 'ARA', 'AVO', 'ASA']
+        after_real_feasible_1 = hash_table_of_variables["horizontal"][5].get_feasibles()
+        self.assertEqual(after_expected_feasible_1, after_real_feasible_1)
+        
+        after_expected_pounded_1 = False
+        real_expected_pounded_1 = 11 in hash_table_of_variables["horizontal"][5].get_pounds()
+        self.assertEqual(after_expected_pounded_1, real_expected_pounded_1)
         
         
         
