@@ -24,7 +24,7 @@ COLS = 40  # número de columnas del crucigrama
 #RUTA_DOMINIOS = "Domains_Examples/debug_forward_checking/debug_1.txt"
 
 RUTA_TABLERO = 'Boards_Examples/super_complex.txt'
-RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
+RUTA_DOMINIOS = 'Domains_Examples/5000-words.txt'
 
 LLENA = '*'
 VACIA = '-'
