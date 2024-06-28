@@ -14,179 +14,198 @@ MEDIUM_PURPLE = (147, 112, 219)
 DARK_PURPLE = (128, 0, 128)
 WHITE = (255, 255, 255)
 
-MARGEN=5 #ancho del borde entre celdas
-MARGEN_INFERIOR=60 #altura del margen inferior entre la cuadrícula y la ventana
-TAM=60  #tamaño de la celda
-FILS=5 # número de filas del crucigrama
-COLS=6 # número de columnas del crucigrama
+MARGEN = 5  # ancho del borde entre celdas
+MARGEN_INFERIOR = 60  # altura del margen inferior entre la cuadrícula y la ventana
+TAM = 60  # tamaño de la celda
+FILS = 5  # número de filas del crucigrama
+COLS = 6  # número de columnas del crucigrama
 RUTA_TABLERO = "Boards_Examples/mine1.txt"
 
-LLENA='*' 
-VACIA='-'
+LLENA = '*'
+VACIA = '-'
 
 
 #########################################################################
 # Detecta si se pulsa el botón de FC
-######################################################################### 
+#########################################################################
 def pulsaBotonFC(pos, anchoVentana, altoVentana):
-    if pos[0]>=anchoVentana//4-25 and pos[0]<=anchoVentana//4+25 and pos[1]>=altoVentana-45 and pos[1]<=altoVentana-19:
+    if pos[0] >= anchoVentana//4-25 and pos[0] <= anchoVentana//4+25 and pos[1] >= altoVentana-45 and pos[1] <= altoVentana-19:
         return True
     else:
         return False
-    
-######################################################################### 
+
+#########################################################################
 # Detecta si se pulsa el botón de AC3
-######################################################################### 
+#########################################################################
+
+
 def pulsaBotonAC3(pos, anchoVentana, altoVentana):
-    if pos[0]>=3*(anchoVentana//4)-25 and pos[0]<=3*(anchoVentana//4)+25 and pos[1]>=altoVentana-45 and pos[1]<=altoVentana-19:
+    if pos[0] >= 3*(anchoVentana//4)-25 and pos[0] <= 3*(anchoVentana//4)+25 and pos[1] >= altoVentana-45 and pos[1] <= altoVentana-19:
         return True
     else:
         return False
-    
-######################################################################### 
+
+#########################################################################
 # Detecta si se pulsa el botón de reset
-######################################################################### 
+#########################################################################
+
+
 def pulsaBotonReset(pos, anchoVentana, altoVentana):
-    if pos[0]>=(anchoVentana//2)-25 and pos[0]<=(anchoVentana//2)+25 and pos[1]>=altoVentana-45 and pos[1]<=altoVentana-19:
+    if pos[0] >= (anchoVentana//2)-25 and pos[0] <= (anchoVentana//2)+25 and pos[1] >= altoVentana-45 and pos[1] <= altoVentana-19:
         return True
     else:
         return False
-    
-######################################################################### 
+
+#########################################################################
 # Detecta si el ratón se pulsa en la cuadrícula
-######################################################################### 
+#########################################################################
+
+
 def inTablero(pos):
-    if pos[0]>=MARGEN and pos[0]<=(TAM+MARGEN)*COLS+MARGEN and pos[1]>=MARGEN and pos[1]<=(TAM+MARGEN)*FILS+MARGEN:        
+    if pos[0] >= MARGEN and pos[0] <= (TAM+MARGEN)*COLS+MARGEN and pos[1] >= MARGEN and pos[1] <= (TAM+MARGEN)*FILS+MARGEN:
         return True
     else:
         return False
-    
-######################################################################### 
+
+#########################################################################
 # Busca posición de palabras de longitud tam en el almacen
-######################################################################### 
+#########################################################################
+
+
 def busca(almacen, tam):
-    enc=False
-    pos=-1
-    i=0
-    while i<len(almacen) and enc==False:
-        if almacen[i].tam==tam: 
-            pos=i
-            enc=True
-        i=i+1
+    enc = False
+    pos = -1
+    i = 0
+    while i < len(almacen) and enc == False:
+        if almacen[i].tam == tam:
+            pos = i
+            enc = True
+        i = i+1
     return pos
-    
-######################################################################### 
+
+#########################################################################
 # Crea un almacen de palabras
-######################################################################### 
+#########################################################################
+
+
 def creaAlmacen():
-    f= open('d0.txt', 'r', encoding="utf-8")
-    lista=f.read()
+    f = open('d0.txt', 'r', encoding="utf-8")
+    lista = f.read()
     f.close()
-    listaPal=lista.split()
-    almacen=[]
-   
-    for pal in listaPal:        
-        pos=busca(almacen, len(pal)) 
-        if pos==-1: #no existen palabras de esa longitud
-            dom=Dominio(len(pal))
-            dom.addPal(pal.upper())            
+    listaPal = lista.split()
+    almacen = []
+
+    for pal in listaPal:
+        pos = busca(almacen, len(pal))
+        if pos == -1:  # no existen palabras de esa longitud
+            dom = Dominio(len(pal))
+            dom.addPal(pal.upper())
             almacen.append(dom)
-        elif pal.upper() not in almacen[pos].lista: #añade la palabra si no está duplicada        
-            almacen[pos].addPal(pal.upper())           
+        # añade la palabra si no está duplicada
+        elif pal.upper() not in almacen[pos].lista:
+            almacen[pos].addPal(pal.upper())
     return almacen
 
-######################################################################### 
+#########################################################################
 # Imprime el contenido del almacen
-######################################################################### 
+#########################################################################
+
+
 def imprimeAlmacen(almacen):
     for dom in almacen:
-        print (dom.tam)
-        lista=dom.getLista()
+        print(dom.tam)
+        lista = dom.getLista()
         for pal in lista:
-            print (pal, end=" ")
+            print(pal, end=" ")
         print()
 
 
-#########################################################################  
+#########################################################################
 # Añadido por Mí
 #########################################################################
 
 def substract(a, b):
     return a - b
 
-def is_outside_crossboard (i, j, board):
-    return (i < 0 
-            or  
-            i >= board.alto 
-            or 
-            j < 0 
+
+def is_outside_crossboard(i, j, board):
+    return (i < 0
+            or
+            i >= board.alto
+            or
+            j < 0
             or j >= board.ancho)
 
-def is_inside_crossboard (i, j, board):
+
+def is_inside_crossboard(i, j, board):
     return not is_outside_crossboard(i, j, board)
+
 
 def is_solid(i, j, board):
     if is_outside_crossboard(i, j, board):
         return False
     return board.tablero[i][j] == '*'
 
+
 def is_empty(i, j, board):
     if is_outside_crossboard(i, j, board):
         return False
     return board.tablero[i][j] == '-'
 
+
 def has_letter(i, j, board):
     return (
-        not is_empty(i, j, board) 
-        and 
-        not is_solid(i, j, board) 
-        and 
-        not is_outside_crossboard(i, j, board))   
+        not is_empty(i, j, board)
+        and
+        not is_solid(i, j, board)
+        and
+        not is_outside_crossboard(i, j, board))
 
 
 def is_isolated(i, j, board):
     return (
-              (
-              is_solid(i - 1, j, board) 
-              or 
-              is_outside_crossboard(i - 1, j, board)
-              )
-              
-              and
-              
-              (
-              is_solid(i, j + 1, board) 
-              or 
-              is_outside_crossboard(i, j + 1, board)
-              )
-              
-              and
-              
-              (
-              is_solid(i + 1, j, board) 
-              or 
-              is_outside_crossboard(i + 1, j, board)
-              )
-              
-              and
-              
-              (
-              is_solid(i, j - 1, board) 
-              or 
-              is_outside_crossboard(i, j - 1, board)
-              )
-              
-              and
-              
-              (
-                  is_empty(i, j, board)
-                  or
-                  has_letter(i, j, board)
-              )
-              
-             )
+        (
+            is_solid(i - 1, j, board)
+            or
+            is_outside_crossboard(i - 1, j, board)
+        )
 
-def initialize_1_isolated_variables(board, number_of_previous_variables = 0):
+        and
+
+        (
+            is_solid(i, j + 1, board)
+            or
+            is_outside_crossboard(i, j + 1, board)
+        )
+
+        and
+
+        (
+            is_solid(i + 1, j, board)
+            or
+            is_outside_crossboard(i + 1, j, board)
+        )
+
+        and
+
+        (
+            is_solid(i, j - 1, board)
+            or
+            is_outside_crossboard(i, j - 1, board)
+        )
+
+        and
+
+        (
+            is_empty(i, j, board)
+            or
+            has_letter(i, j, board)
+        )
+
+    )
+
+
+def initialize_1_isolated_variables(board, number_of_previous_variables=0):
     isolated_variables_counter = number_of_previous_variables
     isolated_variable_list = []
     for i in range(board.getAlto()):
@@ -194,33 +213,35 @@ def initialize_1_isolated_variables(board, number_of_previous_variables = 0):
             if is_isolated(i, j, board):
                 isolated_variables_counter += 1
                 new_isolated_variable = Word(
-                                             name = isolated_variables_counter, 
-                                             initial_pos = (i, j), 
-                                             final_pos= (i, j),
-                                             length = 1,
-                                             orientation = "isolated")
+                    name=isolated_variables_counter,
+                    initial_pos=(i, j),
+                    final_pos=(i, j),
+                    length=1,
+                    orientation="isolated")
                 isolated_variable_list.append(new_isolated_variable)
     return isolated_variable_list
 
+
 def is_right_horizontal_terminal(i, j, board):
     return (
-            (
-             is_solid(i, j + 1, board) 
-             or 
-             is_outside_crossboard(i, j + 1, board)
-            )
-            
-            and
-            (
-                is_empty(i, j, board)
-                or
-                has_letter(i, j, board)
-            )  
-            )
+        (
+            is_solid(i, j + 1, board)
+            or
+            is_outside_crossboard(i, j + 1, board)
+        )
 
-def initialize_1_horizontal_variables(board, number_of_previous_variables = 0,
-                                      horizontal_variable_list = None,
-                                      list_of_variables = None):
+        and
+        (
+            is_empty(i, j, board)
+            or
+            has_letter(i, j, board)
+        )
+    )
+
+
+def initialize_1_horizontal_variables(board, number_of_previous_variables=0,
+                                      horizontal_variable_list=None,
+                                      list_of_variables=None):
     if horizontal_variable_list is None:
         horizontal_variable_list = []
     if list_of_variables is None:
@@ -239,37 +260,39 @@ def initialize_1_horizontal_variables(board, number_of_previous_variables = 0,
                 horizontal_variable_number += 1
                 new_horizontal_variable = (
                     Word(
-                        name = horizontal_variable_number ,
-                        initial_pos = (i, j - horizontal_variable_length + 1),
-                        final_pos = (i, j),
-                        length = horizontal_variable_length,
-                        orientation = "horizontal"
-                        )
+                        name=horizontal_variable_number,
+                        initial_pos=(i, j - horizontal_variable_length + 1),
+                        final_pos=(i, j),
+                        length=horizontal_variable_length,
+                        orientation="horizontal"
                     )
+                )
                 horizontal_variable_list.append(new_horizontal_variable)
                 list_of_variables.append(new_horizontal_variable)
                 horizontal_variable_length = 0
     return horizontal_variable_list
 
+
 def is_down_vertical_terminal(i, j, board):
     return (
-            (
-             is_solid(i + 1, j, board) 
-             or 
-             is_outside_crossboard(i + 1, j, board)
-            )
-            
-            and
-            (
-                is_empty(i, j, board)
-                or
-                has_letter(i, j, board)
-            )  
-            )
+        (
+            is_solid(i + 1, j, board)
+            or
+            is_outside_crossboard(i + 1, j, board)
+        )
 
-def initialize_1_vertical_variables(board, number_of_previous_variables = 0,
-                                    vertical_variable_list = None,
-                                    list_of_variables = None):
+        and
+        (
+            is_empty(i, j, board)
+            or
+            has_letter(i, j, board)
+        )
+    )
+
+
+def initialize_1_vertical_variables(board, number_of_previous_variables=0,
+                                    vertical_variable_list=None,
+                                    list_of_variables=None):
     if vertical_variable_list is None:
         vertical_variable_list = []
     if list_of_variables is None:
@@ -288,11 +311,11 @@ def initialize_1_vertical_variables(board, number_of_previous_variables = 0,
                 vertical_variable_number += 1
                 new_vertical_variable = (
                     Word(
-                        name = vertical_variable_number,
-                        initial_pos= (i - vertical_variable_length + 1, j),
-                        final_pos = (i, j),
-                        length = vertical_variable_length,
-                        orientation = "vertical"
+                        name=vertical_variable_number,
+                        initial_pos=(i - vertical_variable_length + 1, j),
+                        final_pos=(i, j),
+                        length=vertical_variable_length,
+                        orientation="vertical"
                     )
                 )
                 vertical_variable_list.append(new_vertical_variable)
@@ -300,10 +323,11 @@ def initialize_1_vertical_variables(board, number_of_previous_variables = 0,
                 vertical_variable_length = 0
     return vertical_variable_list
 
-def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_variables = 0,
-                                                   horizontal_variable_list = None,
-                                                   list_of_vertical_variables = None,
-                                                   isolated_variable_list = None):
+
+def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_variables=0,
+                                                   horizontal_variable_list=None,
+                                                   list_of_vertical_variables=None,
+                                                   isolated_variable_list=None):
     if horizontal_variable_list is None:
         horizontal_variable_list = []
     if list_of_vertical_variables is None:
@@ -312,23 +336,24 @@ def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_var
         isolated_variable_list = []
     horizontal_variable_number = number_of_previous_variables
     horizontal_variable_length = 0
-    
+
     for i in range(board.getAlto()):
         for j in range(board.getAncho()):
             if is_solid(i, j, board):
                 continue
             if is_isolated(i, j, board):
-                horizontal_variable_number += 1   
+                horizontal_variable_number += 1
                 new_isolated_variable = Word(
-                        name = len(isolated_variable_list) + number_of_previous_variables + 1,
-                        initial_pos = (i, j),
-                        final_pos = (i, j),
-                        length = 1,
-                        orientation = "isolated"
-                    )
+                    name=len(isolated_variable_list) +
+                    number_of_previous_variables + 1,
+                    initial_pos=(i, j),
+                    final_pos=(i, j),
+                    length=1,
+                    orientation="isolated"
+                )
                 isolated_variable_list.append(new_isolated_variable)
                 continue
-                
+
             horizontal_variable_length += 1
             if is_right_horizontal_terminal(i, j, board):
                 if horizontal_variable_length == 1:
@@ -337,28 +362,29 @@ def initialize_1_horizontal_and_isolated_variables(board, number_of_previous_var
                 horizontal_variable_number += 1
                 new_horizontal_variable = (
                     Word(
-                        name = len(horizontal_variable_list) + number_of_previous_variables + 1,
-                        initial_pos = (i, j - horizontal_variable_length + 1),
-                        final_pos = (i, j),
-                        length = horizontal_variable_length,
-                        orientation = "horizontal"
-                        )
+                        name=len(horizontal_variable_list) +
+                        number_of_previous_variables + 1,
+                        initial_pos=(i, j - horizontal_variable_length + 1),
+                        final_pos=(i, j),
+                        length=horizontal_variable_length,
+                        orientation="horizontal"
                     )
+                )
                 horizontal_variable_list.append(new_horizontal_variable)
                 list_of_vertical_variables.append(new_horizontal_variable)
                 horizontal_variable_length = 0
-                
+
     for word in isolated_variable_list:
         word.set_name(word.get_name() + len(horizontal_variable_list))
-    
+
     list_of_vertical_variables.extend(isolated_variable_list)
     return list_of_vertical_variables
 
 
-def initialize_1_vertical_and_isolated_variables(board, number_of_previous_variables = 0,
-                                                   vertical_variable_list = None,
-                                                   list_of_horizontal_variables = None,
-                                                   isolated_variable_list = None):
+def initialize_1_vertical_and_isolated_variables(board, number_of_previous_variables=0,
+                                                 vertical_variable_list=None,
+                                                 list_of_horizontal_variables=None,
+                                                 isolated_variable_list=None):
     if vertical_variable_list is None:
         vertical_variable_list = []
     if list_of_horizontal_variables is None:
@@ -367,20 +393,21 @@ def initialize_1_vertical_and_isolated_variables(board, number_of_previous_varia
         isolated_variable_list = []
     vertical_variable_number = number_of_previous_variables
     vertical_variable_length = 0
-    
+
     for j in range(board.getAncho()):
         for i in range(board.getAlto()):
             if is_solid(i, j, board):
                 continue
             if is_isolated(i, j, board):
-                vertical_variable_number += 1   
+                vertical_variable_number += 1
                 new_isolated_variable = Word(
-                        name = len(isolated_variable_list) + number_of_previous_variables + 1,
-                        initial_pos = (i, j),
-                        final_pos = (i, j),
-                        length = 1,
-                        orientation = "isolated"
-                    )
+                    name=len(isolated_variable_list) +
+                    number_of_previous_variables + 1,
+                    initial_pos=(i, j),
+                    final_pos=(i, j),
+                    length=1,
+                    orientation="isolated"
+                )
                 isolated_variable_list.append(new_isolated_variable)
                 continue
             vertical_variable_length += 1
@@ -391,20 +418,21 @@ def initialize_1_vertical_and_isolated_variables(board, number_of_previous_varia
                 vertical_variable_number += 1
                 new_vertical_variable = (
                     Word(
-                        name = len(vertical_variable_list) + number_of_previous_variables + 1,
-                        initial_pos= (i - vertical_variable_length + 1, j),
-                        final_pos = (i, j),
-                        length = vertical_variable_length,
-                        orientation = "vertical"
+                        name=len(vertical_variable_list) +
+                        number_of_previous_variables + 1,
+                        initial_pos=(i - vertical_variable_length + 1, j),
+                        final_pos=(i, j),
+                        length=vertical_variable_length,
+                        orientation="vertical"
                     )
                 )
                 vertical_variable_list.append(new_vertical_variable)
                 list_of_horizontal_variables.append(new_vertical_variable)
                 vertical_variable_length = 0
-                
+
     for word in isolated_variable_list:
         word.set_name(word.get_name() + len(vertical_variable_list))
-    
+
     list_of_horizontal_variables.extend(isolated_variable_list)
     return list_of_horizontal_variables
 
@@ -415,7 +443,7 @@ def initialize_1_all_variables(board):
     list_of_variables = []
     isolated_variable_list = []
     dictionary_of_variables = {}
-    
+
     if m >= n:
         horizontal_variable_list = []
         vertical_variable_list = []
@@ -429,9 +457,7 @@ def initialize_1_all_variables(board):
                                                      isolated_variable_list)
         dictionary_of_variables["vertical"] = vertical_variable_list
         dictionary_of_variables["isolated"] = isolated_variable_list
-        
-        
-        
+
     else:
         vertical_variable_list = []
         horizontal_variable_list = []
@@ -445,8 +471,9 @@ def initialize_1_all_variables(board):
                                                        isolated_variable_list)
         dictionary_of_variables["horizontal"] = horizontal_variable_list
         dictionary_of_variables["isolated"] = isolated_variable_list
-    
+
     return dictionary_of_variables
+
 
 def initialize_2_all_variables(board):
     n = board.getAlto()
@@ -454,7 +481,7 @@ def initialize_2_all_variables(board):
     list_of_variables = []
     isolated_variable_list = []
     dictionary_of_variables = {}
-    
+
     if m >= n:
         vertical_variable_list = []
         horizontal_variable_list = []
@@ -468,7 +495,7 @@ def initialize_2_all_variables(board):
                                                        isolated_variable_list)
         dictionary_of_variables["horizontal"] = horizontal_variable_list
         dictionary_of_variables["isolated"] = isolated_variable_list
-        
+
     else:
         horizontal_variable_list = []
         vertical_variable_list = []
@@ -483,17 +510,16 @@ def initialize_2_all_variables(board):
         dictionary_of_variables["vertical"] = vertical_variable_list
         dictionary_of_variables["isolated"] = isolated_variable_list
 
-    
     return dictionary_of_variables
 
 
 def create_storage_with_hash_table(filename):
     with open(filename, 'r', encoding="utf-8") as f:
         lista = f.read()
-    
+
     listaPal = lista.split()
     almacen = {}
-   
+
     for pal in listaPal:
         tam = len(pal)
         if tam not in almacen:
@@ -502,21 +528,23 @@ def create_storage_with_hash_table(filename):
             almacen[tam] = dom
         elif pal.upper() not in almacen[tam].getLista():
             almacen[tam].addPal(pal.upper())
-            
+
     return almacen
 
+
 def initialize_feasibles_v1(board, storage, dictionary_of_variables):
-    
+
     for word in dictionary_of_variables["horizontal"]:
         word.set_feasibles(storage[word.get_length()].getLista())
-        
+
     for word in dictionary_of_variables["vertical"]:
         word.set_feasibles(storage[word.get_length()].getLista())
-        
+
     for word in dictionary_of_variables["isolated"]:
         word.set_feasibles(storage[word.get_length()].getLista())
-        
+
     return dictionary_of_variables
+
 
 def get_initial_letters(board):
     initial_letters = {}
@@ -526,19 +554,21 @@ def get_initial_letters(board):
                 initial_letters[(i, j)] = board.getCelda(i, j)
     return initial_letters
 
+
 def square_belongs_to_word(i, j, word):
     if word.get_orientation() == "horizontal":
         return i == word.get_initial_pos()[0] and j >= word.get_initial_pos()[1] and j <= word.get_final_pos()[1]
-    
+
     elif word.get_orientation() == "vertical":
         return j == word.get_initial_pos()[1] and i >= word.get_initial_pos()[0] and i <= word.get_final_pos()[0]
-    
+
     elif word.get_orientation() == "isolated":
         return i == word.get_initial_pos()[0] and j == word.get_initial_pos()[1]
 
+
 def initialize_restrictions_v1(board, initial_letters, hash_table_of_variables):
     founded = False
-    
+
     for key in initial_letters:
         for word in hash_table_of_variables["horizontal"]:
             if square_belongs_to_word(key[0], key[1], word):
@@ -548,7 +578,7 @@ def initialize_restrictions_v1(board, initial_letters, hash_table_of_variables):
                 word.add_restriction(new_restriction)
                 founded = True
                 break
-            
+
         for word in hash_table_of_variables["vertical"]:
             if square_belongs_to_word(key[0], key[1], word):
                 new_restriction = Restriction(word, word,
@@ -557,10 +587,10 @@ def initialize_restrictions_v1(board, initial_letters, hash_table_of_variables):
                 word.add_restriction(new_restriction)
                 founded = True
                 break
-        
+
         if founded == True:
             continue
-        
+
         for word in hash_table_of_variables["isolated"]:
             if square_belongs_to_word(key[0], key[1], word):
                 new_restriction = Restriction(word, word,
@@ -570,21 +600,26 @@ def initialize_restrictions_v1(board, initial_letters, hash_table_of_variables):
                 founded = True
                 break
         founded = False
-        
+
+
 def count_number_of_variables(hash_table_of_variables):
     count = 0
     for key in hash_table_of_variables:
         count += len(hash_table_of_variables[key])
     return count
 
+
 def count_number_of_horizontal_variables(hash_table_of_variables):
     return len(hash_table_of_variables["horizontal"])
+
 
 def count_number_of_vertical_variables(hash_table_of_variables):
     return len(hash_table_of_variables["vertical"])
 
+
 def count_number_of_isolated_variables(hash_table_of_variables):
     return len(hash_table_of_variables["isolated"])
+
 
 def get_common_square_coordinates_from_two_variables(word_a, word_b):
     if word_a.get_orientation() == word_b.get_orientation():
@@ -595,84 +630,87 @@ def get_common_square_coordinates_from_two_variables(word_a, word_b):
                 return None
         else:
             return None
-    
+
     else:
         horizontal_word = word_a if word_a.get_orientation() == "horizontal" else word_b
         vertical_word = word_a if word_a.get_orientation() == "vertical" else word_b
-        
+
         common_square = (
-                        horizontal_word.get_initial_pos()[0], 
-                        vertical_word.get_initial_pos()[1]
-                        )
-        
+            horizontal_word.get_initial_pos()[0],
+            vertical_word.get_initial_pos()[1]
+        )
+
         if (
-            square_belongs_to_word(common_square[0], 
-                                   common_square[1], 
-                                   horizontal_word) 
-                                   and 
-            square_belongs_to_word(common_square[0], 
-                                   common_square[1], 
+            square_belongs_to_word(common_square[0],
+                                   common_square[1],
+                                   horizontal_word)
+            and
+            square_belongs_to_word(common_square[0],
+                                   common_square[1],
                                    vertical_word)
-            ):
+        ):
             return common_square
-        
+
         else:
             return None
 
+
 def ok_restriction_between_two_variables(board, word_a, word_b, feasible_b):
     result = False
-    common_square = get_common_square_coordinates_from_two_variables(word_a, word_b)
-    
+    common_square = get_common_square_coordinates_from_two_variables(
+        word_a, word_b)
+
     if common_square is None:
         result = True
         return result
 
     horizontal_word = word_a if word_a.get_orientation() == "horizontal" else word_b
     vertical_word = word_a if word_a.get_orientation() == "vertical" else word_b
-    
+
     horizontal_word_index = abs(
-                                (
-                                common_square[1] 
-                                - 
-                                horizontal_word.get_initial_pos()[1]
-                                )
-                                )
-    
+        (
+            common_square[1]
+            -
+            horizontal_word.get_initial_pos()[1]
+        )
+    )
+
     vertical_word_index = abs(
-                            (
-                            common_square[0]
-                            -
-                            vertical_word.get_initial_pos()[0]
-                            )
-                            )
-    
+        (
+            common_square[0]
+            -
+            vertical_word.get_initial_pos()[0]
+        )
+    )
+
     if word_a.get_orientation() == "horizontal":
         if word_a.get_value()[horizontal_word_index] == feasible_b[vertical_word_index]:
             result = True
-            
+
     elif word_a.get_orientation() == "vertical":
         if word_a.get_value()[vertical_word_index] == feasible_b[horizontal_word_index]:
             result = True
-            
+
     return result
-        
 
 
 def forward(board, concrete_variable, hash_table_of_variables):
     result = False
     number_of_variables_to_be_checked = 0
     orientation_to_be_checked = "-"
-    
+
     if concrete_variable.get_orientation() == "horizontal":
         orientation_to_be_checked = "vertical"
-        number_of_variables_to_be_checked = count_number_of_vertical_variables(hash_table_of_variables)
-    
+        number_of_variables_to_be_checked = count_number_of_vertical_variables(
+            hash_table_of_variables)
+
     elif concrete_variable.get_orientation() == "vertical":
         orientation_to_be_checked = "horizontal"
-        number_of_variables_to_be_checked = count_number_of_horizontal_variables(hash_table_of_variables)
-    
+        number_of_variables_to_be_checked = count_number_of_horizontal_variables(
+            hash_table_of_variables)
+
     elif concrete_variable.get_orientation() == "isolated":
-        if ok_restriction_between_two_variables(board, 
+        if ok_restriction_between_two_variables(board,
                                                 concrete_variable,
                                                 concrete_variable,
                                                 concrete_variable.get_value()):
@@ -681,15 +719,15 @@ def forward(board, concrete_variable, hash_table_of_variables):
         else:
             result = False
             return result
-        
-    for j in range (number_of_variables_to_be_checked):
+
+    for j in range(number_of_variables_to_be_checked):
         empty = True
         variable_checked_deep_copy = deepcopy(hash_table_of_variables
                                               [orientation_to_be_checked][j])
         for feasible_value in (hash_table_of_variables
                                [orientation_to_be_checked]
                                [j].get_feasibles()):
-            if ok_restriction_between_two_variables(board, 
+            if ok_restriction_between_two_variables(board,
                                                     concrete_variable,
                                                     hash_table_of_variables
                                                     [orientation_to_be_checked][j],
@@ -697,107 +735,157 @@ def forward(board, concrete_variable, hash_table_of_variables):
                 empty = False
             else:
                 variable_checked_deep_copy.remove_feasible(feasible_value)
-                variable_checked_deep_copy.add_pound(concrete_variable, feasible_value)
+                variable_checked_deep_copy.add_pound(
+                    concrete_variable, feasible_value)
         hash_table_of_variables[orientation_to_be_checked][j] = variable_checked_deep_copy
         if empty == True:
             result = False
             return result
-        
+
     result = True
     return result
-        
+
+
+def pound_reflexive_restrictions(hash_table_of_variables):
+    for key in hash_table_of_variables:
+        for word in hash_table_of_variables[key]:
+            word_checked_deep_copy = deepcopy(word)
+            for restriction in word.get_restrictions()[word.get_name()]:
+                restriction_value = restriction.get_letter_of_restriction()
+                word_index = -1
+                if word.get_orientation() == "horizontal":
+                    word_index = abs(
+                        (
+                            restriction.get_y_coordinate()
+                            -
+                            word.get_initial_pos()[1]
+                        )
+                    )
+                    
+                elif word.get_orientation() == "vertical":
+                    word_index = abs(
+                        (
+                            restriction.get_x_coordinate()
+                            -
+                            word.get_initial_pos()[0]
+                        )
+                    )
+                            
+                elif word.get_orientation() == "isolated":
+                    word_index = 0
+                    
+                for feasible_value in word.get_feasibles():
+                    if feasible_value[word_index] != restriction_value:
+                        word_checked_deep_copy.remove_feasible(feasible_value)
+                
+            hash_table_of_variables[key][word.get_name()] = word_checked_deep_copy
+                
+                    
 
                 
 
 
 
-            
-#########################################################################  
+
+
+
+
+
+
+
+
+#########################################################################
 # Principal
 #########################################################################
 def main():
-    root= tkinter.Tk() #para eliminar la ventana de Tkinter
-    root.withdraw() #se cierra
+    root = tkinter.Tk()  # para eliminar la ventana de Tkinter
+    root.withdraw()  # se cierra
     pygame.init()
-    
-    reloj=pygame.time.Clock()
-    
-    anchoVentana=COLS*(TAM+MARGEN)+MARGEN
-    altoVentana= MARGEN_INFERIOR+FILS*(TAM+MARGEN)+MARGEN
-    
-    dimension=[anchoVentana,altoVentana]
-    screen=pygame.display.set_mode(dimension) 
+
+    reloj = pygame.time.Clock()
+
+    anchoVentana = COLS*(TAM+MARGEN)+MARGEN
+    altoVentana = MARGEN_INFERIOR+FILS*(TAM+MARGEN)+MARGEN
+
+    dimension = [anchoVentana, altoVentana]
+    screen = pygame.display.set_mode(dimension)
     pygame.display.set_caption("Practica 1: Crucigrama")
-    
-    botonFC=pygame.image.load("botonFC.png").convert()
-    botonFC=pygame.transform.scale(botonFC,[50, 30])
-    
-    botonAC3=pygame.image.load("botonAC3.png").convert()
-    botonAC3=pygame.transform.scale(botonAC3,[50, 30])
-    
-    botonReset=pygame.image.load("botonReset.png").convert()
-    botonReset=pygame.transform.scale(botonReset,[50,30])
-    
-    almacen=creaAlmacen()
-    game_over=False
-    tablero=Tablero(FILS, COLS,RUTA_TABLERO)
-    print (tablero)    
+
+    botonFC = pygame.image.load("botonFC.png").convert()
+    botonFC = pygame.transform.scale(botonFC, [50, 30])
+
+    botonAC3 = pygame.image.load("botonAC3.png").convert()
+    botonAC3 = pygame.transform.scale(botonAC3, [50, 30])
+
+    botonReset = pygame.image.load("botonReset.png").convert()
+    botonReset = pygame.transform.scale(botonReset, [50, 30])
+
+    almacen = creaAlmacen()
+    game_over = False
+    tablero = Tablero(FILS, COLS, RUTA_TABLERO)
+    print(tablero)
     while not game_over:
         for event in pygame.event.get():
-            if event.type==pygame.QUIT:               
-                game_over=True
-            if event.type==pygame.MOUSEBUTTONUP:                
-                #obtener posición y calcular coordenadas matriciales                               
-                pos=pygame.mouse.get_pos()                
+            if event.type == pygame.QUIT:
+                game_over = True
+            if event.type == pygame.MOUSEBUTTONUP:
+                # obtener posición y calcular coordenadas matriciales
+                pos = pygame.mouse.get_pos()
                 if pulsaBotonFC(pos, anchoVentana, altoVentana):
                     print("FC")
-                    res=False #aquí llamar al forward checking
-                    if res==False:
-                        #MessageBox.showwarning("Alerta", "No hay solución")
-                        print("No hay solución")                                  
-                elif pulsaBotonAC3(pos, anchoVentana, altoVentana):                    
-                     print("AC3")
-                elif pulsaBotonReset(pos, anchoVentana, altoVentana):                   
+                    res = False  # aquí llamar al forward checking
+                    if res == False:
+                        # MessageBox.showwarning("Alerta", "No hay solución")
+                        print("No hay solución")
+                elif pulsaBotonAC3(pos, anchoVentana, altoVentana):
+                    print("AC3")
+                elif pulsaBotonReset(pos, anchoVentana, altoVentana):
                     tablero.reset()
                 elif inTablero(pos):
-                    colDestino=pos[0]//(TAM+MARGEN)
-                    filDestino=pos[1]//(TAM+MARGEN)                    
-                    if event.button==1: #botón izquierdo
-                        if tablero.getCelda(filDestino, colDestino)==VACIA:
+                    colDestino = pos[0]//(TAM+MARGEN)
+                    filDestino = pos[1]//(TAM+MARGEN)
+                    if event.button == 1:  # botón izquierdo
+                        if tablero.getCelda(filDestino, colDestino) == VACIA:
                             tablero.setCelda(filDestino, colDestino, LLENA)
                         else:
                             tablero.setCelda(filDestino, colDestino, VACIA)
-                    elif event.button==3: #botón derecho
-                        c=askstring('Entrada', 'Introduce carácter')
-                        tablero.setCelda(filDestino, colDestino, c.upper())   
-            
-        ##código de dibujo        
-        #limpiar pantalla
+                    elif event.button == 3:  # botón derecho
+                        c = askstring('Entrada', 'Introduce carácter')
+                        tablero.setCelda(filDestino, colDestino, c.upper())
+
+        # código de dibujo
+        # limpiar pantalla
         screen.fill(DARK_PURPLE)
-        pygame.draw.rect(screen, MEDIUM_PURPLE, [0, 0, COLS*(TAM+MARGEN)+MARGEN, altoVentana],0)
+        pygame.draw.rect(screen, MEDIUM_PURPLE, [
+                         0, 0, COLS*(TAM+MARGEN)+MARGEN, altoVentana], 0)
         for fil in range(tablero.getAlto()):
             for col in range(tablero.getAncho()):
-                if tablero.getCelda(fil, col)==VACIA: 
-                    pygame.draw.rect(screen, WHITE, [(TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
-                elif tablero.getCelda(fil, col)==LLENA: 
-                    pygame.draw.rect(screen, DARK_PURPLE, [(TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
-                else: #dibujar letra                    
-                    pygame.draw.rect(screen, WHITE, [(TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
-                    fuente= pygame.font.Font(None, 70)
-                    texto= fuente.render(tablero.getCelda(fil, col), True, DARK_PURPLE)            
-                    screen.blit(texto, [(TAM+MARGEN)*col+MARGEN+15, (TAM+MARGEN)*fil+MARGEN+5])             
-        #pintar botones        
+                if tablero.getCelda(fil, col) == VACIA:
+                    pygame.draw.rect(
+                        screen, WHITE, [(TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
+                elif tablero.getCelda(fil, col) == LLENA:
+                    pygame.draw.rect(screen, DARK_PURPLE, [
+                                     (TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
+                else:  # dibujar letra
+                    pygame.draw.rect(
+                        screen, WHITE, [(TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
+                    fuente = pygame.font.Font(None, 70)
+                    texto = fuente.render(tablero.getCelda(
+                        fil, col), True, DARK_PURPLE)
+                    screen.blit(texto, [(TAM+MARGEN)*col +
+                                MARGEN+15, (TAM+MARGEN)*fil+MARGEN+5])
+        # pintar botones
         screen.blit(botonFC, [anchoVentana//4-25, altoVentana-45])
         screen.blit(botonAC3, [3*(anchoVentana//4)-25, altoVentana-45])
         screen.blit(botonReset, [anchoVentana//2-25, altoVentana-45])
-        #actualizar pantalla
+        # actualizar pantalla
         pygame.display.flip()
         reloj.tick(40)
-        if game_over==True: #retardo cuando se cierra la ventana
+        if game_over == True:  # retardo cuando se cierra la ventana
             pygame.time.delay(500)
-    
+
     pygame.quit()
- 
-if __name__=="__main__":
+
+
+if __name__ == "__main__":
     main()
- 
