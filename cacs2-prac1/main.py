@@ -777,8 +777,9 @@ def pound_reflexive_restrictions(hash_table_of_variables):
                             
                 elif word.get_orientation() == "isolated":
                     word_index = 0
-                    
-                for feasible_value in word.get_feasibles():
+                
+                list_of_feasibles = hash_table_of_variables[key][acces_variable_index].get_feasibles()
+                for feasible_value in list_of_feasibles:
                     if feasible_value[word_index] != restriction_value:
                         word_checked_deep_copy.remove_feasible(feasible_value)
                 
