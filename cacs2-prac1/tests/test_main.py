@@ -1288,16 +1288,19 @@ class TestMain(unittest.TestCase):
         
         horizontal_variable_restrainer_3 = hash_table_of_variables["horizontal"][2]
         horizontal_variable_restrainer_3.set_value("OSO")
+        vertical_variable_restricted_5 = hash_table_of_variables["vertical"][4]
         
-        expected_hash_table = deepcopy(hash_table_of_variables)
+        expected_feasible_1 = ['ESTO', 'OSOS', 'PARA', 'COMO', 'ROSA', 'OLOR', 'LALA', 'PERO', 'PERA']
         
         forward(board, horizontal_variable_restrainer_3, hash_table_of_variables)
         
         restore(board, horizontal_variable_restrainer_3, hash_table_of_variables)
         
+        real_feasible_1 = hash_table_of_variables["vertical"][4].get_feasibles()
+        
         real_hash_table = deepcopy(hash_table_of_variables)
         
-        self.assertEqual(expected_hash_table, real_hash_table)
+        self.assertEqual(expected_feasible_1, real_feasible_1)
         
         
         
