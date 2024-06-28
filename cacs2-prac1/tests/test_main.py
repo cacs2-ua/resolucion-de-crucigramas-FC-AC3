@@ -1276,7 +1276,7 @@ class TestMain(unittest.TestCase):
         
         
         
-    def test_1_restore(self):
+    def test_1_restore(self): # Test 42
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         hash_table_of_variables = initialize_1_all_variables(board)
         filename = 'tests/resources/Boards_Examples/d0-forward-test1.txt'
@@ -1290,17 +1290,28 @@ class TestMain(unittest.TestCase):
         horizontal_variable_restrainer_3.set_value("OSO")
         vertical_variable_restricted_5 = hash_table_of_variables["vertical"][4]
         
-        expected_feasible_1 = ['ESTO', 'OSOS', 'PARA', 'COMO', 'ROSA', 'OLOR', 'LALA', 'PERO', 'PERA']
+        
         
         forward(board, horizontal_variable_restrainer_3, hash_table_of_variables)
         
+        expected_feasible_1 = ['ESTO', 'OSOS']
+        real_feasible_1 = hash_table_of_variables["vertical"][4].get_feasibles()
+        self.assertEqual(expected_feasible_1, real_feasible_1)
+        
+        expected_pounded_1 = ['PARA', 'COMO', 'ROSA', 'OLOR', 'LALA', 'PERO', 'PERA']
+        real_pounded_1 = hash_table_of_variables["vertical"][4].get_pounds()[3]
+        self.assertEqual(expected_pounded_1, real_pounded_1)
+        
         restore(board, horizontal_variable_restrainer_3, hash_table_of_variables)
         
-        real_feasible_1 = hash_table_of_variables["vertical"][4].get_feasibles()
+        after_expected_feasible_1 = ['ESTO', 'OSOS', 'PARA', 'COMO', 'ROSA', 'OLOR', 'LALA', 'PERO', 'PERA']
+        after_real_feasible_1 = hash_table_of_variables["vertical"][4].get_feasibles()
+        self.assertEqual(after_expected_feasible_1, after_real_feasible_1)
         
-        real_hash_table = deepcopy(hash_table_of_variables)
-        
-        self.assertEqual(expected_feasible_1, real_feasible_1)
+        after_expected_pounded_1 = False
+        real_expected_pounded_1 = 3 in hash_table_of_variables["vertical"][4].get_pounds()
+        self.assertEqual(after_expected_pounded_1, real_expected_pounded_1)
+
         
         
         
