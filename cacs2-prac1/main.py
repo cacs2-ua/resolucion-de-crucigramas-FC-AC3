@@ -19,7 +19,9 @@ MARGEN_INFERIOR = 60  # altura del margen inferior entre la cuadrícula y la ven
 TAM = 60  # tamaño de la celda
 FILS = 5  # número de filas del crucigrama
 COLS = 6  # número de columnas del crucigrama
+
 RUTA_TABLERO = "Boards_Examples/mine1.txt"
+RUTA_DOMINIOS = "Domains_Examples/mine_crossboard_ordered_domain_h_v_a.txt"
 
 LLENA = '*'
 VACIA = '-'
@@ -968,9 +970,35 @@ def FC(variable_number,
     return False
                     
 
+
+def forward_checking(board, domains_filename, debug_flag = False):
+    hash_table_of_variables = initialize_1_all_variables(board)
+    hash_table_of_domains = create_storage_with_hash_table(domains_filename)
+    initialize_feasibles_v1(board, hash_table_of_domains, hash_table_of_variables)
     
+    initial_letters_hash_map = get_initial_letters(board)
+    initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
     
-                    
+    reflexive_pound_result = pound_reflexive_restrictions_version_2(hash_table_of_variables)
+    
+    if reflexive_pound_result == False:
+        return False
+    
+    variable_number = 1
+    number_of_horizontals = count_number_of_horizontal_variables(hash_table_of_variables)
+    number_of_verticals = count_number_of_vertical_variables(hash_table_of_variables)
+    number_of_isolated = count_number_of_isolated_variables(hash_table_of_variables)
+    total_number_of_variables = count_number_of_variables(hash_table_of_variables)
+    
+    result = FC(variable_number,
+       board, hash_table_of_variables,
+       number_of_horizontals,
+       number_of_verticals,
+       number_of_isolated,
+       total_number_of_variables,
+       debug_flag)
+    
+    return result
 
 
 
@@ -1014,7 +1042,8 @@ def main():
                 pos = pygame.mouse.get_pos()
                 if pulsaBotonFC(pos, anchoVentana, altoVentana):
                     print("FC")
-                    res = False  # aquí llamar al forward checking
+                    res = forward_checking(tablero, RUTA_DOMINIOS, debug_flag=True)
+                    print(tablero)
                     if res == False:
                         # MessageBox.showwarning("Alerta", "No hay solución")
                         print("No hay solución")
