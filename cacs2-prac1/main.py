@@ -748,7 +748,9 @@ def forward(board, concrete_variable, hash_table_of_variables):
 
 def pound_reflexive_restrictions(hash_table_of_variables):
     for key in hash_table_of_variables:
+        acces_variable_index = -1
         for word in hash_table_of_variables[key]:
+            acces_variable_index += 1
             if len(word.get_restrictions()) == 0:
                 continue
             word_checked_deep_copy = deepcopy(word)
@@ -780,7 +782,7 @@ def pound_reflexive_restrictions(hash_table_of_variables):
                     if feasible_value[word_index] != restriction_value:
                         word_checked_deep_copy.remove_feasible(feasible_value)
                 
-            hash_table_of_variables[key][word.get_name()] = word_checked_deep_copy
+                hash_table_of_variables[key][acces_variable_index] = word_checked_deep_copy
                 
                     
 
