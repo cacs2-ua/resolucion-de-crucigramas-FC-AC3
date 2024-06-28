@@ -24,7 +24,7 @@ COLS = 6  # número de columnas del crucigrama
 #RUTA_DOMINIOS = "Domains_Examples/debug_forward_checking/debug_1.txt"
 
 RUTA_TABLERO = "Boards_Examples/mine1.txt"
-RUTA_DOMINIOS = "Domains_Examples/mine_crossboard_disordered.txt"
+RUTA_DOMINIOS = "Domains_Examples/mine_crossboard_mixed_with_150.txt"
 
 LLENA = '*'
 VACIA = '-'
