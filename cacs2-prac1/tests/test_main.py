@@ -1347,8 +1347,7 @@ class TestMain(unittest.TestCase):
         real_expected_pounded_1 = 11 in hash_table_of_variables["horizontal"][5].get_pounds()
         self.assertEqual(after_expected_pounded_1, real_expected_pounded_1)
     
-    def test_0_forward_checking(self): 
-        # Test 44
+    def test_0_forward_checking(self): # Test 44
         board = Tablero(file_path='tests/resources/Boards_Examples/debug_forward_checking/debug_1.txt')
         domains_route = 'tests/resources/Domains_Examples/debug_forward_checking/debug_1.txt'
         debug_flag = True
@@ -1361,7 +1360,7 @@ class TestMain(unittest.TestCase):
 
 
 """  
-    def test_forward_checking(self): # Test 44
+    def test_forward_checking(self): # Test 45
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1_v2.txt')
         domains_route = 'tests/resources/Domains_Examples/mine_crossboard_ordered_domain_h_v_a.txt'
         debug_flag = True

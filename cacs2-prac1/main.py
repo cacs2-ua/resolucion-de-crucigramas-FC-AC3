@@ -923,16 +923,19 @@ def FC(variable_number,
     access_orientation = "-"
     access_index = -1
     
+    if variable_number == 4:
+        print("")
+    
     
     if 0 < variable_number <= number_of_horizontals:
         access_orientation = "horizontal"
         access_index = variable_number - 1
     
-    elif number_of_horizontals < variable_number <= number_of_verticals:
+    elif number_of_horizontals < variable_number <= number_of_horizontals + number_of_verticals:
         access_orientation = "vertical"
         access_index = variable_number - number_of_horizontals - 1
     
-    elif number_of_verticals < variable_number <= number_of_isolated:
+    elif number_of_horizontals + number_of_verticals < variable_number <= number_of_horizontals + number_of_verticals + number_of_isolated:
         access_orientation = "isolated"
         access_index = variable_number - number_of_horizontals - number_of_verticals  - 1
     
