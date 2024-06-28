@@ -941,7 +941,10 @@ def FC(variable_number,
                            [access_index]
                            .get_feasibles()):
         hash_table_of_variables[access_orientation][access_index].set_value(feasible_value)
-        
+        if ((hash_table_of_variables[access_orientation][access_index].get_name()) == 1
+            and
+            hash_table_of_variables[access_orientation][access_index].get_value() == "ASS"):
+            print("") 
         if debug_flag == True:
             set_word_on_board(board,
                               hash_table_of_variables[access_orientation][access_index],
@@ -962,10 +965,10 @@ def FC(variable_number,
                       total_number_of_variables,
                       debug_flag):
                     return True
-                else:
-                    restore(board,
-                            hash_table_of_variables[access_orientation][access_index],
-                            hash_table_of_variables)
+            else:
+                restore(board,
+                        hash_table_of_variables[access_orientation][access_index],
+                        hash_table_of_variables)
     
     return False
                     
