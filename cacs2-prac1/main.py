@@ -691,58 +691,6 @@ def ok_restriction_between_two_variables(board, word_a, word_b, feasible_b):
     return result
 
 
-def forward(board, concrete_variable, hash_table_of_variables):
-    result = False
-    number_of_variables_to_be_checked = 0
-    orientation_to_be_checked = "-"
-
-    if concrete_variable.get_orientation() == "horizontal":
-        orientation_to_be_checked = "vertical"
-        number_of_variables_to_be_checked = count_number_of_vertical_variables(
-            hash_table_of_variables)
-
-    elif concrete_variable.get_orientation() == "vertical":
-        orientation_to_be_checked = "horizontal"
-        number_of_variables_to_be_checked = count_number_of_horizontal_variables(
-            hash_table_of_variables)
-
-    elif concrete_variable.get_orientation() == "isolated":
-        if ok_restriction_between_two_variables(board,
-                                                concrete_variable,
-                                                concrete_variable,
-                                                concrete_variable.get_value()):
-            result = True
-            return result
-        else:
-            result = False
-            return result
-
-    for j in range(number_of_variables_to_be_checked):
-        empty = True
-        variable_checked_deep_copy = deepcopy(hash_table_of_variables
-                                              [orientation_to_be_checked][j])
-        for feasible_value in (hash_table_of_variables
-                               [orientation_to_be_checked]
-                               [j].get_feasibles()):
-            if ok_restriction_between_two_variables(board,
-                                                    concrete_variable,
-                                                    hash_table_of_variables
-                                                    [orientation_to_be_checked][j],
-                                                    feasible_value):
-                empty = False
-            else:
-                variable_checked_deep_copy.remove_feasible(feasible_value)
-                variable_checked_deep_copy.add_pound(
-                    concrete_variable, feasible_value)
-        hash_table_of_variables[orientation_to_be_checked][j] = variable_checked_deep_copy
-        if empty == True:
-            result = False
-            return result
-
-    result = True
-    return result
-
-
 def pound_reflexive_restrictions(hash_table_of_variables):
     for key in hash_table_of_variables:
         acces_variable_index = -1
@@ -782,6 +730,104 @@ def pound_reflexive_restrictions(hash_table_of_variables):
                 
                 hash_table_of_variables[key][acces_variable_index] = word_checked_deep_copy
   
+def pound_reflexive_restrictions_version_2(hash_table_of_variables):
+    for key in hash_table_of_variables:
+        acces_variable_index = -1
+        for word in hash_table_of_variables[key]:
+            acces_variable_index += 1
+            if len(word.get_restrictions()) == 0:
+                continue
+            word_checked_deep_copy = deepcopy(word)
+            for restriction in word.get_restrictions()[word.get_name()]:
+                restriction_value = restriction.get_letter_of_restriction()
+                word_index = -1
+                if word.get_orientation() == "horizontal":
+                    word_index = abs(
+                        (
+                            restriction.get_y_coordinate()
+                            -
+                            word.get_initial_pos()[1]
+                        )
+                    )
+                    
+                elif word.get_orientation() == "vertical":
+                    word_index = abs(
+                        (
+                            restriction.get_x_coordinate()
+                            -
+                            word.get_initial_pos()[0]
+                        )
+                    )
+                            
+                elif word.get_orientation() == "isolated":
+                    word_index = 0
+
+                list_of_feasibles = hash_table_of_variables[key][acces_variable_index].get_feasibles()
+                for feasible_value in list_of_feasibles:
+                    if feasible_value[word_index] != restriction_value:
+                        word_checked_deep_copy.remove_feasible(feasible_value)
+                
+                hash_table_of_variables[key][acces_variable_index] = word_checked_deep_copy
+                
+                if hash_table_of_variables[key][acces_variable_index].get_feasibles() == []:
+                    return False
+                
+    return True
+
+def forward(board, concrete_variable, hash_table_of_variables):
+    result = False
+    number_of_variables_to_be_checked = 0
+    orientation_to_be_checked = "-"
+
+    if concrete_variable.get_orientation() == "horizontal":
+        orientation_to_be_checked = "vertical"
+        number_of_variables_to_be_checked = count_number_of_vertical_variables(
+            hash_table_of_variables)
+
+    elif concrete_variable.get_orientation() == "vertical":
+        orientation_to_be_checked = "horizontal"
+        number_of_variables_to_be_checked = count_number_of_horizontal_variables(
+            hash_table_of_variables)
+
+    """
+    elif concrete_variable.get_orientation() == "isolated":
+        if ok_restriction_between_two_variables(board,
+                                                concrete_variable,
+                                                concrete_variable,
+                                                concrete_variable.get_value()):
+            result = True
+            return result
+        else:
+            result = False
+            return result
+    """
+    
+    for j in range(number_of_variables_to_be_checked):
+        empty = True
+        variable_checked_deep_copy = deepcopy(hash_table_of_variables
+                                              [orientation_to_be_checked][j])
+        for feasible_value in (hash_table_of_variables
+                               [orientation_to_be_checked]
+                               [j].get_feasibles()):
+            if ok_restriction_between_two_variables(board,
+                                                    concrete_variable,
+                                                    hash_table_of_variables
+                                                    [orientation_to_be_checked][j],
+                                                    feasible_value):
+                empty = False
+            else:
+                variable_checked_deep_copy.remove_feasible(feasible_value)
+                variable_checked_deep_copy.add_pound(
+                    concrete_variable, feasible_value)
+        hash_table_of_variables[orientation_to_be_checked][j] = variable_checked_deep_copy
+        if empty == True:
+            result = False
+            return result
+
+    result = True
+    return result
+
+
 def restore(board, restrainer_variable, hash_table_of_variables):
     result = False
     number_of_variables_to_be_checked = 0
@@ -822,15 +868,6 @@ def restore(board, restrainer_variable, hash_table_of_variables):
     
 
                     
-
-                
-
-
-
-
-
-
-
 
 
 
