@@ -20,8 +20,8 @@ TAM = 30  # tamaño de la celda
 FILS = 20  # número de filas del crucigrama
 COLS = 20  # número de columnas del crucigrama
 
-#RUTA_TABLERO = "Boards_Examples/debug_forward_checking/debug_1.txt"
-#RUTA_DOMINIOS = "Domains_Examples/debug_forward_checking/debug_1.txt"
+RUTA_TABLERO = "Boards_Examples/debug_forward_checking/debug_1.txt"
+RUTA_DOMINIOS = "Domains_Examples/debug_forward_checking/debug_1.txt"
 
 RUTA_TABLERO = "Boards_Examples/complex.txt"
 RUTA_DOMINIOS = "Domains_Examples/Top3000EnglishWords.txt"
@@ -1042,14 +1042,18 @@ def tablero_to_2d_array(tablero):
 # Principal
 #########################################################################
 def main():
-    root = tkinter.Tk()  # para eliminar la ventana de Tkinter
-    root.withdraw()  # se cierra
+    global TAM
+    root = tkinter.Tk()  
+    root.withdraw()
     pygame.init()
 
     reloj = pygame.time.Clock()
 
-    anchoVentana = COLS*(TAM+MARGEN)+MARGEN
-    altoVentana = MARGEN_INFERIOR+FILS*(TAM+MARGEN)+MARGEN
+    
+    TAM = min(600 // FILS, 600 // COLS)
+
+    anchoVentana = COLS * (TAM + MARGEN) + MARGEN
+    altoVentana = MARGEN_INFERIOR + FILS * (TAM + MARGEN) + MARGEN
 
     dimension = [anchoVentana, altoVentana]
     screen = pygame.display.set_mode(dimension)
@@ -1073,7 +1077,7 @@ def main():
             if event.type == pygame.QUIT:
                 game_over = True
             if event.type == pygame.MOUSEBUTTONUP:
-                # obtener posición y calcular coordenadas matriciales
+
                 pos = pygame.mouse.get_pos()
                 if pulsaBotonFC(pos, anchoVentana, altoVentana):
                     print("FC")
@@ -1087,8 +1091,8 @@ def main():
                 elif pulsaBotonReset(pos, anchoVentana, altoVentana):
                     tablero.reset()
                 elif inTablero(pos):
-                    colDestino = pos[0]//(TAM+MARGEN)
-                    filDestino = pos[1]//(TAM+MARGEN)
+                    colDestino = pos[0] // (TAM + MARGEN)
+                    filDestino = pos[1] // (TAM + MARGEN)
                     if event.button == 1:  # botón izquierdo
                         if tablero.getCelda(filDestino, colDestino) == VACIA:
                             tablero.setCelda(filDestino, colDestino, LLENA)
@@ -1101,28 +1105,23 @@ def main():
         # código de dibujo
         # limpiar pantalla
         screen.fill(DARK_PURPLE)
-        pygame.draw.rect(screen, MEDIUM_PURPLE, [
-                         0, 0, COLS*(TAM+MARGEN)+MARGEN, altoVentana], 0)
+        pygame.draw.rect(screen, MEDIUM_PURPLE, [0, 0, COLS * (TAM + MARGEN) + MARGEN, altoVentana], 0)
         for fil in range(tablero.getAlto()):
             for col in range(tablero.getAncho()):
                 if tablero.getCelda(fil, col) == VACIA:
-                    pygame.draw.rect(
-                        screen, WHITE, [(TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
+                    pygame.draw.rect(screen, WHITE, [(TAM + MARGEN) * col + MARGEN, (TAM + MARGEN) * fil + MARGEN, TAM, TAM], 0)
                 elif tablero.getCelda(fil, col) == LLENA:
-                    pygame.draw.rect(screen, DARK_PURPLE, [
-                                     (TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
+                    pygame.draw.rect(screen, DARK_PURPLE, [(TAM + MARGEN) * col + MARGEN, (TAM + MARGEN) * fil + MARGEN, TAM, TAM], 0)
                 else:  # dibujar letra
-                    pygame.draw.rect(
-                        screen, WHITE, [(TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
-                    fuente = pygame.font.Font(None, 25)
-                    texto = fuente.render(tablero.getCelda(
-                        fil, col), True, DARK_PURPLE)
-                    screen.blit(texto, [(TAM+MARGEN)*col +
-                                MARGEN+15, (TAM+MARGEN)*fil+MARGEN+5])
+                    pygame.draw.rect(screen, WHITE, [(TAM + MARGEN) * col + MARGEN, (TAM + MARGEN) * fil + MARGEN, TAM, TAM], 0)
+                    fuente = pygame.font.Font(None, TAM)
+                    texto = fuente.render(tablero.getCelda(fil, col), True, DARK_PURPLE)
+                    text_rect = texto.get_rect(center=((TAM + MARGEN) * col + MARGEN + TAM // 2, (TAM + MARGEN) * fil + MARGEN + TAM // 2))
+                    screen.blit(texto, text_rect)
         # pintar botones
-        screen.blit(botonFC, [anchoVentana//4-25, altoVentana-45])
-        screen.blit(botonAC3, [3*(anchoVentana//4)-25, altoVentana-45])
-        screen.blit(botonReset, [anchoVentana//2-25, altoVentana-45])
+        screen.blit(botonFC, [anchoVentana // 4 - 25, altoVentana - 45])
+        screen.blit(botonAC3, [3 * (anchoVentana // 4) - 25, altoVentana - 45])
+        screen.blit(botonReset, [anchoVentana // 2 - 25, altoVentana - 45])
         # actualizar pantalla
         pygame.display.flip()
         reloj.tick(40)
@@ -1131,6 +1130,6 @@ def main():
 
     pygame.quit()
 
-
 if __name__ == "__main__":
     main()
+
