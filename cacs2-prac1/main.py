@@ -749,6 +749,8 @@ def forward(board, concrete_variable, hash_table_of_variables):
 def pound_reflexive_restrictions(hash_table_of_variables):
     for key in hash_table_of_variables:
         for word in hash_table_of_variables[key]:
+            if len(word.get_restrictions()) == 0:
+                continue
             word_checked_deep_copy = deepcopy(word)
             for restriction in word.get_restrictions()[word.get_name()]:
                 restriction_value = restriction.get_letter_of_restriction()
