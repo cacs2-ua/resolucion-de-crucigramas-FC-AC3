@@ -444,6 +444,27 @@ def initialize_1_all_variables(board):
     isolated_variable_list = []
     dictionary_of_variables = {}
 
+
+
+    horizontal_variable_list = []
+    vertical_variable_list = []
+    initialize_1_horizontal_variables(board, 0, horizontal_variable_list,
+                                        list_of_variables)
+    dictionary_of_variables["horizontal"] = horizontal_variable_list
+    initialize_1_vertical_and_isolated_variables(board,
+                                                    len(list_of_variables),
+                                                    vertical_variable_list,
+                                                    list_of_variables,
+                                                    isolated_variable_list)
+    dictionary_of_variables["vertical"] = vertical_variable_list
+    dictionary_of_variables["isolated"] = isolated_variable_list
+
+    return dictionary_of_variables
+
+
+
+
+    """
     if m >= n:
         horizontal_variable_list = []
         vertical_variable_list = []
@@ -472,8 +493,8 @@ def initialize_1_all_variables(board):
         dictionary_of_variables["horizontal"] = horizontal_variable_list
         dictionary_of_variables["isolated"] = isolated_variable_list
 
-    return dictionary_of_variables
-
+    
+    """
 
 def initialize_2_all_variables(board):
     n = board.getAlto()
@@ -868,8 +889,24 @@ def restore(board, restrainer_variable, hash_table_of_variables):
                 checked_variable.add_feasible(pounded_value)
                 
             hash_table_of_variables[orientation_to_be_checked][j] = checked_variable
-    
 
+"""
+def FC_1(variable_number,
+       board, hash_table_of_variables,
+       number_of_horizontals,
+       number_of_verticals,
+       number_of_isolated):
+    
+    access_orientation = "-"
+    access_index = -1
+    
+    if 1 <= variable_number <= number_of_horizontals:
+        access_orientation = "horizontal"
+    
+    elif number_of_horizontals
+"""
+    
+    
                     
 
 
