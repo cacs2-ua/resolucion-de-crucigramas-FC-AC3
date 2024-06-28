@@ -3,7 +3,7 @@ from variable import *
 from copy import deepcopy
 
 class Restriction:
-    def __init__ (self, word_restricted = None, word_restrainer = None,
+    def __init__ (self, word_restrainer = None, word_restricted = None,
                   x_coordinate = 0, y_coordinate = 0,
                   letter_of_restriction = "-"):
         if word_restricted is None:

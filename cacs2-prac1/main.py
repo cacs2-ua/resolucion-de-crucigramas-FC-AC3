@@ -782,7 +782,8 @@ def pound_reflexive_restrictions(hash_table_of_variables):
                 
                 hash_table_of_variables[key][acces_variable_index] = word_checked_deep_copy
                 
-                    
+
+
                     
 
                 
