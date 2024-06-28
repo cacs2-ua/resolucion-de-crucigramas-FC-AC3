@@ -16,14 +16,14 @@ WHITE = (255, 255, 255)
 
 MARGEN = 5  # ancho del borde entre celdas
 MARGEN_INFERIOR = 60  # altura del margen inferior entre la cuadrícula y la ventana
-TAM = 60  # tamaño de la celda
-FILS = 10  # número de filas del crucigrama
-COLS = 10  # número de columnas del crucigrama
+TAM = 30  # tamaño de la celda
+FILS = 20  # número de filas del crucigrama
+COLS = 20  # número de columnas del crucigrama
 
 #RUTA_TABLERO = "Boards_Examples/debug_forward_checking/debug_1.txt"
 #RUTA_DOMINIOS = "Domains_Examples/debug_forward_checking/debug_1.txt"
 
-RUTA_TABLERO = "Boards_Examples/medium.txt"
+RUTA_TABLERO = "Boards_Examples/complex.txt"
 RUTA_DOMINIOS = "Domains_Examples/Top3000EnglishWords.txt"
 
 LLENA = '*'
@@ -1114,7 +1114,7 @@ def main():
                 else:  # dibujar letra
                     pygame.draw.rect(
                         screen, WHITE, [(TAM+MARGEN)*col+MARGEN, (TAM+MARGEN)*fil+MARGEN, TAM, TAM], 0)
-                    fuente = pygame.font.Font(None, 70)
+                    fuente = pygame.font.Font(None, 25)
                     texto = fuente.render(tablero.getCelda(
                         fil, col), True, DARK_PURPLE)
                     screen.blit(texto, [(TAM+MARGEN)*col +
