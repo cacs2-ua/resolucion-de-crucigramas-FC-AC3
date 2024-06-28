@@ -1252,7 +1252,21 @@ class TestMain(unittest.TestCase):
         vertical_variable_restrainer_5 = hash_table_of_variables["vertical"][4]
         real_pounded_domain_1 = vertical_variable_restrainer_5.get_feasibles()
         
+
+        
         self.assertEqual(expected_pounded_domain_1, real_pounded_domain_1)
+        
+        expected_pounded_domain_2 = ['NO']
+        horizontal_variable_restrainer_5 = hash_table_of_variables["horizontal"][4]
+        real_pounded_domain_2 = horizontal_variable_restrainer_5.get_feasibles()
+        
+        self.assertEqual(expected_pounded_domain_2, real_pounded_domain_2)
+        
+        expected_pounded_domain_3 = ['L']
+        isolated_variable_restrainer_2 = hash_table_of_variables["isolated"][1]
+        real_pounded_domain_3 = isolated_variable_restrainer_2.get_feasibles()
+        
+        self.assertEqual(expected_pounded_domain_3, real_pounded_domain_3)
         
         
         
