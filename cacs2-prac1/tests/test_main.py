@@ -1236,7 +1236,7 @@ class TestMain(unittest.TestCase):
         real_pounded_domain_14 = hash_table_of_variables["isolated"][1].get_feasibles()
         self.assertEqual(expected_pounded_domain_14, real_pounded_domain_14)
         
-    def test_pound_reflexive_restrictions(self):
+    def test_pound_reflexive_restrictions(self): # Test 41
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1_v2.txt')
         hash_table_of_variables = initialize_1_all_variables(board)
         filename = 'tests/resources/Boards_Examples/d0.txt'

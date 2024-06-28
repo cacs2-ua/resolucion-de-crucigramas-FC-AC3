@@ -588,9 +588,6 @@ def initialize_restrictions_v1(board, initial_letters, hash_table_of_variables):
                 founded = True
                 break
 
-        if founded == True:
-            continue
-
         for word in hash_table_of_variables["isolated"]:
             if square_belongs_to_word(key[0], key[1], word):
                 new_restriction = Restriction(word, word,
@@ -777,7 +774,7 @@ def pound_reflexive_restrictions(hash_table_of_variables):
                             
                 elif word.get_orientation() == "isolated":
                     word_index = 0
-                
+
                 list_of_feasibles = hash_table_of_variables[key][acces_variable_index].get_feasibles()
                 for feasible_value in list_of_feasibles:
                     if feasible_value[word_index] != restriction_value:
