@@ -1359,7 +1359,6 @@ class TestMain(unittest.TestCase):
         self.assertEqual(expected_board, real_board)
 
 
-"""  
     def test_forward_checking(self): # Test 45
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1_v2.txt')
         domains_route = 'tests/resources/Domains_Examples/mine_crossboard_ordered_domain_h_v_a.txt'
@@ -1370,7 +1369,6 @@ class TestMain(unittest.TestCase):
         real_board = tablero_to_2d_array(board)
         
         self.assertEqual(expected_board, real_board)
-"""
 
 
         
