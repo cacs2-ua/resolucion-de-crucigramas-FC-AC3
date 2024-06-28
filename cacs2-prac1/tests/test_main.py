@@ -1268,6 +1268,14 @@ class TestMain(unittest.TestCase):
         
         self.assertEqual(expected_pounded_domain_3, real_pounded_domain_3)
         
+        expected_pounded_domain_4 = ['L', 'A', 'B']
+        isolated_variable_restrainer_1 = hash_table_of_variables["isolated"][0]
+        real_pounded_domain_4 = isolated_variable_restrainer_1.get_feasibles()
+        
+        self.assertEqual(expected_pounded_domain_4, real_pounded_domain_4)
+        
+        
+        
         
         
         
