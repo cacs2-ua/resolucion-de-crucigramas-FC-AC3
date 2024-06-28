@@ -1015,6 +1015,19 @@ def store_crossboard(file_path):
     
     return crossboard
 
+def tablero_to_2d_array(tablero):
+    alto = tablero.getAlto()
+    ancho = tablero.getAncho()
+    array_2d = []
+
+    for i in range(alto):
+        row = []
+        for j in range(ancho):
+            row.append(tablero.getCelda(i, j))
+        array_2d.append(row)
+    
+    return array_2d
+
 
 #########################################################################
 # Principal
