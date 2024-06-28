@@ -2,7 +2,6 @@ como
 I
 su
 que
-él
 era
 para
 en
@@ -107,6 +106,7 @@ mundo
 cerca
 construir
 asina
+l
 auto
 tierra
 padre

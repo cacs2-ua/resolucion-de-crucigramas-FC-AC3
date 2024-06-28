@@ -1380,6 +1380,17 @@ class TestMain(unittest.TestCase):
         real_board = tablero_to_2d_array(board)
         
         self.assertEqual(expected_board, real_board)
+    
+    def test_forward_checking_3(self): # Test 47
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1_v2.txt')
+        domains_route = 'tests/resources/Domains_Examples/mine_crossboard_mixed_with_150.txt'
+        debug_flag = True
+        
+        expected_board = store_crossboard(file_path='tests/resources/Boards_Examples/mine1_solution_v2.txt')
+        forward_checking(board, domains_route, debug_flag)
+        real_board = tablero_to_2d_array(board)
+        
+        self.assertEqual(expected_board, real_board)
         
         
         

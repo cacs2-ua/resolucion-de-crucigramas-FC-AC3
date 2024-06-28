@@ -23,8 +23,8 @@ COLS = 6  # número de columnas del crucigrama
 #RUTA_TABLERO = "Boards_Examples/debug_forward_checking/debug_1.txt"
 #RUTA_DOMINIOS = "Domains_Examples/debug_forward_checking/debug_1.txt"
 
-RUTA_TABLERO = "Boards_Examples/moodle_example.txt"
-RUTA_DOMINIOS = "Domains_Examples/d0.txt"
+RUTA_TABLERO = 'tests/resources/Boards_Examples/mine1_v2.txt'
+RUTA_DOMINIOS = 'Domains_Examples/mine_crossboard_mixed_with_150.txt'
 
 LLENA = '*'
 VACIA = '-'
