@@ -23,7 +23,7 @@ COLS = 10  # número de columnas del crucigrama
 #RUTA_TABLERO = "Boards_Examples/debug_forward_checking/debug_1.txt"
 #RUTA_DOMINIOS = "Domains_Examples/debug_forward_checking/debug_1.txt"
 
-RUTA_TABLERO = "Boards_Examples/simple.txt"
+RUTA_TABLERO = "Boards_Examples/medium.txt"
 RUTA_DOMINIOS = "Domains_Examples/Top3000EnglishWords.txt"
 
 LLENA = '*'
