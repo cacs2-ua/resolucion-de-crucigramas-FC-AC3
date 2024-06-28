@@ -1276,6 +1276,29 @@ class TestMain(unittest.TestCase):
         
         
         
+    def test_1_restore(self):
+        board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
+        hash_table_of_variables = initialize_1_all_variables(board)
+        filename = 'tests/resources/Boards_Examples/d0-forward-test1.txt'
+        hash_table_of_domains = create_storage_with_hash_table(filename)
+        initialize_feasibles_v1(board, hash_table_of_domains, hash_table_of_variables)
+        
+        initial_letters_hash_map = get_initial_letters(board)
+        initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
+        
+        horizontal_variable_restrainer_3 = hash_table_of_variables["horizontal"][2]
+        horizontal_variable_restrainer_3.set_value("OSO")
+        
+        expected_hash_table = deepcopy(hash_table_of_variables)
+        
+        forward(board, horizontal_variable_restrainer_3, hash_table_of_variables)
+        
+        restore(board, horizontal_variable_restrainer_3, hash_table_of_variables)
+        
+        real_hash_table = deepcopy(hash_table_of_variables)
+        
+        self.assertEqual(expected_hash_table, real_hash_table)
+        
         
         
         

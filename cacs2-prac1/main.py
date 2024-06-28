@@ -782,7 +782,7 @@ def pound_reflexive_restrictions(hash_table_of_variables):
                 
                 hash_table_of_variables[key][acces_variable_index] = word_checked_deep_copy
   
-def restaura(board, restrainer_variable, hash_table_of_variables):
+def restore(board, restrainer_variable, hash_table_of_variables):
     result = False
     number_of_variables_to_be_checked = 0
     orientation_to_be_checked = "-"
