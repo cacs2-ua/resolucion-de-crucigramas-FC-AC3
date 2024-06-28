@@ -21,7 +21,7 @@ FILS = 5  # número de filas del crucigrama
 COLS = 6  # número de columnas del crucigrama
 
 RUTA_TABLERO = "Boards_Examples/mine1.txt"
-RUTA_DOMINIOS = "Domains_Examples/mine_crossboard_disordered.txt"
+RUTA_DOMINIOS = "Domains_Examples/mine_crossboard_ordered_domain_h_v_a.txt"
 
 LLENA = '*'
 VACIA = '-'
