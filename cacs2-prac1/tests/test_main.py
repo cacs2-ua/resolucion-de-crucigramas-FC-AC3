@@ -1075,7 +1075,6 @@ class TestMain(unittest.TestCase):
         
         self.assertEqual(expected_pound_3, real_pound_3)
         
-    """
     def test_1_forward(self): # Test 39
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         hash_table_of_variables = initialize_1_all_variables(board)
@@ -1160,8 +1159,9 @@ class TestMain(unittest.TestCase):
         expected_pounded_domain_14 = ['L', 'A', 'B']
         real_pounded_domain_14 = hash_table_of_variables["isolated"][0].get_feasibles()
         self.assertEqual(expected_pounded_domain_14, real_pounded_domain_14)
-       """ 
-    def test_2_forward(self):
+
+
+    def test_2_forward(self):  # Test 40
         board = Tablero(file_path='tests/resources/Boards_Examples/mine1.txt')
         hash_table_of_variables = initialize_1_all_variables(board)
         filename = 'tests/resources/Boards_Examples/d0-forward-test2.txt'

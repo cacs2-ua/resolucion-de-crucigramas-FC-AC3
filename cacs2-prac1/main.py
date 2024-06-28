@@ -683,8 +683,6 @@ def forward(board, concrete_variable, hash_table_of_variables):
             return result
         
     for j in range (number_of_variables_to_be_checked):
-        if j == 4:
-            print("hola")
         empty = True
         variable_checked_deep_copy = deepcopy(hash_table_of_variables
                                               [orientation_to_be_checked][j])
