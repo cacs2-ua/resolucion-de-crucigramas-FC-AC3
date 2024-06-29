@@ -1236,6 +1236,7 @@ def revise(board,
             revised = True
     
     hash_table_of_variables[word_restricted.get_orientation()][acces_index] = checked_word_restricted
+    word_restricted.set_feasibles(checked_word_restricted.get_feasibles())
     
     return revised
 
@@ -1286,6 +1287,10 @@ def AC3(board, domains_filename,
             )
             
             for key_restrainer in word_restricted.get_restrictions():
+                
+                if key_restrainer == word_restricted.get_name():
+                    continue
+                
                 if (hash_table_of_variables
                                    [access_orientation]
                                    [access_index]
@@ -1294,16 +1299,50 @@ def AC3(board, domains_filename,
                                    get_AC3_check()) == True:
                     continue
                 
-                word_restrainer = (hash_table_of_variables
+                word_restrainer_name = (hash_table_of_variables
                                    [access_orientation]
                                    [access_index]
                                    .get_restrictions()
                                    [key_restrainer][0]
-                                   .get_word_restrainer())
+                                   .get_word_restrainer()
+                                   .get_name())
+                
+                if access_orientation == "horizontal":
+                    orientation_for_word_restrainer = "vertical"
+                elif access_orientation == "vertical":
+                    orientation_for_word_restrainer = "horizontal"
+                
+                access_index_for_word_restrainer = (
+                    assign_access_orientation_and_access_index(
+                        word_restrainer_name,
+                        number_of_horizontals,
+                        number_of_verticals,
+                        number_of_isolated
+                    )[1]
+                )
+                
+                word_restrainer = (hash_table_of_variables
+                                   [orientation_for_word_restrainer]
+                                   [access_index_for_word_restrainer])
+                
+                if (
+                    word_restricted.get_name() == 1
+                    and
+                    word_restrainer.get_name() == 6
+                ):
+                    print("")
+                
+                if ("OLA" not in
+                    hash_table_of_variables
+                    ["vertical"][0].get_feasibles()
+                    and 
+                    word_restricted.get_name() == 1):
+                    print("")
                 
                 revised_result = revise(board, 
                                         hash_table_of_variables,
                                         word_restricted, word_restrainer)
+
                 
                 if revised_result == True:
                     if len(hash_table_of_variables
@@ -1406,7 +1445,7 @@ def main():
                 if pulsaBotonFC(pos, anchoVentana, altoVentana):
                     print("FC")
                     res = forward_checking(tablero, RUTA_DOMINIOS, debug_flag=True,
-                                           AC3_Flag = AC3_Flag, hash_table_of_variables = AC3_hash_table_of_variables,
+                                           AC3_flag = AC3_Flag, AC3_Hash_Table_Of_Variables = AC3_hash_table_of_variables,
                                            AC3_result = AC3_Result)
                     print(tablero)
                     if res == False:
