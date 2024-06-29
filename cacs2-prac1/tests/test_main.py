@@ -1470,7 +1470,7 @@ class TestMain(unittest.TestCase):
         real_result_7 = 2 in vertical_variable_5.get_restrictions()
         self.assertEqual(expected_result_7, real_result_7)
         
-    def test_revise(self):
+    def test_revise(self): # Test 50
         board = Tablero(file_path='tests/resources/Boards_Examples/moodle_example.txt')
         domains_route = 'tests/resources/Domains_Examples/d0.txt'
         hash_table_of_variables = {}
@@ -1497,8 +1497,32 @@ class TestMain(unittest.TestCase):
         
         self.assertEqual(expected_feasibles_2, real_feasibles_2)    
 
+    
+    def test_revise_2(self): # Test 51
+        board = Tablero(file_path='tests/resources/Boards_Examples/moodle_example.txt')
+        domains_route = 'tests/resources/Domains_Examples/d0.txt'
+        hash_table_of_variables = {}
+        hash_table_of_domains = {}
         
-        print("")
+        set_up_1_for_tests(board, domains_route,
+                           hash_table_of_variables,
+                           hash_table_of_domains)
+        
+        vertical_restricted_variable_4 = hash_table_of_variables["vertical"][3]
+        horizontal_restrainer_variable_4 = hash_table_of_variables["horizontal"][3]
+        
+        expected_result_1 = True
+        real_result_1 = revise(board,
+               hash_table_of_variables,
+               vertical_restricted_variable_4,
+               horizontal_restrainer_variable_4)
+        
+        self.assertEqual(expected_result_1, real_result_1)
+        
+        expected_feasibles_1 = ['OSERA', 'RETOS', 'SETOS']
+        real_feasibles_1 = hash_table_of_variables["vertical"][3].get_feasibles()
+        
+        self.assertEqual(expected_feasibles_1, real_feasibles_1)
         
         
         
