@@ -1101,6 +1101,55 @@ def initialize_hash_table_for_AC3(board, hash_table_of_variables):
             hash_table_AC3[word.get_name()] = word
     
     return hash_table_AC3
+
+def ok_restriction_between_two_variables_version2(board, word_a, feasible_a, word_b, feasible_b):
+    result = False
+    common_square = get_common_square_coordinates_from_two_variables(
+        word_a, word_b)
+
+    if common_square is None:
+        result = True
+        return result
+
+    horizontal_word = word_a if word_a.get_orientation() == "horizontal" else word_b
+    vertical_word = word_a if word_a.get_orientation() == "vertical" else word_b
+
+    horizontal_word_index = abs(
+        (
+            common_square[1]
+            -
+            horizontal_word.get_initial_pos()[1]
+        )
+    )
+
+    vertical_word_index = abs(
+        (
+            common_square[0]
+            -
+            vertical_word.get_initial_pos()[0]
+        )
+    )
+
+    if word_a.get_orientation() == "horizontal":
+        if feasible_a[horizontal_word_index] == feasible_b[vertical_word_index]:
+            result = True
+
+    elif word_a.get_orientation() == "vertical":
+        if feasible_a[vertical_word_index] == feasible_b[horizontal_word_index]:
+            result = True
+
+    return result
+
+"""
+
+def revise(board, word_restricted, word_restrainer):
+    revised = False
+    for feasible_value_restricted in word_restricted.get_feasibles():
+        checked_word_restricted = deepcopy(word_restricted)
+        exist_compatible_in_restrainer = False
+        
+        for feasible_value_restrainer in word_restrainer.get_feasibles():
+"""       
         
 
 #########################################################################
