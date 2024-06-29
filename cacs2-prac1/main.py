@@ -1092,7 +1092,16 @@ def assign_all_restrictions(board, hash_table_of_variables):
         
             hash_table_of_variables[key][access_variable_index] = checked_restricted_variable
                 
-                
+
+def initialize_hash_table_for_AC3(board, hash_table_of_variables):
+    hash_table_AC3 = {}
+    
+    for key in hash_table_of_variables:
+        for word in hash_table_of_variables[key]:
+            hash_table_AC3[word.get_name()] = word
+    
+    return hash_table_AC3
+        
 
 #########################################################################
 # Principal
