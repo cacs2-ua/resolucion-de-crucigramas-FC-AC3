@@ -1485,6 +1485,7 @@ class TestMain(unittest.TestCase):
         vertical_restrainer_variable_3 = hash_table_of_variables["vertical"][2]
         
         real_result_1 = revise(board,
+               hash_table_of_variables,
                horizontal_restricted_variable_2,
                vertical_restrainer_variable_1)
         
