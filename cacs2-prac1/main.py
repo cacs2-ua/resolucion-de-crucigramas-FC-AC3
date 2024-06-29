@@ -1052,6 +1052,16 @@ def set_up_1_for_tests(board, domains_filename,
     initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
     
     reflexive_pound_result = pound_reflexive_restrictions_version_2(hash_table_of_variables)
+    
+    if reflexive_pound_result == False:
+        return False
+    
+    number_of_horizontals = count_number_of_horizontal_variables(hash_table_of_variables)
+    number_of_verticals = count_number_of_vertical_variables(hash_table_of_variables)
+    number_of_isolated = count_number_of_isolated_variables(hash_table_of_variables)
+    
+    return True, number_of_horizontals, number_of_verticals, number_of_isolated
+
 
 def assign_all_restrictions(board, hash_table_of_variables):
     for key in hash_table_of_variables:
