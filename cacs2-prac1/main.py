@@ -1284,6 +1284,14 @@ def AC3(board, domains_filename,
             )
             
             for key_restrainer in word_restricted.get_restrictions():
+                if (hash_table_of_variables
+                                   [access_orientation]
+                                   [access_index]
+                                   .get_restrictions()
+                                   [key_restrainer][0].
+                                   get_AC3_check()) == True:
+                    continue
+                
                 word_restrainer = (hash_table_of_variables
                                    [access_orientation]
                                    [access_index]
@@ -1317,6 +1325,28 @@ def AC3(board, domains_filename,
                             word_AC3_check.get_restrictions()):
                             if word_AC3_check.get_name() not in deep_copy_AC3_hash_table:
                                 deep_copy_AC3_hash_table[word_AC3_check.get_name()] = word_AC3_check.get_name()
+                                
+                                access_index_for_update_AC3_check = (assign_access_orientation_and_access_index(
+                                                            word_AC3_check.get_name(), 
+                                                            number_of_horizontals, 
+                                                            number_of_verticals,
+                                                            number_of_isolated)[1])
+                                
+                                (hash_table_of_variables
+                                   [access_orientation_for_update_AC3_check]
+                                   [access_index_for_update_AC3_check]
+                                   .get_restrictions()
+                                   [word_restricted.get_name()][0].
+                                   set_AC3_check(False)) 
+                                                                     
+                
+                
+                (hash_table_of_variables
+                                   [access_orientation]
+                                   [access_index]
+                                   .get_restrictions()
+                                   [key_restrainer][0].
+                                   set_AC3_check(True)) 
         
         AC3_hash_table = deep_copy_AC3_hash_table
         deep_copy_AC3_hash_table = deepcopy(AC3_hash_table)
