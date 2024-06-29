@@ -1037,6 +1037,16 @@ def tablero_to_2d_array(tablero):
     
     return array_2d
 
+def set_up_1_for_tests(board, domains_filename):
+    hash_table_of_variables = initialize_1_all_variables(board)
+    hash_table_of_domains = create_storage_with_hash_table(domains_filename)
+    initialize_feasibles_v1(board, hash_table_of_domains, hash_table_of_variables)
+    
+    initial_letters_hash_map = get_initial_letters(board)
+    initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
+    
+    reflexive_pound_result = pound_reflexive_restrictions_version_2(hash_table_of_variables)
+    
 
 def assign_all_restrictions(board, hash_table_of_variables):
     for key in hash_table_of_variables:
