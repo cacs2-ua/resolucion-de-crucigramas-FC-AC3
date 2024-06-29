@@ -1359,9 +1359,10 @@ def AC3(board, domains_filename,
 # Principal
 #########################################################################
 def main():
-    hash_table_of_variables = {}
+    AC3_hash_table_of_variables = {}
     hash_table_of_domains = {}
     AC3_Flag = False
+    AC3_Result = False
     
     global TAM
     root = tkinter.Tk()  
@@ -1402,13 +1403,22 @@ def main():
                 pos = pygame.mouse.get_pos()
                 if pulsaBotonFC(pos, anchoVentana, altoVentana):
                     print("FC")
-                    res = forward_checking(tablero, RUTA_DOMINIOS, debug_flag=True)
+                    res = forward_checking(tablero, RUTA_DOMINIOS, debug_flag=True,
+                                           AC3_Flag = AC3_Flag, hash_table_of_variables = AC3_hash_table_of_variables,
+                                           AC3_result = AC3_Result)
                     print(tablero)
                     if res == False:
                         # MessageBox.showwarning("Alerta", "No hay solución")
                         print("No hay solución")
                 elif pulsaBotonAC3(pos, anchoVentana, altoVentana):
                     print("AC3")
+                    AC3_Result = (AC3(
+                        tablero, RUTA_DOMINIOS,
+                        AC3_hash_table_of_variables,
+                        hash_table_of_domains
+                    ))
+                    AC3_Flag = True
+                    
                 elif pulsaBotonReset(pos, anchoVentana, altoVentana):
                     tablero.reset()
                 elif inTablero(pos):
