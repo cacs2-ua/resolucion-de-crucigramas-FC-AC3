@@ -1484,11 +1484,18 @@ class TestMain(unittest.TestCase):
         vertical_restrainer_variable_1 = hash_table_of_variables["vertical"][0]
         vertical_restrainer_variable_3 = hash_table_of_variables["vertical"][2]
         
+        expected_result_1 = True
         real_result_1 = revise(board,
                hash_table_of_variables,
                horizontal_restricted_variable_2,
                vertical_restrainer_variable_1)
         
+        self.assertEqual(expected_result_1, real_result_1)
+        
+        expected_feasibles_2 = ['ROSA', 'OLOR', 'LALA', 'OSOS']
+        real_feasibles_2 = hash_table_of_variables["horizontal"][1].get_feasibles()
+        
+        self.assertEqual(expected_feasibles_2, real_feasibles_2)    
 
         
         print("")
