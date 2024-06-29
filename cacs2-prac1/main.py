@@ -979,32 +979,61 @@ def FC(variable_number,
                     
 
 
-def forward_checking(board, domains_filename, debug_flag = False):
-    hash_table_of_variables = initialize_1_all_variables(board)
-    hash_table_of_domains = create_storage_with_hash_table(domains_filename)
-    initialize_feasibles_v1(board, hash_table_of_domains, hash_table_of_variables)
+def forward_checking(board, domains_filename, debug_flag = False,
+                     AC3_flag = False, AC3_Hash_Table_Of_Variables = None,
+                     AC3_result = False):
     
-    initial_letters_hash_map = get_initial_letters(board)
-    initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
+    if AC3_Hash_Table_Of_Variables == None:
+        AC3_Hash_Table_Of_Variables = {}
     
-    reflexive_pound_result = pound_reflexive_restrictions_version_2(hash_table_of_variables)
+    result = False
     
-    if reflexive_pound_result == False:
-        return False
+    if AC3_flag == False:
+        hash_table_of_variables = initialize_1_all_variables(board)
+        hash_table_of_domains = create_storage_with_hash_table(domains_filename)
+        initialize_feasibles_v1(board, hash_table_of_domains, hash_table_of_variables)
+        
+        initial_letters_hash_map = get_initial_letters(board)
+        initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
+        
+        reflexive_pound_result = pound_reflexive_restrictions_version_2(hash_table_of_variables)
+        
+        if reflexive_pound_result == False:
+            return False
+        
+        variable_number = 1
+        number_of_horizontals = count_number_of_horizontal_variables(hash_table_of_variables)
+        number_of_verticals = count_number_of_vertical_variables(hash_table_of_variables)
+        number_of_isolated = count_number_of_isolated_variables(hash_table_of_variables)
+        total_number_of_variables = count_number_of_variables(hash_table_of_variables)
+        
+        result = FC(variable_number,
+        board, hash_table_of_variables,
+        number_of_horizontals,
+        number_of_verticals,
+        number_of_isolated,
+        total_number_of_variables,
+        debug_flag)
     
-    variable_number = 1
-    number_of_horizontals = count_number_of_horizontal_variables(hash_table_of_variables)
-    number_of_verticals = count_number_of_vertical_variables(hash_table_of_variables)
-    number_of_isolated = count_number_of_isolated_variables(hash_table_of_variables)
-    total_number_of_variables = count_number_of_variables(hash_table_of_variables)
-    
-    result = FC(variable_number,
-       board, hash_table_of_variables,
-       number_of_horizontals,
-       number_of_verticals,
-       number_of_isolated,
-       total_number_of_variables,
-       debug_flag)
+    else:
+        
+        if AC3_result == False:
+            return False
+        
+        variable_number = 1
+        number_of_horizontals = count_number_of_horizontal_variables(AC3_Hash_Table_Of_Variables)
+        number_of_verticals = count_number_of_vertical_variables(AC3_Hash_Table_Of_Variables)
+        number_of_isolated = count_number_of_isolated_variables(AC3_Hash_Table_Of_Variables)
+        total_number_of_variables = count_number_of_variables(AC3_Hash_Table_Of_Variables)
+        
+        result = FC(variable_number,
+        board, AC3_Hash_Table_Of_Variables,
+        number_of_horizontals,
+        number_of_verticals,
+        number_of_isolated,
+        total_number_of_variables,
+        debug_flag)
+        
     
     return result
 
@@ -1309,6 +1338,10 @@ def AC3(board, domains_filename,
 # Principal
 #########################################################################
 def main():
+    hash_table_of_variables = {}
+    hash_table_of_domains = {}
+    AC3_Flag = False
+    
     global TAM
     root = tkinter.Tk()  
     root.withdraw()

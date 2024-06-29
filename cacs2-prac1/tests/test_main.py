@@ -1387,7 +1387,7 @@ class TestMain(unittest.TestCase):
         debug_flag = True
         
         expected_board = store_crossboard(file_path='tests/resources/Boards_Examples/mine1_solution_v2.txt')
-        forward_checking(board, domains_route, debug_flag)
+        result = forward_checking(board, domains_route, debug_flag)
         real_board = tablero_to_2d_array(board)
         
         self.assertEqual(expected_board, real_board)
