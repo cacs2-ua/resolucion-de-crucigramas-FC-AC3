@@ -1054,7 +1054,7 @@ def set_up_1_for_tests(board, domains_filename,
     reflexive_pound_result = pound_reflexive_restrictions_version_2(hash_table_of_variables)
     
     if reflexive_pound_result == False:
-        return False
+        return False, -1, -1, -1
     
     number_of_horizontals = count_number_of_horizontal_variables(hash_table_of_variables)
     number_of_verticals = count_number_of_vertical_variables(hash_table_of_variables)
@@ -1225,6 +1225,9 @@ def AC3(board, domains_filename,
         hash_table_of_domains
     )
     
+    if pound_reflexive == False:
+        return False
+    
     AC3_hash_table = initialize_hash_table_for_AC3(board, hash_table_of_variables)
     
     deep_copy_AC3_hash_table = deepcopy(AC3_hash_table)
@@ -1234,9 +1237,7 @@ def AC3(board, domains_filename,
             deep_copy_AC3_hash_table.pop(key)
             
             variable_number = key
-            access_orientation = "-"
-            access_index = -1
-            
+
             access_orientation, access_index = assign_access_orientation_and_access_index(
                 variable_number, 
                 number_of_horizontals, 
@@ -1264,6 +1265,7 @@ def AC3(board, domains_filename,
                 revised_result = revise(board, 
                                         hash_table_of_variables,
                                         word_restricted, word_restrainer)
+                
                 if revised_result == True:
                     if len(hash_table_of_variables
                         [access_orientation]
