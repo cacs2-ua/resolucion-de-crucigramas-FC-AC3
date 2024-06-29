@@ -17,14 +17,14 @@ WHITE = (255, 255, 255)
 MARGEN = 5  # ancho del borde entre celdas
 MARGEN_INFERIOR = 60  # altura del margen inferior entre la cuadrícula y la ventana
 TAM = 30  # tamaño de la celda
-FILS = 20  # número de filas del crucigrama
-COLS = 20  # número de columnas del crucigrama
+FILS = 5  # número de filas del crucigrama
+COLS = 6  # número de columnas del crucigrama
 
 #RUTA_TABLERO = "Boards_Examples/debug_forward_checking/debug_1.txt"
 #RUTA_DOMINIOS = "Domains_Examples/debug_forward_checking/debug_1.txt"
 
-RUTA_TABLERO = 'Boards_Examples/complex.txt'
-RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
+RUTA_TABLERO = 'Boards_Examples/moodle_example.txt'
+RUTA_DOMINIOS = 'Domains_Examples/d0.txt'
 
 #RUTA_TABLERO = 'Boards_Examples/complex.txt'
 #RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
@@ -1328,7 +1328,7 @@ def AC3(board, domains_filename,
                 if (
                     word_restricted.get_name() == 1
                     and
-                    word_restrainer.get_name() == 6
+                    word_restrainer.get_name() == 7
                 ):
                     print("")
                 
@@ -1381,13 +1381,21 @@ def AC3(board, domains_filename,
                                    set_AC3_check(False)) 
                                                                      
                 
-                
+                if (word_restricted.get_name() == 1
+                    and
+                    word_restrainer.get_name() == 6):
+                    print("")
                 (hash_table_of_variables
                                    [access_orientation]
                                    [access_index]
                                    .get_restrictions()
                                    [key_restrainer][0].
-                                   set_AC3_check(True)) 
+                                   set_AC3_check(True))
+                
+                (word_restricted
+                 .get_restrictions()
+                 [key_restrainer][0]
+                 .set_AC3_check(True))
         
         AC3_hash_table = deep_copy_AC3_hash_table
         deep_copy_AC3_hash_table = deepcopy(AC3_hash_table)
