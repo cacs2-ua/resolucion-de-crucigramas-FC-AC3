@@ -1208,6 +1208,7 @@ def revise(board,
     
     return revised
 
+
 def AC3(board, domains_filename,
         hash_table_of_variables,
         hash_table_of_domains):
@@ -1229,8 +1230,74 @@ def AC3(board, domains_filename,
     deep_copy_AC3_hash_table = deepcopy(AC3_hash_table)
     
     while len(deep_copy_AC3_hash_table) != 0:
-        print("")
+        for key in AC3_hash_table:
+            deep_copy_AC3_hash_table.pop(key)
+            
+            variable_number = key
+            access_orientation = "-"
+            access_index = -1
+            
+            access_orientation, access_index = assign_access_orientation_and_access_index(
+                variable_number, 
+                number_of_horizontals, 
+                number_of_verticals, 
+                number_of_isolated
+            )
+            
+            if access_orientation == "isolated":
+                continue
+            
+            word_restricted = (
+                hash_table_of_variables
+                [access_orientation]
+                [access_index]
+            )
+            
+            for key_restrainer in word_restricted.get_restrictions():
+                word_restrainer = (hash_table_of_variables
+                                   [access_orientation]
+                                   [access_index]
+                                   .get_restrictions()
+                                   [key_restrainer][0]
+                                   .get_word_restrainer())
+                
+                revised_result = revise(board, 
+                                        hash_table_of_variables,
+                                        word_restricted, word_restrainer)
+                if revised_result == True:
+                    if len(hash_table_of_variables
+                        [access_orientation]
+                        [access_index]
+                        .get_feasibles()) == 0:
+                        return False
+                    
+                    access_orientation_for_update_AC3_check = "-"
+                    
+                    if access_orientation == "horizontal":
+                        access_orientation_for_update_AC3_check = "vertical"
+                    
+                    elif access_orientation == "vertical":
+                        access_orientation_for_update_AC3_check = "horizontal"
+                    
+                    for word_AC3_check in (hash_table_of_variables
+                                           [access_orientation_for_update_AC3_check]):
+                        if (word_restricted.get_name()
+                            in
+                            word_AC3_check.get_restrictions()):
+                            if word_AC3_check.get_name() not in deep_copy_AC3_hash_table:
+                                deep_copy_AC3_hash_table[word_AC3_check.get_name()] = word_AC3_check.get_name()
         
+        AC3_hash_table = deep_copy_AC3_hash_table
+        deep_copy_AC3_hash_table = deepcopy(AC3_hash_table)
+    
+    return True
+
+                            
+                
+            
+            
+            
+
         
         
        
