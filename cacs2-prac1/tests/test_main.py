@@ -1424,6 +1424,54 @@ class TestMain(unittest.TestCase):
         real_result_5 = 11 in horizontal_variable_2.get_restrictions()
         self.assertEqual(expected_result_5, real_result_5)
         
+        expected_result_6 = False
+        real_result_6 = 10 in horizontal_variable_2.get_restrictions()
+        self.assertEqual(expected_result_6, real_result_6)
+    
+    def test_2_assign_all_restrictions(self): # Test 49
+        
+        board = Tablero(file_path='tests/resources/Boards_Examples/moodle_example.txt')
+        domains_route = 'tests/resources/Domains_Examples/d0.txt'
+        hash_table_of_variables = {}
+        hash_table_of_domains = {}
+        
+        set_up_1_for_tests(board, domains_route,
+                           hash_table_of_variables,
+                           hash_table_of_domains)
+        
+        assign_all_restrictions(board, hash_table_of_variables)
+        vertical_variable_5 = hash_table_of_variables["vertical"][4]
+        
+        expected_result_1 = True
+        real_result_1 = 10 in vertical_variable_5.get_restrictions()
+        self.assertEqual(expected_result_1, real_result_1)
+        
+        expected_result_2 = True
+        real_result_2 = 3 in vertical_variable_5.get_restrictions()
+        self.assertEqual(expected_result_2, real_result_2)
+        
+        expected_result_3 = True
+        real_result_3 = 4 in vertical_variable_5.get_restrictions()
+        self.assertEqual(expected_result_3, real_result_3)
+        
+        expected_result_4 = True
+        real_result_4 = 10 in vertical_variable_5.get_restrictions()
+        self.assertEqual(expected_result_4, real_result_4)
+        
+        expected_result_5 = True
+        real_result_5 = 10 in vertical_variable_5.get_restrictions()
+        self.assertEqual(expected_result_5, real_result_5)
+        
+        expected_result_6 = False
+        real_result_6 = 1 in vertical_variable_5.get_restrictions()
+        self.assertEqual(expected_result_6, real_result_6)
+        
+        expected_result_7 = False
+        real_result_7 = 2 in vertical_variable_5.get_restrictions()
+        self.assertEqual(expected_result_7, real_result_7)
+        
+        
+        
         
         
         
