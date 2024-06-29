@@ -98,6 +98,13 @@ class Word:
             self.restrictions[restrainer_name] = []
         self.restrictions[restrainer_name].append(restriction)
     
+    def remove_restriction(self, restriction):
+        restrainer_name = restriction.get_word_restrainer().get_name()
+        if restrainer_name in self.restrictions:
+            self.restrictions[restrainer_name].remove(restriction)
+            if len(self.restrictions[restrainer_name]) == 0:
+                del self.restrictions[restrainer_name]
+    
     def add_pound(self, restrainer_word, pound):
         if restrainer_word.get_name() not in self.pounds:
             self.pounds[restrainer_word.get_name()] = []
