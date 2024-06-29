@@ -1164,9 +1164,21 @@ def assign_access_orientation_and_access_index(
 
 
 
-def revise(board, word_restricted, word_restrainer):
+def revise(board, 
+           hash_table_of_variables,
+           word_restricted, word_restrainer):
     revised = False
     checked_word_restricted = deepcopy(word_restricted)
+    
+    variable_number = word_restricted.get_name()
+    number_of_horizontals = count_number_of_horizontal_variables(hash_table_of_variables)
+    number_of_verticals = count_number_of_vertical_variables(hash_table_of_variables)
+    number_of_isolated = count_number_of_isolated_variables(hash_table_of_variables)
+    
+    acces_index = assign_access_orientation_and_access_index(variable_number,
+                                                             number_of_horizontals,
+                                                             number_of_verticals,
+                                                             number_of_isolated)[1]
     
     for feasible_value_restricted in word_restricted.get_feasibles():
         exist_compatible_in_restrainer = False
@@ -1182,7 +1194,7 @@ def revise(board, word_restricted, word_restrainer):
             checked_word_restricted.remove_feasible(feasible_value_restricted)
             revised = True
     
-    word_restricted = checked_word_restricted
+    hash_table_of_variables[word_restricted.get_orientation()][acces_index] = checked_word_restricted
     
     return revised
             
