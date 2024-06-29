@@ -1102,7 +1102,9 @@ def initialize_hash_table_for_AC3(board, hash_table_of_variables):
     
     return hash_table_AC3
 
-def ok_restriction_between_two_variables_version2(board, word_a, feasible_a, word_b, feasible_b):
+def ok_restriction_between_two_variables_version2(board, 
+                                                  word_a, feasible_a, 
+                                                  word_b, feasible_b):
     result = False
     common_square = get_common_square_coordinates_from_two_variables(
         word_a, word_b)
@@ -1140,16 +1142,30 @@ def ok_restriction_between_two_variables_version2(board, word_a, feasible_a, wor
 
     return result
 
-"""
 
 def revise(board, word_restricted, word_restrainer):
     revised = False
+    checked_word_restricted = deepcopy(word_restricted)
+    
     for feasible_value_restricted in word_restricted.get_feasibles():
-        checked_word_restricted = deepcopy(word_restricted)
         exist_compatible_in_restrainer = False
         
         for feasible_value_restrainer in word_restrainer.get_feasibles():
-"""       
+            if ok_restriction_between_two_variables_version2(board,
+                                                             word_restrainer, feasible_value_restrainer,
+                                                             word_restricted, feasible_value_restricted):   
+                exist_compatible_in_restrainer = True
+                break
+            
+        if exist_compatible_in_restrainer == False:
+            checked_word_restricted.remove_feasible(feasible_value_restricted)
+            revised = True
+    
+    word_restricted = checked_word_restricted
+    
+    return revised
+            
+       
         
 
 #########################################################################
