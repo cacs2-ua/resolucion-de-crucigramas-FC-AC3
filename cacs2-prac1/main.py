@@ -1325,20 +1325,6 @@ def AC3(board, domains_filename,
                                    [orientation_for_word_restrainer]
                                    [access_index_for_word_restrainer])
                 
-                if (
-                    word_restricted.get_name() == 1
-                    and
-                    word_restrainer.get_name() == 7
-                ):
-                    print("")
-                
-                if ("OLA" not in
-                    hash_table_of_variables
-                    ["vertical"][0].get_feasibles()
-                    and 
-                    word_restricted.get_name() == 1):
-                    print("")
-                
                 revised_result = revise(board, 
                                         hash_table_of_variables,
                                         word_restricted, word_restrainer)
@@ -1380,11 +1366,6 @@ def AC3(board, domains_filename,
                                    [word_restricted.get_name()][0].
                                    set_AC3_check(False)) 
                                                                      
-                
-                if (word_restricted.get_name() == 1
-                    and
-                    word_restrainer.get_name() == 6):
-                    print("")
                 (hash_table_of_variables
                                    [access_orientation]
                                    [access_index]
@@ -1402,7 +1383,7 @@ def AC3(board, domains_filename,
     
     return True
 
-                            
+
                 
 #########################################################################
 # Principal
@@ -1442,7 +1423,9 @@ def main():
     almacen = creaAlmacen()
     game_over = False
     tablero = Tablero(FILS, COLS, RUTA_TABLERO)
-    print(tablero)
+    tablero_original = deepcopy(tablero)
+    #print(tablero)
+    
     while not game_over:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -1457,8 +1440,8 @@ def main():
                                            AC3_result = AC3_Result)
                     print(tablero)
                     if res == False:
-                        # MessageBox.showwarning("Alerta", "No hay solución")
-                        print("No hay solución")
+                        tablero = deepcopy(tablero_original)
+                        MessageBox.showwarning("Alerta", "No hay solución")
                 elif pulsaBotonAC3(pos, anchoVentana, altoVentana):
                     print("AC3")
                     AC3_Result = (AC3(
