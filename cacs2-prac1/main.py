@@ -1085,6 +1085,8 @@ def set_up_1_for_tests(board, domains_filename,
     if reflexive_pound_result == False:
         return False, -1, -1, -1
     
+    assign_all_restrictions(board, hash_table_of_variables)
+    
     number_of_horizontals = count_number_of_horizontal_variables(hash_table_of_variables)
     number_of_verticals = count_number_of_vertical_variables(hash_table_of_variables)
     number_of_isolated = count_number_of_isolated_variables(hash_table_of_variables)
