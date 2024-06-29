@@ -1384,6 +1384,51 @@ def AC3(board, domains_filename,
     return True
 
 
+def print_AC3_domains_information(board, domains_filename,
+                                hash_table_of_variables,
+                                hash_table_of_domains,
+                                AC3_hash_table_of_variables):
+    
+    set_up_1_for_tests(board, domains_filename,
+                       hash_table_of_variables,
+                       hash_table_of_domains)
+    
+    print ("\n")
+    print("DOMINIOS ANTES DEL AC3")
+    
+
+    access_index = 0
+    for key in hash_table_of_variables:
+        for word in hash_table_of_variables[key]:
+            name = word.get_name()
+            x_pos = word.get_initial_pos()[0]
+            y_pos = word.get_initial_pos()[1]
+            word_type = word.get_orientation()
+            domain = word.get_feasibles()
+            
+            print(f"Nombre {name}", end=" ")
+            print(f"Posicion {x_pos} {y_pos}", end=" ")
+            print(f"Tipo: {word_type}", end=" ")
+            print(f"Dominio: {domain}")
+    
+    print ("\n")
+    
+    print("DOMINIOS DESPUÉS DEL AC3")
+    
+    access_index = 0
+    for key in hash_table_of_variables:
+        for word in AC3_hash_table_of_variables[key]:
+            name = word.get_name() - 1
+            x_pos = word.get_initial_pos()[0]
+            y_pos = word.get_initial_pos()[1]
+            word_type = word.get_orientation()
+            domain = word.get_feasibles()
+            
+            print(f"Nombre {name}", end=" ")
+            print(f"Posicion {x_pos} {y_pos}", end=" ")
+            print(f"Tipo: {word_type}", end=" ")
+            print(f"Dominio: {domain}")
+    
                 
 #########################################################################
 # Principal
@@ -1450,6 +1495,10 @@ def main():
                         hash_table_of_domains
                     ))
                     AC3_Flag = True
+                    print_AC3_domains_information(tablero, RUTA_DOMINIOS,
+                                                    {},
+                                                    hash_table_of_domains,
+                                                    AC3_hash_table_of_variables)
                     
                 elif pulsaBotonReset(pos, anchoVentana, altoVentana):
                     tablero.reset()
