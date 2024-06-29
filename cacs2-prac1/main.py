@@ -17,14 +17,17 @@ WHITE = (255, 255, 255)
 MARGEN = 5  # ancho del borde entre celdas
 MARGEN_INFERIOR = 60  # altura del margen inferior entre la cuadrícula y la ventana
 TAM = 30  # tamaño de la celda
-FILS = 20  # número de filas del crucigrama
-COLS = 20  # número de columnas del crucigrama
+FILS = 5  # número de filas del crucigrama
+COLS = 6  # número de columnas del crucigrama
 
 #RUTA_TABLERO = "Boards_Examples/debug_forward_checking/debug_1.txt"
 #RUTA_DOMINIOS = "Domains_Examples/debug_forward_checking/debug_1.txt"
 
-RUTA_TABLERO = 'Boards_Examples/complex.txt'
-RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
+RUTA_TABLERO = 'Boards_Examples/moodle_example.txt'
+RUTA_DOMINIOS = 'Domains_Examples/d0.txt'
+
+#RUTA_TABLERO = 'Boards_Examples/complex.txt'
+#RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
 
 LLENA = '*'
 VACIA = '-'
@@ -1037,16 +1040,22 @@ def tablero_to_2d_array(tablero):
     
     return array_2d
 
-def set_up_1_for_tests(board, domains_filename):
-    hash_table_of_variables = initialize_1_all_variables(board)
-    hash_table_of_domains = create_storage_with_hash_table(domains_filename)
+def set_up_1_for_tests(board, domains_filename,
+                       hash_table_of_variables,
+                       hash_table_of_domains):
+    # Clear the dictionaries to ensure they are empty before updating
+    hash_table_of_variables.clear()
+    hash_table_of_domains.clear()
+
+    # Update the dictionaries with the new data
+    hash_table_of_variables.update(initialize_1_all_variables(board))
+    hash_table_of_domains.update(create_storage_with_hash_table(domains_filename))
     initialize_feasibles_v1(board, hash_table_of_domains, hash_table_of_variables)
     
     initial_letters_hash_map = get_initial_letters(board)
     initialize_restrictions_v1(board, initial_letters_hash_map, hash_table_of_variables)
     
     reflexive_pound_result = pound_reflexive_restrictions_version_2(hash_table_of_variables)
-    
 
 def assign_all_restrictions(board, hash_table_of_variables):
     for key in hash_table_of_variables:

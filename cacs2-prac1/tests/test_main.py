@@ -1391,6 +1391,39 @@ class TestMain(unittest.TestCase):
         real_board = tablero_to_2d_array(board)
         
         self.assertEqual(expected_board, real_board)
+    
+    def test_assign_all_restrictions(self): # Test 48
+        board = Tablero(file_path='tests/resources/Boards_Examples/moodle_example.txt')
+        domains_route = 'tests/resources/Domains_Examples/d0.txt'
+        hash_table_of_variables = {}
+        hash_table_of_domains = {}
+        
+        set_up_1_for_tests(board, domains_route,
+                           hash_table_of_variables,
+                           hash_table_of_domains)
+        
+        expected_result_1 = True
+        assign_all_restrictions(board, hash_table_of_variables)
+        horizontal_variable_2 = hash_table_of_variables["horizontal"][1]
+        real_result_1 = 7 in horizontal_variable_2.get_restrictions()
+        self.assertEqual(expected_result_1, real_result_1)
+        
+        expected_result_2 = True
+        real_result_2 = 6 in horizontal_variable_2.get_restrictions()
+        self.assertEqual(expected_result_2, real_result_2)
+        
+        expected_result_3 = True
+        real_result_3 = 8 in horizontal_variable_2.get_restrictions()
+        self.assertEqual(expected_result_3, real_result_3)
+        
+        expected_result_4 = True
+        real_result_4 = 9 in horizontal_variable_2.get_restrictions()
+        self.assertEqual(expected_result_4, real_result_4)
+        
+        expected_result_5 = False
+        real_result_5 = 11 in horizontal_variable_2.get_restrictions()
+        self.assertEqual(expected_result_5, real_result_5)
+        
         
         
         
