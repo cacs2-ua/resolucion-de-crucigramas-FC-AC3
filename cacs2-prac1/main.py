@@ -1094,7 +1094,7 @@ def initialize_hash_table_for_AC3(board, hash_table_of_variables):
     
     for key in hash_table_of_variables:
         for word in hash_table_of_variables[key]:
-            hash_table_AC3[word.get_name()] = word
+            hash_table_AC3[word.get_name()] = deepcopy(word)
     
     return hash_table_AC3
 
