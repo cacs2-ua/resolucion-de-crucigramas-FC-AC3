@@ -1038,6 +1038,43 @@ def tablero_to_2d_array(tablero):
     return array_2d
 
 
+def assign_all_restrictions(board, hash_table_of_variables):
+    for key in hash_table_of_variables:
+        access_variable_index = -1
+        for word_restricted in hash_table_of_variables[key]:
+            
+            if word_restricted.get_orientation() == "isolated":
+                return
+            
+            access_variable_index += 1
+            access_orientation = "-"
+            
+            checked_restricted_variable = deepcopy(hash_table_of_variables
+                                                   [key][access_variable_index])
+            
+            
+            if word_restricted.get_orientation() == "horizontal":
+                access_orientation = "vertical"
+            
+            elif word_restricted.get_orientation() == "vertical":  
+                access_orientation = "horizontal"
+            
+            for word_restrainer in hash_table_of_variables[access_orientation]:
+                common_square = get_common_square_coordinates_from_two_variables(word_restricted,
+                                                                                 word_restrainer)
+                if common_square != None:
+                    checked_restricted_variable.add_restriction(Restriction(
+                        word_restrainer,
+                        word_restricted,
+                        common_square[0],
+                        common_square[1],
+                        board.getCelda(common_square[0], common_square[1])
+                    ))
+        
+            hash_table_of_variables[key][access_variable_index] = checked_restricted_variable
+                
+                
+
 #########################################################################
 # Principal
 #########################################################################
