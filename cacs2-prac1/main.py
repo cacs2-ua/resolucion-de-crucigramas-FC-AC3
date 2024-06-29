@@ -1232,6 +1232,7 @@ def AC3(board, domains_filename,
         print("")
         
         
+        
        
         
 
