@@ -1470,7 +1470,27 @@ class TestMain(unittest.TestCase):
         real_result_7 = 2 in vertical_variable_5.get_restrictions()
         self.assertEqual(expected_result_7, real_result_7)
         
+    def test_revise(self):
+        board = Tablero(file_path='tests/resources/Boards_Examples/moodle_example.txt')
+        domains_route = 'tests/resources/Domains_Examples/d0.txt'
+        hash_table_of_variables = {}
+        hash_table_of_domains = {}
         
+        set_up_1_for_tests(board, domains_route,
+                           hash_table_of_variables,
+                           hash_table_of_domains)
+        
+        horizontal_restricted_variable_2 = hash_table_of_variables["horizontal"][1]
+        vertical_restrainer_variable_1 = hash_table_of_variables["vertical"][0]
+        vertical_restrainer_variable_3 = hash_table_of_variables["vertical"][2]
+        
+        real_result_1 = revise(board,
+               horizontal_restricted_variable_2,
+               vertical_restrainer_variable_1)
+        
+
+        
+        print("")
         
         
         
