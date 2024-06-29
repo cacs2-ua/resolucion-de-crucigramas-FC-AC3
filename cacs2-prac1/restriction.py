@@ -5,7 +5,8 @@ from copy import deepcopy
 class Restriction:
     def __init__ (self, word_restrainer = None, word_restricted = None,
                   x_coordinate = 0, y_coordinate = 0,
-                  letter_of_restriction = "-"):
+                  letter_of_restriction = "-",
+                  AC3_check = False):
         if word_restricted is None:
             word_restricted = Word()
         self.word_restricted = word_restricted
@@ -17,6 +18,7 @@ class Restriction:
         self.x_coordinate = x_coordinate
         self.y_coordinate = y_coordinate
         self.letter_of_restriction = letter_of_restriction
+        self.AC3_check = AC3_check
     
     def set_word_restricted(self, word_restricted):
         self.word_restricted = word_restricted
@@ -47,6 +49,12 @@ class Restriction:
     
     def get_letter_of_restriction(self):
         return self.letter_of_restriction
+    
+    def set_AC3_check(self, AC3_check):
+        self.AC3_check = AC3_check
+    
+    def get_AC3_check(self):
+        return self.AC3_check
     
     def __eq__(self, other):
         if isinstance(other, Restriction):

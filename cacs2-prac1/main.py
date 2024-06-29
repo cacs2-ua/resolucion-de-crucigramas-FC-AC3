@@ -1207,7 +1207,31 @@ def revise(board,
     hash_table_of_variables[word_restricted.get_orientation()][acces_index] = checked_word_restricted
     
     return revised
-            
+
+def AC3(board, domains_filename,
+        hash_table_of_variables,
+        hash_table_of_domains):
+    
+    (
+        pound_reflexive, 
+        number_of_horizontals, 
+        number_of_verticals, 
+        number_of_isolated
+    ) = set_up_1_for_tests(
+        board, 
+        domains_filename, 
+        hash_table_of_variables, 
+        hash_table_of_domains
+    )
+    
+    AC3_hash_table = initialize_hash_table_for_AC3(board, hash_table_of_variables)
+    
+    deep_copy_AC3_hash_table = deepcopy(AC3_hash_table)
+    
+    while len(deep_copy_AC3_hash_table) != 0:
+        print("")
+        
+        
        
         
 
