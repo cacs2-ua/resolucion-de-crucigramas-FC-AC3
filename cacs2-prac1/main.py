@@ -1389,7 +1389,7 @@ def print_AC3_domains_information(board, domains_filename,
                                 hash_table_of_domains,
                                 AC3_hash_table_of_variables):
     
-    with open("tests/resources/AC3_moodle_domains.txt", "w") as file:
+    with open("tests/resources/AC3_domains.txt", "w") as file:
         def print_to_both(*args, **kwargs):
             print(*args, **kwargs)
             print(*args, **kwargs, file=file)
@@ -1422,7 +1422,7 @@ def print_AC3_domains_information(board, domains_filename,
         access_index = 0
         for key in hash_table_of_variables:
             for word in AC3_hash_table_of_variables[key]:
-                name = word.get_name() - 1
+                name = word.get_name()
                 x_pos = word.get_initial_pos()[0]
                 y_pos = word.get_initial_pos()[1]
                 word_type = word.get_orientation()

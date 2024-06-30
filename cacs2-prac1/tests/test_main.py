@@ -1542,8 +1542,8 @@ class TestMain(unittest.TestCase):
         return joined_content1 == joined_content2
 
     def test_files_have_same_content(self): # Test 52
-        file1 = 'tests/resources/AC3_moodle_domains.txt'
-        file2 = 'tests/resources/expected_AC3_moodle_domains.txt'
+        file1 = 'tests/resources/AC3_domains.txt'
+        file2 = 'tests/resources/expected_AC3_domains.txt'
         result = self.compare_files_ignore_breaklines(file1, file2)
         self.assertTrue(result, f"{file1} and {file2} do not have the same content")
 

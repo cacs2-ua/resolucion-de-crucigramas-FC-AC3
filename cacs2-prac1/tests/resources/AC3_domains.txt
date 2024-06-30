@@ -1,3 +1,5 @@
+
+
 DOMINIOS ANTES DEL AC3
 Nombre 1 Posicion 0 0 Tipo: horizontal Dominio: ['TOTEM', 'OSERA', 'RETOS', 'SETOS', 'ESOPO']
 Nombre 2 Posicion 1 0 Tipo: horizontal Dominio: ['ESTO', 'PARA', 'COMO', 'ROSA', 'OLOR', 'LALA', 'PERO', 'OSOS', 'PERA']
@@ -13,14 +15,14 @@ Nombre 11 Posicion 1 5 Tipo: vertical Dominio: ['ES', 'UN', 'DE', 'LA', 'NO', 'A
 
 
 DOMINIOS DESPUES DEL AC3
-Nombre 0 Posicion 0 0 Tipo: horizontal Dominio: ['RETOS', 'SETOS']
-Nombre 1 Posicion 1 0 Tipo: horizontal Dominio: ['OSOS']
-Nombre 2 Posicion 2 0 Tipo: horizontal Dominio: ['LOTERO', 'LOTERA']
-Nombre 3 Posicion 3 1 Tipo: horizontal Dominio: ['PERO']
-Nombre 4 Posicion 4 0 Tipo: horizontal Dominio: ['ROMANO', 'ROMANA']
-Nombre 5 Posicion 0 0 Tipo: vertical Dominio: ['ROL', 'SOL']
-Nombre 6 Posicion 0 1 Tipo: vertical Dominio: ['ESOPO']
-Nombre 7 Posicion 0 2 Tipo: vertical Dominio: ['TOTEM']
-Nombre 8 Posicion 0 3 Tipo: vertical Dominio: ['OSERA']
-Nombre 9 Posicion 2 4 Tipo: vertical Dominio: ['RON']
-Nombre 10 Posicion 1 5 Tipo: vertical Dominio: ['LA', 'NO']
+Nombre 1 Posicion 0 0 Tipo: horizontal Dominio: ['RETOS', 'SETOS']
+Nombre 2 Posicion 1 0 Tipo: horizontal Dominio: ['OSOS']
+Nombre 3 Posicion 2 0 Tipo: horizontal Dominio: ['LOTERO', 'LOTERA']
+Nombre 4 Posicion 3 1 Tipo: horizontal Dominio: ['PERO']
+Nombre 5 Posicion 4 0 Tipo: horizontal Dominio: ['ROMANO', 'ROMANA']
+Nombre 6 Posicion 0 0 Tipo: vertical Dominio: ['ROL', 'SOL']
+Nombre 7 Posicion 0 1 Tipo: vertical Dominio: ['ESOPO']
+Nombre 8 Posicion 0 2 Tipo: vertical Dominio: ['TOTEM']
+Nombre 9 Posicion 0 3 Tipo: vertical Dominio: ['OSERA']
+Nombre 10 Posicion 2 4 Tipo: vertical Dominio: ['RON']
+Nombre 11 Posicion 1 5 Tipo: vertical Dominio: ['LA', 'NO']
