@@ -24,11 +24,23 @@ COLS = 20  # número de columnas del crucigrama
 #RUTA_TABLERO = "Boards_Examples/debug_forward_checking/debug_1.txt"
 #RUTA_DOMINIOS = "Domains_Examples/debug_forward_checking/debug_1.txt"
 
+#RUTA_TABLERO = "Boards_Examples/moodle_example.txt"
+#RUTA_DOMINIOS = "Domains_Examples/d0.txt"
+
+#RUTA_TABLERO = "Boards_Examples/mine1.txt"
+#RUTA_DOMINIOS = "Domains_Examples/mine_crossboard_mixed_with_150.txt"
+
+#RUTA_TABLERO = "Boards_Examples/mine1.txt"
+#RUTA_DOMINIOS = "Domains_Examples/Top3000EnglishWords_version2.txt"
+
+#RUTA_TABLERO = 'Boards_Examples/simple.txt'
+#RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
+
+#RUTA_TABLERO = 'Boards_Examples/medium.txt'
+#RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
+
 RUTA_TABLERO = 'Boards_Examples/complex.txt'
 RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
-
-#RUTA_TABLERO = 'Boards_Examples/complex.txt'
-#RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
 
 LLENA = '*'
 VACIA = '-'
@@ -1528,13 +1540,14 @@ def main():
                     ))
                     end_time = time()
                     execution_time_ms = (end_time - start_time) * 1000
-                    print(f"AC3 Execution time: {execution_time_ms:.3f} ms")
-                    
+
                     AC3_Flag = True
                     print_AC3_domains_information(tablero, RUTA_DOMINIOS,
                                                     {},
                                                     hash_table_of_domains,
                                                     AC3_hash_table_of_variables)
+                    
+                    print(f"AC3 Execution time: {execution_time_ms:.3f} ms")
                     
                 elif pulsaBotonReset(pos, anchoVentana, altoVentana):
                     tablero.reset()
