@@ -1523,6 +1523,30 @@ class TestMain(unittest.TestCase):
         real_feasibles_1 = hash_table_of_variables["vertical"][3].get_feasibles()
         
         self.assertEqual(expected_feasibles_1, real_feasibles_1)
+    
+    
+    
+    def compare_files_ignore_breaklines(self, file1, file2):
+        with open(file1, 'r') as f1, open(file2, 'r') as f2:
+            content1 = f1.read().splitlines()
+            content2 = f2.read().splitlines()
+
+        # Remove empty lines
+        content1 = [line for line in content1 if line.strip()]
+        content2 = [line for line in content2 if line.strip()]
+
+        # Join lines to ignore breaklines
+        joined_content1 = ''.join(content1)
+        joined_content2 = ''.join(content2)
+
+        return joined_content1 == joined_content2
+
+    def test_files_have_same_content(self): # Test 52
+        file1 = 'tests/resources/AC3_moodle_domains.txt'
+        file2 = 'tests/resources/expected_AC3_moodle_domains.txt'
+        result = self.compare_files_ignore_breaklines(file1, file2)
+        self.assertTrue(result, f"{file1} and {file2} do not have the same content")
+
         
         
         

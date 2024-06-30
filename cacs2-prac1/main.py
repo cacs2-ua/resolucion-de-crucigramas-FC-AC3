@@ -1389,45 +1389,51 @@ def print_AC3_domains_information(board, domains_filename,
                                 hash_table_of_domains,
                                 AC3_hash_table_of_variables):
     
-    set_up_1_for_tests(board, domains_filename,
-                       hash_table_of_variables,
-                       hash_table_of_domains)
-    
-    print ("\n")
-    print("DOMINIOS ANTES DEL AC3")
-    
+    with open("tests/resources/AC3_moodle_domains.txt", "w") as file:
+        def print_to_both(*args, **kwargs):
+            print(*args, **kwargs)
+            print(*args, **kwargs, file=file)
 
-    access_index = 0
-    for key in hash_table_of_variables:
-        for word in hash_table_of_variables[key]:
-            name = word.get_name()
-            x_pos = word.get_initial_pos()[0]
-            y_pos = word.get_initial_pos()[1]
-            word_type = word.get_orientation()
-            domain = word.get_feasibles()
-            
-            print(f"Nombre {name}", end=" ")
-            print(f"Posicion {x_pos} {y_pos}", end=" ")
-            print(f"Tipo: {word_type}", end=" ")
-            print(f"Dominio: {domain}")
-    
-    print ("\n")
-    
-    print("DOMINIOS DESPUÉS DEL AC3")
-    
-    access_index = 0
-    for key in hash_table_of_variables:
-        for word in AC3_hash_table_of_variables[key]:
-            name = word.get_name() - 1
-            x_pos = word.get_initial_pos()[0]
-            y_pos = word.get_initial_pos()[1]
-            word_type = word.get_orientation()
-            domain = word.get_feasibles()
-            
-            print(f"Nombre {name}", end=" ")
-            print(f"Posicion {x_pos} {y_pos}", end=" ")
-            print(f"Tipo: {word_type}", end=" ")
-            print(f"Dominio: {domain}")
+        set_up_1_for_tests(board, domains_filename,
+                           hash_table_of_variables,
+                           hash_table_of_domains)
+        
+        print_to_both("\n")
+        print_to_both("DOMINIOS ANTES DEL AC3")
+        
+        access_index = 0
+        for key in hash_table_of_variables:
+            for word in hash_table_of_variables[key]:
+                name = word.get_name()
+                x_pos = word.get_initial_pos()[0]
+                y_pos = word.get_initial_pos()[1]
+                word_type = word.get_orientation()
+                domain = word.get_feasibles()
+                
+                print_to_both(f"Nombre {name}", end=" ")
+                print_to_both(f"Posicion {x_pos} {y_pos}", end=" ")
+                print_to_both(f"Tipo: {word_type}", end=" ")
+                print_to_both(f"Dominio: {domain}")
+        
+        print_to_both("\n")
+        
+        print_to_both("DOMINIOS DESPUES DEL AC3")
+        
+        access_index = 0
+        for key in hash_table_of_variables:
+            for word in AC3_hash_table_of_variables[key]:
+                name = word.get_name() - 1
+                x_pos = word.get_initial_pos()[0]
+                y_pos = word.get_initial_pos()[1]
+                word_type = word.get_orientation()
+                domain = word.get_feasibles()
+                
+                print_to_both(f"Nombre {name}", end=" ")
+                print_to_both(f"Posicion {x_pos} {y_pos}", end=" ")
+                print_to_both(f"Tipo: {word_type}", end=" ")
+                print_to_both(f"Dominio: {domain}")
+
+
     
                 
 #########################################################################
