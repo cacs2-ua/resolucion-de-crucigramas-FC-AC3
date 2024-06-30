@@ -122,3 +122,6 @@ class Word:
     def remove_feasible (self, feasible):
         self.feasibles.remove(feasible)
     
+    def clear_restrictions(self):
+        self.restrictions.clear()
+    

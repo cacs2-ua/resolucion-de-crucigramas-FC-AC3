@@ -18,13 +18,13 @@ WHITE = (255, 255, 255)
 MARGEN = 5  # ancho del borde entre celdas
 MARGEN_INFERIOR = 60  # altura del margen inferior entre la cuadrícula y la ventana
 TAM = 30  # tamaño de la celda
-FILS = 10  # número de filas del crucigrama
-COLS = 10  # número de columnas del crucigrama
+FILS = 20  # número de filas del crucigrama
+COLS = 20  # número de columnas del crucigrama
 
 #RUTA_TABLERO = "Boards_Examples/debug_forward_checking/debug_1.txt"
 #RUTA_DOMINIOS = "Domains_Examples/debug_forward_checking/debug_1.txt"
 
-RUTA_TABLERO = 'Boards_Examples/simple.txt'
+RUTA_TABLERO = 'Boards_Examples/complex.txt'
 RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
 
 #RUTA_TABLERO = 'Boards_Examples/complex.txt'
@@ -543,6 +543,12 @@ def initialize_2_all_variables(board):
     return dictionary_of_variables
 
 
+def clear_restrictions(hash_table_of_variables):
+    for key in hash_table_of_variables:
+        for word in hash_table_of_variables[key]:
+            word.clear_restrictions()
+
+
 def create_storage_with_hash_table(filename):
     with open(filename, 'r', encoding="utf-8") as f:
         lista = f.read()
@@ -1002,6 +1008,8 @@ def forward_checking(board, domains_filename, debug_flag = False,
         if reflexive_pound_result == False:
             return False
         
+        clear_restrictions(hash_table_of_variables)
+        
         variable_number = 1
         number_of_horizontals = count_number_of_horizontal_variables(hash_table_of_variables)
         number_of_verticals = count_number_of_vertical_variables(hash_table_of_variables)
@@ -1020,6 +1028,8 @@ def forward_checking(board, domains_filename, debug_flag = False,
         
         if AC3_result == False:
             return False
+        
+        clear_restrictions(AC3_Hash_Table_Of_Variables)
         
         variable_number = 1
         number_of_horizontals = count_number_of_horizontal_variables(AC3_Hash_Table_Of_Variables)
@@ -1433,6 +1443,7 @@ def print_AC3_domains_information(board, domains_filename,
                 print_to_both(f"Posicion {x_pos} {y_pos}", end=" ")
                 print_to_both(f"Tipo: {word_type}", end=" ")
                 print_to_both(f"Dominio: {domain}")
+
 
 
     
