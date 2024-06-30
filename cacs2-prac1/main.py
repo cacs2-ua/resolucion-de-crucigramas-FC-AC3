@@ -33,14 +33,14 @@ COLS = 20  # número de columnas del crucigrama
 #RUTA_TABLERO = "Boards_Examples/mine1.txt"
 #RUTA_DOMINIOS = "Domains_Examples/Top3000EnglishWords_version2.txt"
 
-#RUTA_TABLERO = 'Boards_Examples/simple.txt'
-#RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
+RUTA_TABLERO = 'Boards_Examples/simple.txt'
+RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
 
 #RUTA_TABLERO = 'Boards_Examples/medium.txt'
 #RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
 
-RUTA_TABLERO = 'Boards_Examples/complex.txt'
-RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
+#RUTA_TABLERO = 'Boards_Examples/complex.txt'
+#RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
 
 LLENA = '*'
 VACIA = '-'
@@ -1041,8 +1041,6 @@ def forward_checking(board, domains_filename, debug_flag = False,
         if AC3_result == False:
             return False
         
-        clear_restrictions(AC3_Hash_Table_Of_Variables)
-        
         variable_number = 1
         number_of_horizontals = count_number_of_horizontal_variables(AC3_Hash_Table_Of_Variables)
         number_of_verticals = count_number_of_vertical_variables(AC3_Hash_Table_Of_Variables)
@@ -1404,6 +1402,7 @@ def AC3(board, domains_filename,
         AC3_hash_table = deep_copy_AC3_hash_table
         deep_copy_AC3_hash_table = deepcopy(AC3_hash_table)
     
+    clear_restrictions(hash_table_of_variables)
     return True
 
 
