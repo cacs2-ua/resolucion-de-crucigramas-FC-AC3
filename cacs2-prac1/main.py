@@ -9,6 +9,7 @@ from variable import *
 from restriction import *
 from pygame.locals import *
 from copy import deepcopy
+from time import time
 
 MEDIUM_PURPLE = (147, 112, 219)
 DARK_PURPLE = (128, 0, 128)
@@ -17,14 +18,14 @@ WHITE = (255, 255, 255)
 MARGEN = 5  # ancho del borde entre celdas
 MARGEN_INFERIOR = 60  # altura del margen inferior entre la cuadrícula y la ventana
 TAM = 30  # tamaño de la celda
-FILS = 5  # número de filas del crucigrama
-COLS = 6  # número de columnas del crucigrama
+FILS = 10  # número de filas del crucigrama
+COLS = 10  # número de columnas del crucigrama
 
 #RUTA_TABLERO = "Boards_Examples/debug_forward_checking/debug_1.txt"
 #RUTA_DOMINIOS = "Domains_Examples/debug_forward_checking/debug_1.txt"
 
-RUTA_TABLERO = 'Boards_Examples/moodle_example.txt'
-RUTA_DOMINIOS = 'Domains_Examples/d0.txt'
+RUTA_TABLERO = 'Boards_Examples/simple.txt'
+RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
 
 #RUTA_TABLERO = 'Boards_Examples/complex.txt'
 #RUTA_DOMINIOS = 'Domains_Examples/Top3000EnglishWords.txt'
@@ -1486,20 +1487,38 @@ def main():
                 pos = pygame.mouse.get_pos()
                 if pulsaBotonFC(pos, anchoVentana, altoVentana):
                     print("FC")
+                    
+                    start_time = time()
                     res = forward_checking(tablero, RUTA_DOMINIOS, debug_flag=True,
                                            AC3_flag = AC3_Flag, AC3_Hash_Table_Of_Variables = AC3_hash_table_of_variables,
                                            AC3_result = AC3_Result)
-                    print(tablero)
+                    end_time = time()
+                    
+                    execution_time_ms = (end_time - start_time) * 1000
+                    
+                    if AC3_Flag == True:
+                        print(f"Forward Checking After AC3 Execution time: {execution_time_ms:.3f} ms")
+                    
+                    else:
+                        print(f"Forward Checking Execution time: {execution_time_ms:.3f} ms")
+                    #print(tablero)
+                    
                     if res == False:
                         tablero = deepcopy(tablero_original)
                         MessageBox.showwarning("Alerta", "No hay solución")
                 elif pulsaBotonAC3(pos, anchoVentana, altoVentana):
                     print("AC3")
+                    
+                    start_time = time()
                     AC3_Result = (AC3(
                         tablero, RUTA_DOMINIOS,
                         AC3_hash_table_of_variables,
                         hash_table_of_domains
                     ))
+                    end_time = time()
+                    execution_time_ms = (end_time - start_time) * 1000
+                    print(f"AC3 Execution time: {execution_time_ms:.3f} ms")
+                    
                     AC3_Flag = True
                     print_AC3_domains_information(tablero, RUTA_DOMINIOS,
                                                     {},
